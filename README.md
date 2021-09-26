@@ -6,10 +6,8 @@
 ## 1. First, it needs to be executed in a virtual environment:
 
 source venv/bin/activate 
-
-##  (其中deactivte 为关闭虚拟环境)
-## 2. (Where deactivte is to close the virtual environment)
-
+###  (Where the command deactivate can close the virtual environment)
+## 2. Run the web project command
 python manage.py runserver
 
 
