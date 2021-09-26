@@ -2,5 +2,5 @@ Week 1
 
 
 Week 2
-1.初步搭建django框环境
-2.system archtiecture
+1. Initially build Django frame environment
+2. system archtiecture
