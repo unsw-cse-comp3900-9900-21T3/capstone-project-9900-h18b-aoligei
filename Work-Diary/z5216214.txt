@@ -4,3 +4,6 @@ Week 1
 Week 2
 1. Initially build Django frame environment
 2. system archtiecture
+
+Week 3
+1.
