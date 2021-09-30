@@ -4,7 +4,7 @@ z5216214 Haojin GUO
 
 Week 1
 1. Discuss the selection of the project with the team members,
-    and finally choose - project5, e-commerce recommend system, as our project theme.
+    and finally choose -- project5, e-commerce recommend system, as our project theme.
 2. Search for information about the recommendation algorithm, determine the recommendation
     algorithm of the product recommendation system, mainly use the collaborative filtering
     algorithm, and temporarily determine the algorithm based on user and content.
