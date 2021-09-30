@@ -1,3 +1,6 @@
+COMP9900 21T3
+Project-5 e-commerce recommender system
+z5216214 Haojin GUO
 
 Week 1
 1. Discuss the selection of the project with the team members,
