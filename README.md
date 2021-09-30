@@ -6,10 +6,18 @@
 ## 1. First, it needs to be executed in a virtual environment:
 
 source venv/bin/activate 
-####  (Where the command deactivate can close the virtual environment)
 
-## 2. Run the web project command
-python manage.py runserver
+
+## 2. Close the  virtual environment
+deactivate
+
+
+## 3. Run the  project on website
+python manage.py runserver (choose a port number, default 8000)
+
+## 4. STOP run:
+CRTL + D/C
+
 
 
 
