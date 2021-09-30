@@ -17,7 +17,3 @@ python manage.py runserver (choose a port number, default 8000)
 
 ## 4. STOP run:
 CRTL + D/C
-
-
-## this is a test message
-
