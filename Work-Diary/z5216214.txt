@@ -1,6 +1,22 @@
-Week 1
+COMP9900 21T3
+Project-5 e-commerce recommender system
+z5216214 Haojin GUO
 
+Week 1
+1. Discuss the selection of the project with the team members,
+    and finally choose -- project5, e-commerce recommend system, as our project theme.
+2. Search for information about the recommendation algorithm, determine the recommendation
+    algorithm of the product recommendation system, mainly use the collaborative filtering
+    algorithm, and temporarily determine the algorithm based on user and content.
 
 Week 2
 1. Initially build Django frame environment
-2. system archtiecture
+2. Create a mysql database on Amazon AWS RDS and connect the database to django.
+2. Draw system archtiecture diagram
+
+Week 3
+
+1. Complete the ER (Entity relation) diagram
+2. Complete the class diagram (PonyORM)
+
+Week 4
