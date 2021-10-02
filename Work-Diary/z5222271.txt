@@ -1,0 +1,15 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 1
+Group formation
+Determine project
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 2
+Discuss and determine project's main requirements
+Discuss and determine the technology stack of the project
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 3
+Determine requirements in details
+Write proposal draft(Cart and Q&A functions of part b)
+Modify and integrate the final proposal
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 4
