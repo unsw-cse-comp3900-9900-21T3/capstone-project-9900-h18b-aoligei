@@ -2,7 +2,7 @@
 
 ### 1. 建立虚拟环境
 ```python
-python -m venv <venvname>
+python3 -m venv <venvname>
 ```
 
 ### 2. 如果没有 virtualenv
@@ -20,5 +20,5 @@ django-admin.py startprooject <project-name> .
 ### 4. 创建应用程序
 
 ```.env
-python manage.py startapp <app-name>
+python3 manage.py startapp <app-name>
 ```
