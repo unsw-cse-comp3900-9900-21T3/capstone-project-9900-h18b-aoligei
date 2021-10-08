@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 
 
 # Create your models here.
@@ -16,7 +17,7 @@ class Category(models.Model):
 
 
 class Format(models.Model):
-    title = models.CharField(max_length=20,  blank=True, null=True)
+    title = models.CharField(max_length=20, blank=True, null=True)
     status = models.BooleanField(default=True)
 
     class Meta:
@@ -29,7 +30,7 @@ class Format(models.Model):
 
 
 class Rating(models.Model):
-    title = models.CharField(max_length=20,  blank=True, null=True)
+    title = models.CharField(max_length=20, blank=True, null=True)
     status = models.BooleanField(default=True)
 
     class Meta:
@@ -39,6 +40,7 @@ class Rating(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Availability(models.Model):
     title = models.CharField(max_length=20, blank=True, null=True)
@@ -59,7 +61,10 @@ class Product(models.Model):
     discount_price = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2)
     stock = models.PositiveIntegerField()
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
+    image = models.ImageField(u'image', upload_to='products/%Y/%m/%d', blank=True)
+
+    def image_data(self, obj):
+        return mark_safe(u'<img src="%s" width="250px" />' % obj.image.url)
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     format = models.ForeignKey(Format, on_delete=models.CASCADE, null=True)
