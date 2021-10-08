@@ -63,8 +63,9 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(u'image', upload_to='products/%Y/%m/%d', blank=True)
 
-    def image_data(self, obj):
-        return mark_safe(u'<img src="%s" width="250px" />' % obj.image.url)
+    # def image_data(self, obj):
+    #     return mark_safe(u'<img src="%s" width="100px" />' % obj.image.url)
+
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     format = models.ForeignKey(Format, on_delete=models.CASCADE, null=True)
@@ -80,6 +81,8 @@ class Product(models.Model):
 
     class Meta:
         ordering = ('-created_time',)
+        verbose_name = 'product'
+        verbose_name_plural = 'products'
 
     def __str__(self):
         return self.title
