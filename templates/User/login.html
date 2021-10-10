@@ -3,6 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+<!--    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">-->
+    <link rel="stylesheet"  type="text/css" href="/static/css/font-awesome/css/font-awesome.css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /*div {*/
+        /*    display: flex;*/
+        /*}*/
+        .container {
+            display: flex;
+            width: 1200px;
+            height: 500px;
+            background-color: white;
+            margin: auto;
+            flex-direction: row;
+            /*justify-content: space-between;*/
+            /*flex-direction: column;*/
+                }
+
+        .account-form-left {
+            /*background: #ffffff none repeat scroll 0 0;*/
+            height: 450px;
+            width: 500px;
+            margin-left: 10px;
+            border: 1px solid #d2d2d2;
+            /*margin-bottom: 15px;*/
+            padding: 40px
+        }
+        .account-form-right {
+            /*background: #ffffff none repeat scroll 0 0;*/
+            height: 450px;
+            width: 500px;
+            border: 1px solid #d2d2d2;
+            margin-left: 20px;
+            /*margin-bottom: 15px;*/
+            padding: 40px
+        }
+        /*.account-title span {*/
+        /*    background: #333333 none repeat scroll 0 0;*/
+        /*    color: #ffffff;*/
+        /*    display: inline-block;*/
+        /*    height: 40px;*/
+        /*    line-height: 40px;*/
+        /*    margin-right: 10px;*/
+        /*    text-align: center;*/
+        /*    width: 40px;*/
+        /*}*/
+        /*.fa {*/
+        /*    display: inline-block;*/
+        /*    font: normal normal normal 14px/1 FontAwesome;*/
+        /*    font-size: inherit;*/
+        /*    text-rendering: auto;*/
+        /*    -webkit-font-smoothing: antialiased;*/
+        /*    -moz-osx-font-smoothing: grayscale;*/
+        /*    transform: translate(0, 0);*/
+        /*}*/
+    </style>
 </head>
 <body>
 
@@ -10,15 +73,28 @@
 {% if form.errors %}
        <p>Your username and password didn't match. Please try again.</p >
     {% endif %}
+<div class="container">
+<!--    <form method="post" action="{% url 'User:login' %}">-->
+<!--       {% csrf_token %}-->
 
-    <form method="post" action="{% url 'User:login' %}">
-       {% csrf_token %}
-      {{ form.as_p }}
+        <div class="account-form-left">
+            <span class="fa fa-chevron-right">
 
-      <button name="submit">log in</button>
+            </span>
+<!--            {{ form.as_p }}-->
 
-    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
-   </form>
+        </div>
+
+        <div class="account-form-right">
+<!--            {{ form.as_p }}-->
+
+        </div>
+<!--      <button name="submit">log in</button>-->
+
+<!--    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>-->
+<!--   </form>-->
+
+</div>
 
 {% endblock content %}
 
