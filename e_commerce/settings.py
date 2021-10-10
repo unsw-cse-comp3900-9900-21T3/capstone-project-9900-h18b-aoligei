@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'simpleui',
+    'mdeditor',
+    'embed_video',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,10 +133,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    (os.path.join(BASE_DIR, 'static'))
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -144,7 +146,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'Users/login/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 MEDIA_URL = "/media/"
+
 SIMPLEUI_HOME_INFO = False
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_HOME_QUICK = False
@@ -201,7 +205,6 @@ SIMPLEUI_CONFIG = {
                 },
                 {
                     'name': 'Rating',
-                    # 注意url按'/admin/应用名小写/模型名小写/'命名。
                     'url': 'Product/rating/',
                     'icon': 'fa fa-tasks'
                 },
@@ -212,7 +215,6 @@ SIMPLEUI_CONFIG = {
                 },
                 {
                     'name': 'Availability',
-                    # 注意url按'/admin/应用名小写/模型名小写/'命名。
                     'url': 'Product/availability/',
                     'icon': 'fa fa-tasks'
                 },
@@ -221,10 +223,3 @@ SIMPLEUI_CONFIG = {
         },
     ]
 }
-
-EMAIL_HOST = "smtp.163.com"
-EMAIL_PORT = 25
-EMAIL_HOST_USER = "aoligei_9900@163.com"
-EMAIL_HOST_PASSWORD = "LVULKCYNQVNYGQKM"
-EMAIL_USE_TLS = False    # 一般都为False
-EMAIL_FROM = "aoligei_9900@163.com"
