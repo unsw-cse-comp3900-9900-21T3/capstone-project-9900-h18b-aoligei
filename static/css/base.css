@@ -107,6 +107,7 @@ div.headpage input {
 
 .container{
     min-height: 500px;
+    padding-top: 55px;
 }
 
 .footpage{
