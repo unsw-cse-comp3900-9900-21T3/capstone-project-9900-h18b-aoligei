@@ -223,3 +223,9 @@ SIMPLEUI_CONFIG = {
         },
     ]
 }
+EMAIL_HOST = "smtp.163.com"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "aoligei_9900@163.com"
+EMAIL_HOST_PASSWORD = "LVULKCYNQVNYGQKM"
+EMAIL_USE_TLS = False    # 一般都为False
+EMAIL_FROM = "aoligei_9900@163.com"
