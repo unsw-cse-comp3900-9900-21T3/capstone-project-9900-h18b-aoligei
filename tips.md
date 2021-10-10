@@ -32,4 +32,7 @@ pip install Pygments # 用于前端显示markdown里面写的代码的高亮
 editor.md 开源的前端的编辑器的源码，这个在GitHub上，下载解压（好像也有官网）
 pip install static3
 
+pip install django-embed-video
+
+
 ```

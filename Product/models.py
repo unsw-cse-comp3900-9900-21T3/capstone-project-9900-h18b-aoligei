@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from mdeditor.fields import MDTextField, MDTextFormField
+from embed_video.fields import EmbedVideoField
+
 
 # Create your models here.
 class Category(models.Model):
@@ -61,11 +63,7 @@ class Product(models.Model):
     discount_price = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2)
     stock = models.PositiveIntegerField()
 
-    description = MDTextField()
-    # description = models.TextField(blank=True)
-
     image = models.ImageField(u'image', upload_to='products/%Y/%m/%d', blank=True)
-
     # def image_data(self, obj):
     #     return mark_safe(u'<img src="%s" width="100px" />' % obj.image.url)
 
@@ -73,11 +71,14 @@ class Product(models.Model):
     format = models.ForeignKey(Format, on_delete=models.CASCADE, null=True)
     rating = models.ForeignKey(Rating, on_delete=models.CASCADE, null=True)
     availability = models.ForeignKey(Availability, on_delete=models.CASCADE, null=True)
-
-    stock = models.PositiveIntegerField()
-    available = models.BooleanField(default=True)
     publishDate = models.DateField()
 
+    # description = models.TextField(blank=True)
+    description = MDTextField(blank=True, null=True)
+    trailer = EmbedVideoField(blank=True, null=True)
+    details = MDTextField(blank=True, null=True)
+
+    available = models.BooleanField(default=True)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now_add=True)
 

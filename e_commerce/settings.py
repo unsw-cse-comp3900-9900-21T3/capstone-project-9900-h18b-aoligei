@@ -32,14 +32,13 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'simpleui',
     'mdeditor',
+    'embed_video',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
 
     # project apps
     'Product',
@@ -144,10 +143,7 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
 LOGIN_URL = 'Users/login/'
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
@@ -227,4 +223,3 @@ SIMPLEUI_CONFIG = {
         },
     ]
 }
-
