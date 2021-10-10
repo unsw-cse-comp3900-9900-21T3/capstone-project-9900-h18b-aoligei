@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
-
+from mdeditor.fields import MDTextField, MDTextFormField
 
 # Create your models here.
 class Category(models.Model):
@@ -60,12 +60,14 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     discount_price = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2)
     stock = models.PositiveIntegerField()
-    description = models.TextField(blank=True)
+
+    description = MDTextField()
+    # description = models.TextField(blank=True)
+
     image = models.ImageField(u'image', upload_to='products/%Y/%m/%d', blank=True)
 
     # def image_data(self, obj):
     #     return mark_safe(u'<img src="%s" width="100px" />' % obj.image.url)
-
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     format = models.ForeignKey(Format, on_delete=models.CASCADE, null=True)

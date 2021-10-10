@@ -8,7 +8,6 @@
 source venv/bin/activate 
 ```
 
-
 ## 2. Close the  virtual environment
 ```.env
 deactivate
@@ -23,4 +22,11 @@ python3 manage.py runserver (choose a port number, default 8000)
 ## 4. STOP run:
 ```.env
 CRTL + C
+```
+
+### Admin test account
+```text
+account name: admin72
+password: 99009900
+
 ```

@@ -22,3 +22,14 @@ django-admin.py startprooject <project-name> .
 ```.env
 python3 manage.py startapp <app-name>
 ```
+
+### 可能需要安装的包
+```.env
+pip install django-simpleui
+pip install django-mdeditor  # 用于后台编辑
+pip install markdown # 用于前端显示
+pip install Pygments # 用于前端显示markdown里面写的代码的高亮
+editor.md 开源的前端的编辑器的源码，这个在GitHub上，下载解压（好像也有官网）
+pip install static3
+
+```
