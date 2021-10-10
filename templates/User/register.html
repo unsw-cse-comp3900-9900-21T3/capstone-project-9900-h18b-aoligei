@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<form method="post" action="{% url 'User:register' %}" class="form">
+    {% csrf_token %}
+    {{form.as_p}}
+
+
+
+    <button name="submit" class="btn btn-primary">register</button>
+    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
+
+</form>
+
+
+
+
+
+</body>
+</html>

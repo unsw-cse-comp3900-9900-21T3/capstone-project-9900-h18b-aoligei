@@ -1,6 +1,11 @@
 week1
 create the jira
+Group formed. I created the Jira accounts.
 
 week2
-had a meeting for the division of the proposal on Saturday
-had a meeting for the content
+I had a meeting for the division of the proposal on Saturday
+I had a meeting for the content of project on Sunday
+
+week3
+Together with Mengti Tang and Yi Liu, I wrote the user story and sprints section of the proposal. I also
+found and discussed with the team the project progit duct, all available software tools that we can use for the project.
