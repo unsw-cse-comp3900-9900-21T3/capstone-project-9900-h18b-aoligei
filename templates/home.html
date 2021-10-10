@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>homepage</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
-</head>
-<body>
-<h1>hello world</h1>
-     <a href="{% url 'Users:login' %}">Login</a>
 
-<a href="xxadmin.html">
-</a>
+{% extends "base.html" %}
+{% block content %}
+<body>
+
+    <a href="{% url 'Users:login' %}">Login</a>
+    <a href="xxadmin.html">
+    </a>
 </body>
-</html>
+
+{% endblock content %}
