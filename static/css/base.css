@@ -2,6 +2,11 @@ html, body {
     margin: 0;
 }
 
+html {
+    background-image: url("/static/bg.jfif");
+    background-attachment: fixed;
+}
+
 .logo{
     float: left;
 }
@@ -105,18 +110,12 @@ div.headpage input {
     }
 }
 
-.container{
-    min-height: 500px;
-    padding-top: 55px;
-}
-
 .footpage{
     background-color:#a04417;
     width: 100%;
     min-height: 150px;
     text-align: center;
     position: absolute;
-    bottom: 0
 }
 
 
@@ -152,4 +151,11 @@ div.headpage input {
     text-align: center;
     padding-top: 40px;
     padding-bottom: 20px;
+}
+
+.container{
+    min-height: 500px;
+    padding-top: 55px;
+    padding-bottom: 80px;
+    text-align: center;
 }
