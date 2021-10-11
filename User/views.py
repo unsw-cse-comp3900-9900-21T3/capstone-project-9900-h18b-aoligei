@@ -5,10 +5,11 @@ from .forms import UserLoginForm,UserRegisterForm
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth.forms import UserCreationForm
+
 
 from django.core.mail import send_mail
 from .send_email_tool import send_email_code
+from User.models import EmailVertifyCode
 
 
 # Create your views here. 操作数据库 resful
@@ -56,3 +57,12 @@ def register(request):
 
     context = {'form': form}
     return render(request, 'User/register.html', context)
+
+def activate(request,code):
+        # if code:
+        #     email_vertification_list = EmailVertifyCode.objects.filters(code = code)
+        #     if email_vertification_list:
+        #         email_ver = email_vertification_list[0]
+        #         email = email_ver.email
+        #         user = UserRegisterForm.obejects.
+    pass
