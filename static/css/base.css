@@ -115,6 +115,8 @@ div.headpage input {
     width: 100%;
     min-height: 150px;
     text-align: center;
+    position: absolute;
+    bottom: 0
 }
 
 

@@ -9,14 +9,14 @@
         *{
             font-family: Arial;
         }
-        html,body{
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        /*html,body{*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*    background-color: white;*/
+        /*    display: flex;*/
+        /*    justify-content: center;*/
+        /*    align-items: center;*/
+        /*}*/
         /*div {*/
         /*    display: flex;*/
         /*}*/
@@ -95,9 +95,12 @@
 
     </style>
 </head>
+
+{% extends "base.html" %}
+{% block content %}
 <body>
 
-{% block content %}
+
 {% if form.errors %}
        <p>Your username and password didn't match. Please try again.</p >
     {% endif %}
@@ -140,8 +143,9 @@
 
 </div>
 
-{% endblock content %}
+
 
 
 </body>
+{% endblock content %}
 </html>
