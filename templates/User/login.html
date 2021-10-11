@@ -4,103 +4,8 @@
     <meta charset="UTF-8">
     <title>Login</title>
 <!--    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">-->
-    <link rel="stylesheet"  type="text/css" href="/static/css/font-awesome/css/font-awesome.css">
-    <style>
-        *{
-            font-family: Arial;
-        }
-        /*html,body{*/
-        /*    width: 100%;*/
-        /*    height: 100%;*/
-        /*    background-color: white;*/
-        /*    display: flex;*/
-        /*    justify-content: center;*/
-        /*    align-items: center;*/
-        /*}*/
-        /*div {*/
-        /*    display: flex;*/
-        /*}*/
-        .container {
-            display: flex;
-            width: 1200px;
-            height: 500px;
-            background-color: white;
-            margin: auto;
-            flex-direction: row;
-            /*justify-content: space-between;*/
-            /*flex-direction: column;*/
-                }
-        .left-container{
-            display: flex;
-            height: 100%;
-            width: 600px;
-            flex-direction: column;
-        }
-        .right-container{
-            display: flex;
-            height: 100%;
-            width: 600px;
-            flex-direction: column;
-        }
-        .login-area {
-            /*background: #ffffff none repeat scroll 0 0;*/
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 450px;
-            width: 500px;
-            margin-left: 10px;
-            border: 1px solid #d2d2d2;
-            /*margin-bottom: 15px;*/
-            padding: 40px
-        }
-        .register-area {
-            /*background: #ffffff none repeat scroll 0 0;*/
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 450px;
-            width: 500px;
-            border: 1px solid #d2d2d2;
-            margin-left: 20px;
-            /*margin-bottom: 15px;*/
-            padding: 40px
-        }
-        li{
-            margin-left: 10px;
-            font-size: 40px;
-        }
-        li::marker{
-            content: "➡️";
-        }
-        .right-container li{
-            margin-left: 20px;
-        }
-        .signin-form{
-            display: flex;
-            flex-direction: column;
-        }
-        input{
-            /*box-shadow: inset;*/
-            height: 40px;
-            border: 1px solid #d2d2d2;
-        }
-        .login-button{
-            height: 30px;
-            width: 100px;
-            /*background-color: #3b5769;*/
-            margin-top: 100px;
-            cursor: pointer;
-        }
-        .register-button{
-            height: 30px;
-            width: 100px;
-            /*background-color: #3b5769;*/
-            margin-top: 20px;
-            cursor: pointer;
-        }
-
-    </style>
+<!--    <link rel="stylesheet"  type="text/css" href="/static/css/font-awesome/css/font-awesome.css">-->
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 </head>
 
 {% extends "base.html" %}
@@ -108,9 +13,7 @@
 <body>
 
 
-{% if form.errors %}
-       <p>Your username and password didn't match. Please try again.</p >
-    {% endif %}
+
 <div class="container">
 
     <div class="left-container">
@@ -120,9 +23,12 @@
              {% csrf_token %}
              <!--             {{ form.as_p }}-->
              <p>User Name</p>
-             <input type="text" name="username" placeholder="Usernamer" required>
+             <input type="text" name="username" placeholder="Username" required>
              <p>Your Password</p>
              <input type="password" name="password" placeholder="Password" required>
+             {% if form.errors %}
+                <p class="error-message">Your username and password didn't match. Please try again.</p >
+             {% endif %}
              <button class="login-button" type="submit" name="submit">Login</button>
              <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
          </form>
@@ -131,7 +37,7 @@
     <div class="right-container">
         <li>Register</li>
         <div class="register-area">
-            <form method="post" class="signin-form" action="{% url 'User:register' %}" class="form">
+            <form method="post" class="signin-form" action="{% url 'User:register' %}" >
                 {% csrf_token %}
 <!--                {{form.as_p}}-->
                 <p>User Name</p>
