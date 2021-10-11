@@ -101,7 +101,32 @@
         }
         .error-message{
             color: palevioletred;
+            line-height: 0;
+        }
 
+
+         @media screen and (max-width: 800px ) {
+             .container{
+                 display: flex;
+                 flex-direction: column;
+                 width: 600px;
+                 height: 100%;
+                 /*overflow: hidden;*/
+             }
+             .left-container{
+                height: 500px;
+            }
+             .right-container{
+                height: 500px;
+                 margin-top: 20px;
+            }
+
+         }
+        @media screen and (min-width: 801px) and (max-width: 1199px) {
+            .container {
+                width: 100%;
+                overflow: hidden;
+            }
         }
 
     </style>
