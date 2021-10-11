@@ -89,6 +89,13 @@
             height: 30px;
             width: 100px;
             /*background-color: #3b5769;*/
+            margin-top: 100px;
+            cursor: pointer;
+        }
+        .register-button{
+            height: 30px;
+            width: 100px;
+            /*background-color: #3b5769;*/
             margin-top: 20px;
             cursor: pointer;
         }
@@ -129,9 +136,11 @@
 <!--                {{form.as_p}}-->
                 <p>User Name</p>
                 <input type="text" name="username" placeholder="Usernamer" required>
+                <p>Your Email</p>
+                <input type="email" name="email" placeholder="Password" required>
                 <p>Your Password</p>
                 <input type="password" name="password" placeholder="Password" required>
-                <button class="login-button" type="submit" name="submit">Register</button>
+                <button class="register-button" type="submit" name="submit">Register</button>
                 <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
             </form>
 
