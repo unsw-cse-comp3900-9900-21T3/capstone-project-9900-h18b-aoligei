@@ -3,3 +3,9 @@ discuss the topic
 week2
 discuss the proposal in the meeting
 discuss the content in the meeting
+week3
+Together with Mengti Tang and Yu Zhang, I wrote the user story and sprints section of the proposal.
+I write backlog of story in Jira
+week4
+I write the login and register front page
+
