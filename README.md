@@ -16,7 +16,7 @@ deactivate
 
 ## 3. Run the  project on website
 ```.env
-python3 manage.py runserver (choose a port number, default 8000)
+python3 manage.py runserver (default port number 8000)
 ```
 
 ## 4. STOP run:
