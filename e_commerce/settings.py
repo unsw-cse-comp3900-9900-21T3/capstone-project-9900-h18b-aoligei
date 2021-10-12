@@ -157,7 +157,7 @@ SIMPLEUI_HOME_ACTION = False
 
 SIMPLEUI_LOGO = 'https://github.com/Hankin72/COMP9315_21T1/blob/master/_20t1/logo.png?raw=true'
 SIMPLEUI_HOME_PAGE = '/products/dashboard/'
-SIMPLEUI_HOME_TITLE = 'Dashboard!'
+SIMPLEUI_HOME_TITLE = 'Website traffic'
 SIMPLEUI_HOME_ICON = 'fa fa-eye'
 
 
