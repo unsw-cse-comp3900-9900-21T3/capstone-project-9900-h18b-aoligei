@@ -27,8 +27,8 @@ def search(request):
     page = request.GET.get('page')
     products = paginator.get_page(page)
 
-    context = {'products': products}
 
+    context = {'products': products}
     return render(request, 'Product/search.html', context)
 
 
