@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <style>
+        .icon{
+            display: flex;
+            /*margin-left: 0px;*/
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .icon p{
+            margin-left: 5px;
+        }
+    </style>
+</head>
+{% extends "base.html" %}
+{% block content %}
+<body>
+<div class="container">
+    <div class="icon">
+        <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
+        <p style="font-size: 30px">LOGIN</p>
+    </div>
+    <div class="order-history">
+
+    </div>
+</div>
+</body>
+{% endblock content %}
+</html>
