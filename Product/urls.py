@@ -7,6 +7,7 @@ app_name = 'Product'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('item', views.product_item, name='product_item'),
 
     path('products/dashboard/', views.dashboard, name ='dashboard' ),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),

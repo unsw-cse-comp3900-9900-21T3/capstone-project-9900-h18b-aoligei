@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="iteminfo_content_top">
+    <div class="iteminfo_pic">
+        <img height="100%" width="100%" src="/static/movie1.jfif"/>
+    </div>
+
+    <div class="iteminfo_maininfo">
+        <div class="iteminfo_maininfo_text title">
+            Movie/TV Series' Name
+        </div>
+
+        <div class="iteminfo_maininfo_text score">Score :  <p_yellow>★★★☆☆</p_yellow></div>
+
+        <div class="iteminfo_maininfo_text rating">
+            Rating : PG12
+        </div>
+
+        <div class="iteminfo_maininfo_text format">
+            Format type : DVD
+        </div>
+
+        <div class="iteminfo_maininfo_text category">
+            Category : Comedy
+        </div>
+
+        <div class="iteminfo_maininfo_text publishdate">
+            Publish date : 11-03-2019
+        </div>
+
+        <div class="iteminfo_maininfo_text price">
+            Price : <p_price>$90</p_price> <p_price2> was $190</p_price2>
+        </div>
+
+        <div class="iteminfo_maininfo_text stock">
+            In Stock
+        </div>
+
+        <div class="iteminfo_maininfo_text available">
+            Available : Online
+        </div>
+
+        <div class="iteminfo_maininfo_text buy">
+            <input>
+            <button class="iteminfo_buybtn">Add to Cart</button>
+        </div>
+
+        <div class="iteminfo_maininfo_text bottom">
+            <img src="/static/payment.png">
+        </div>
+
+
+    </div>
+</div>
+
+<div class="iteminfo_content_bottom">
+    <div class="iteminfo_description">
+        <p_description>Description<br/><br/></p_description>
+        Description info
+    </div>
+
+    <div class="iteminfo_qa">
+        <p_description>Q&A<br/><br/></p_description>
+        Q&A
+    </div>
+</div>
+
+
+
+{% endblock content %}
