@@ -9,11 +9,12 @@
 
 <div class="headpage">
     <div class="logo">
-        <image width="50px" height="50px" src="/static/tick.svg"></image>
+        <image width="50px" height="50px"
+               src="https://github.com/Hankin72/COMP9315_21T1/blob/master/_20t1/logo.png?raw=true"></image>
     </div>
 
     <div class="dropdown">
-        <button class="dropbtn">Item 1</button>
+        <button class="dropbtn">Category</button>
         <div class="dropdown-content">
             <a>Item 1</a>
             <a>Item 2</a>
@@ -21,7 +22,7 @@
     </div>
 
     <div class="dropdown">
-        <button class="dropbtn">Item 2</button>
+        <button class="dropbtn">Format</button>
         <div class="dropdown-content">
             <a>Item 1</a>
             <a>Item 2</a>
@@ -29,7 +30,7 @@
     </div>
 
     <div class="dropdown">
-        <button class="dropbtn">Item 3</button>
+        <button class="dropbtn">Rating</button>
         <div class="dropdown-content">
             <a>Item 1</a>
             <a>Item 2</a>
@@ -37,7 +38,7 @@
     </div>
 
     <div class="dropdown">
-        <button class="dropbtn">Item 4</button>
+        <button class="dropbtn">Availability</button>
         <div class="dropdown-content">
             <a>Item 1</a>
             <a>Item 2</a>
@@ -48,25 +49,33 @@
 
 
         {% if request.user.is_authenticated %}
-         <a href="{% url 'User:login' %}"><button class="dropbtn" >{{request.user.username}}</button></a >
-        <div class="dropdown-content">
+            <a href="{% url 'User:login' %}">
+                <button class="dropbtn">{{ request.user.username }}</button>
+            </a>
+            <div class="dropdown-content">
 
-            <a href="{% url 'User:logout' %}">Sign out</a>
-            <a href="{% url 'User:personal_info' %}">Personal</a>
-        </div>
+                <a href="{% url 'User:logout' %}">Sign out</a>
+                <a href="{% url 'User:personal_info' %}">Personal</a>
+            </div>
         {% else %}
-         <a href="{% url 'User:login' %}"><button class="dropbtn" >Sign in</button></a >
-        <div class="dropdown-content">
-            <a href="{% url 'User:login' %}">Sign in</a>
-            <a href="{% url 'User:login' %}">Sign up</a>
+            <a href="{% url 'User:login' %}">
+                <button class="dropbtn">Sign in</button>
+            </a>
+            <div class="dropdown-content">
+                <a href="{% url 'User:login' %}">Sign in</a>
+                <a href="{% url 'User:login' %}">Sign up</a>
 
-        </div>
+            </div>
         {% endif %}
 
     </div>
-    <button class="searchbtn">Search</button>
-    <input type="text" placeholder="Find..." name="keyword" id="input1" value="" oninput="change()"/>
+    <form role="search" method="get" id="searchform" action="{% url "Product:search" %}">
+        <button class="searchbtn" type="submit" value="{% url "Product:search" %}">Search</button>
+        <input type="search" placeholder="search for products" name="item_name" id="input1"
+               value="" oninput="change()"/>
+    </form>
 </div>
+
 
 <div class="container">
     {% block content %}
@@ -77,22 +86,30 @@
     <div class="footrow">
         <div class="footcolumnl">
             <div class="foottext">
-                <h_foot>ABOUT US</h_foot><br/>
-                <p_foot>Our goal is to create an E-commerce platform focusing on the field of movie discs, allowing users to purchase these movie discs easily. And we will use recommendation algorithms to help users find products of interest.</p_foot>
+                <h_foot>ABOUT US</h_foot>
+                <br/>
+                <p_foot>Our goal is to create an E-commerce platform focusing on the field of movie discs, allowing
+                    users to purchase these movie discs easily. And we will use recommendation algorithms to help users
+                    find products of interest.
+                </p_foot>
             </div>
         </div>
         <div class="footcolumnr">
             <div class="foottext">
-                <h_foot>CONTACT US</h_foot><br/>
-                <p_foot>Email: 9900xxxxxxxxx@163.com</p_foot><br/>
-                <p_foot>Phone: 1234567890</p_foot><br/>
+                <h_foot>CONTACT US</h_foot>
+                <br/>
+                <p_foot>Email: 9900xxxxxxxxx@163.com</p_foot>
+                <br/>
+                <p_foot>Phone: 1234567890</p_foot>
+                <br/>
             </div>
         </div>
     </div>
 
     <div class="footend">
         <img src="/static/payment.png"><br/>
-        <p_foot>Designed & Developed by 9900-h18b-aoligei</p_foot><br/>
+        <p_foot>Designed & Developed by 9900-h18b-aoligei</p_foot>
+        <br/>
     </div>
 </div>
 

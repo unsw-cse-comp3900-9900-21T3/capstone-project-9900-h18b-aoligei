@@ -155,10 +155,11 @@ SIMPLEUI_ANALYSIS = False
 SIMPLEUI_HOME_QUICK = False
 SIMPLEUI_HOME_ACTION = False
 
-SIMPLEUI_LOGO = 'media/logo.jpeg'
+SIMPLEUI_LOGO = 'https://github.com/Hankin72/COMP9315_21T1/blob/master/_20t1/logo.png?raw=true'
 SIMPLEUI_HOME_PAGE = '/products/dashboard/'
 SIMPLEUI_HOME_TITLE = 'Dashboard!'
 SIMPLEUI_HOME_ICON = 'fa fa-eye'
+
 
 SIMPLEUI_CONFIG = {
     # Whether to use the system default menu, it is recommended to close it when customizing the menu.

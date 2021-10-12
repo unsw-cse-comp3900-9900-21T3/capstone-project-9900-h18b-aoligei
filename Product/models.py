@@ -63,7 +63,7 @@ class Product(models.Model):
     discount_price = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2)
     stock = models.PositiveIntegerField()
 
-    image = models.ImageField(u'image', upload_to='products/%Y/%m/%d', blank=True)
+    image = models.ImageField(u'image', upload_to='products/%Y/%m/%d', blank=True, null=True)
     # def image_data(self, obj):
     #     return mark_safe(u'<img src="%s" width="100px" />' % obj.image.url)
 
