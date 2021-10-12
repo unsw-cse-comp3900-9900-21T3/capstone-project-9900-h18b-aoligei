@@ -17,7 +17,13 @@
 <div class="container">
 
     <div class="left-container">
-        <li>Login</li>
+<!--        <li>Login</li>-->
+<!--        <div style="font-size: 16px;color:#ffffff;" class="li">-->
+        <div class="icon">
+            <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
+            <p style="font-size: 30px">LOGIN</p>
+<!--            </div>-->
+            </div>
         <div class="login-area">
          <form method="post" class="signin-form" action="{% url 'User:login' %}">
              {% csrf_token %}
@@ -35,7 +41,12 @@
         </div>
         </div>
     <div class="right-container">
-        <li>Register</li>
+<!--        <li>Register</li>-->
+        <div class="icon">
+            <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
+            <p style="font-size: 30px">REGISTER</p>
+<!--            </div>-->
+            </div>
         <div class="register-area">
             <form method="post" class="signin-form" action="{% url 'User:register' %}" >
                 {% csrf_token %}

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -154,9 +155,11 @@ SIMPLEUI_ANALYSIS = False
 SIMPLEUI_HOME_QUICK = False
 SIMPLEUI_HOME_ACTION = False
 
+SIMPLEUI_LOGO = 'https://github.com/Hankin72/COMP9315_21T1/blob/master/_20t1/logo.png?raw=true'
 SIMPLEUI_HOME_PAGE = '/products/dashboard/'
 SIMPLEUI_HOME_TITLE = 'Dashboard!'
 SIMPLEUI_HOME_ICON = 'fa fa-eye'
+
 
 SIMPLEUI_CONFIG = {
     # Whether to use the system default menu, it is recommended to close it when customizing the menu.
@@ -223,6 +226,7 @@ SIMPLEUI_CONFIG = {
         },
     ]
 }
+
 EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = "aoligei_9900@163.com"
