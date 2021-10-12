@@ -8,6 +8,7 @@ app_name = 'Product'
 urlpatterns = [
     path('', views.home, name='home'),
 
+
     path('products/dashboard/', views.dashboard, name ='dashboard' ),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),

@@ -79,6 +79,10 @@ def register(request):
     context = {'form': form}
     return render(request, 'User/register.html', context)
 
+def personal_info(request):
+    pass
+
+
 def activate(request,code):
     # if code:
     #     email_vertification_list = EmailVertifyCode.objects.filters(code = code)
