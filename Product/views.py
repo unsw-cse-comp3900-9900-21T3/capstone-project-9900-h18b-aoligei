@@ -16,11 +16,12 @@ def search(request):
     # search code
     item_name = request.GET.get("item_name")
     if item_name != '' and item_name is not None:
-        products = products.filter(title__icontains=item_name) | products.filter(
-            format__title__icontains=item_name) | products.filter(
-            category__title__icontains=item_name) | products.filter(
-            rating__title__icontains=item_name) | products.filter(
-            availability__title__icontains=item_name)
+        products = products.filter(title__icontains=item_name) | \
+                   products.filter(price__icontains=item_name) | \
+                   products.filter(format__title__icontains=item_name) | \
+                   products.filter(category__title__icontains=item_name) | \
+                   products.filter(rating__title__icontains=item_name) | \
+                   products.filter(availability__title__icontains=item_name)
 
     # paginator code
     paginator = Paginator(products, 8)
