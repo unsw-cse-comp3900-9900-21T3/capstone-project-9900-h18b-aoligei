@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -154,6 +155,7 @@ SIMPLEUI_ANALYSIS = False
 SIMPLEUI_HOME_QUICK = False
 SIMPLEUI_HOME_ACTION = False
 
+SIMPLEUI_LOGO = 'media/logo.jpeg'
 SIMPLEUI_HOME_PAGE = '/products/dashboard/'
 SIMPLEUI_HOME_TITLE = 'Dashboard!'
 SIMPLEUI_HOME_ICON = 'fa fa-eye'
@@ -223,6 +225,7 @@ SIMPLEUI_CONFIG = {
         },
     ]
 }
+
 EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = "aoligei_9900@163.com"
