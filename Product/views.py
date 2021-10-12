@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 
 def home(request):
-    return render(request, 'home.html')
+    context = {}
+    return render(request, 'home.html', context)
 
 
 def dashboard(request):
@@ -13,3 +14,12 @@ def dashboard(request):
 
     context = {'user_count': user_count, 'product_count': product_count}
     return render(request, 'Product/dashboard.html', context)
+
+
+
+def test(request):
+    products = Product.objects.all().order_by("-created_time")[:4]
+
+    context = {'products': products}
+
+    return  render(request, 'Product/test.html', context)
