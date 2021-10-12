@@ -29,13 +29,21 @@
                             <div class="card-text">
                                 ${{ product.price }} | {{ product.format }} | {{ product.category }} <br/>
                                 {{ product.availability }}
-
                             </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
+
+    <div class="row">
+        <div class="col-md-3 offset-md-4">
+            <ul class="pagination">
+                {% if products.has_previous %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
     </div>
     </body>
 

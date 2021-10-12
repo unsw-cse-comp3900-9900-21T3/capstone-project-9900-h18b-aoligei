@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Product, Category, Rating, Format, Availability
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -11,6 +12,8 @@ def home(request):
 
 def search(request):
     products = Product.objects.all()
+
+    # search code
     item_name = request.GET.get("item_name")
     if item_name != '' and item_name is not None:
         products = products.filter(title__icontains=item_name) | products.filter(
@@ -19,12 +22,19 @@ def search(request):
             rating__title__icontains=item_name) | products.filter(
             availability__title__icontains=item_name)
 
+    # paginator code
+    paginator = Paginator(products, 8)
+    page = request.GET.get('page')
+    products = paginator.get_page(page)
+
     context = {'products': products}
 
     return render(request, 'Product/search.html', context)
 
+
 def product_item(request):
     return render(request, 'Product/item_info.html')
+
 
 def dashboard(request):
     user_count = User.objects.count()
