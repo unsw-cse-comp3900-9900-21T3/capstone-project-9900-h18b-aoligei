@@ -20,8 +20,15 @@
             {% for product in products %}
                 <div class="col-md-3">
                     <div class="card" style="height: 520px; width: 300px; margin-bottom: 30px;">
-                        <img src="{{ product.image.url }} " style="height: 420px; width: 300px;  margin-left: auto;
+                        {% if product.image.url %}
+                            <img src="{{ product.image.url }} " style="height: 420px; width: 300px;  margin-left: auto;
                     margin-right: auto;" class="card-img-top">
+                        {% else %}
+                            <img src="https://github.com/Hankin72/COMP9315_21T1/blob/master/_20t1/logo.png?raw=true"
+                                 style="height: 420px; width: 300px;  margin-left: auto;
+                    margin-right: auto;" class="card-img-top">
+
+                        {% endif %}
                         <div class="card-body">
                             <div class="card-title">
                                 {{ product.title }}
@@ -34,27 +41,49 @@
                     </div>
                 </div>
             {% endfor %}
-        </div><br/><br/><br/>
+        </div>
+        <br/><br/><br/>
 
         <div class="row">
             <div class="col-md-3 offset-md-4">
                 <ul class="pagination">
-
+                <span class="step-links">
                     {% if products.has_previous %}
-                        <li class="page-item">
-                        <a  class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
-                        </li>
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ products.previous_page_number }}">previous</a>
                     {% endif %}
 
-                    <li class="page-item active">
-                        <a class="page-link" href="?page={{ products.number }}">Current</a>
-                        </li>
+                    <span class="current ">
+                        Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                    </span>
 
                     {% if products.has_next %}
-                        <li class="page-item">
-                        <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
-                        </li>
+
+                        <a href="?page={{ products.next_page_number }}">next</a>
+                        <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+
                     {% endif %}
+                </span>
+
+                    {#                    {% if products.has_previous %}#}
+                    {#                        <li class="page-item">#}
+                    {##}
+                    {#                            <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>#}
+                    {#                        </li>#}
+                    {#                    {% endif %}#}
+                    {##}
+                    {##}
+                    {#                    <li class="page-item active">#}
+                    {#                        <a class="page-link" href="?page={{ products.number }}">{{ products.number }}</a>#}
+                    {##}
+                    {#                    </li>#}
+                    {##}
+                    {#                    {% if products.has_next %}#}
+                    {#                        <li class="page-item">#}
+                    {#                            <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>#}
+                    {#           #}
+                    {#                        </li>#}
+                    {#                    {% endif %}#}
                 </ul>
             </div>
         </div>
