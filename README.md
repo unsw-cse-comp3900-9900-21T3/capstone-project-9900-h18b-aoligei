@@ -24,9 +24,15 @@ python3 manage.py runserver (default port number 8000)
 CRTL + C
 ```
 
+## URL address of the website test
+```text
+1. administration: 127.0.0.1:8000/admin
+2. User/Consumer: 127.0.0.1:8000
+
+```
+
 ### Admin test account
 ```text
 account name: admin72
 password: 99009900
-
 ```
