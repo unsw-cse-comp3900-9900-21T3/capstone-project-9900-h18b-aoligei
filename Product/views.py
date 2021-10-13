@@ -3,7 +3,6 @@ from .models import Product, Category, Rating, Format, Availability
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 
-
 def home(request):
     new_products = Product.objects.all().order_by("-created_time")[:4]
     context = {"new_products": new_products}
@@ -27,7 +26,6 @@ def search(request):
     paginator = Paginator(products, 8)
     page = request.GET.get('page')
     products = paginator.get_page(page)
-
 
     context = {'products': products}
     return render(request, 'Product/search.html', context)
