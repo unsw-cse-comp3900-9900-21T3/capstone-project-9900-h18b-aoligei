@@ -84,28 +84,54 @@
             display: flex;
             flex-direction: column;
         }
-        input{
-            /*box-shadow: inset;*/
-            height: 40px;
-            border: 1px solid #d2d2d2;
-        }
-        .login-button{
-            height: 30px;
-            width: 100px;
-            /*background-color: #3b5769;*/
-            margin-top: 90px;
-            cursor: pointer;
-        }
-        .register-button{
-            height: 30px;
-            width: 100px;
-            /*background-color: #3b5769;*/
-            margin-top: 20px;
-            cursor: pointer;
-        }
+        /*input{*/
+        /*    !*box-shadow: inset;*!*/
+        /*    height: 40px;*/
+        /*    !*border-radius: 5px 5px 5px 5px;*!*/
+        /*    border: 1px solid #d2d2d2;*/
+        /*}*/
+        /*.login-button{*/
+        /*    !*height: 30px;*!*/
+        /*    !*width: 100px;*!*/
+        /*    !*!*background-color: #3b5769;*!*!*/
+        /*    !*margin-top: 90px;*!*/
+        /*    !*cursor: pointer;*!*/
+        /*    width: 170px;*/
+        /*    height: 47px;*/
+        /*    background-color: #27b069;*/
+        /*    font-size: 13px;*/
+        /*    border: none;*/
+        /*    color: #ffffff;*/
+        /*    margin-top: 20px;*/
+        /*}*/
+        /*.register-button{*/
+        /*    !*height: 30px;*!*/
+        /*    !*width: 100px;*!*/
+        /*    !*!*background-color: #3b5769;*!*!*/
+        /*    !*margin-top: 20px;*!*/
+        /*    !*cursor: pointer;*!*/
+        /*    width: 170px;*/
+        /*    height: 47px;*/
+        /*    background-color: #27b069;*/
+        /*    font-size: 13px;*/
+        /*    border: none;*/
+        /*    color: #ffffff;*/
+        /*    margin-top: 44px;*/
+        /*    margin-left: 40px;*/
+        /*}*/
         .error-message{
             color: palevioletred;
             line-height: 0;
+        }
+         .register {
+            width: 170px;
+            height: 47px;
+            background-color: #27b069;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            margin-top: 44px;
+            margin-left: 40px;
         }
 
 
