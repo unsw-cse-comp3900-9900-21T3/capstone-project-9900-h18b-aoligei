@@ -12,7 +12,7 @@
             {{product.title}}
         </div>
 
-        <div class="iteminfo_maininfo_text score">Score :  <p_yellow>{{score}}★★★☆☆</p_yellow></div>
+        <div class="iteminfo_maininfo_text score">Score :  <p_yellow>{{score}}</p_yellow></div>
 
         <div class="iteminfo_maininfo_text rating">
             Rating : {{product.rating}}
@@ -31,11 +31,11 @@
         </div>
 
         <div class="iteminfo_maininfo_text price">
-            Price : <p_price>${{product.price}}</p_price> <p_price2> was ${{product.discount_price}}</p_price2>
+            Price : <p_price>${{product.discount_price}}</p_price> <p_price2> was ${{product.price}}</p_price2>
         </div>
 
         <div class="iteminfo_maininfo_text stock">
-            {{product.stock}}
+            Stock: {{product.stock}}
         </div>
 
         <div class="iteminfo_maininfo_text available">

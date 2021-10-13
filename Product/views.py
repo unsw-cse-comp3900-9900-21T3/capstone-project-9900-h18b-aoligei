@@ -7,9 +7,17 @@ from django.db.models import Avg
 
 
 def home(request):
-    new_products = Product.objects.all().order_by("-created_time")[:4]
+    '''new_products = Product.objects.all().order_by("-created_time")[:4]
     context = {"new_products": new_products}
-    return render(request, 'home.html', context)
+    return render(request, 'home.html', context)'''
+    if request.method=="GET":
+        product_new_release=Product.objects.filter().order_by("-publishDate")[:4]
+        #product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
+        kwarg={
+            "product_new_release":product_new_release,
+            #"product_spotlight":product_spotlight,
+        }
+    return render(request, 'home.html',kwarg)
 
 
 def search(request):
@@ -43,6 +51,7 @@ def getProduct(request,product_id):
 
 
     score=Score.objects.filter(product=product_id).aggregate(Avg('title'))
+    score=score['title__avg']
     try:
         video = f"https://www.youtube.com/embed/{trailer.split('/')[-1]}"
     except AttributeError:

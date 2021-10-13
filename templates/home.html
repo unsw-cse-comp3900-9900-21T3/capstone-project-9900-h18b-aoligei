@@ -4,77 +4,81 @@
         <div class="homecontent_title">
             NEW RELEASE
         </div>
+        {% for single_product in product_new_release %}
         <div class="homecontent_item">
-            <div class="homecontent_pic">
-                <img height="100%" width="100%" src="/static/movie1.jfif"/>
-            </div>
+            <a href="product_id={{single_product.id}}">
+                <div class="homecontent_pic">
+                    <img height="100%" width="100%" src="{{single_product.image.url}}"/>
+                </div>
+            </a>
             <div class="homecontent_info">
                 <div class="homecontent_info_text d1">
-                    The Movie/TV series' Name
+                    {{single_product.title}}
                 </div>
                 <div class="homecontent_info_text d2">
-                    Price:$16 | comedy | PG-12
+                    Price:${{single_product.discount_price}} | comedy | PG-12
                 </div>
                 <div class="homecontent_info_text d3">
                     <button class="homepagebtn l">BUY</button>
                     <button class="homepagebtn r">LIKE</button>
                 </div>
             </div>
-        </div>
 
-        <div class="homecontent_item">
-            <div class="homecontent_pic">
-                <img height="100%" width="100%" src="/static/movie2.jfif"/>
-            </div>
-            <div class="homecontent_info">
-                <div class="homecontent_info_text d1">
-                    The Movie/TV series' Name
-                </div>
-                <div class="homecontent_info_text d2">
-                    Price:$16 | comedy | PG-12
-                </div>
-                <div class="homecontent_info_text d3">
-                    <button class="homepagebtn l">BUY</button>
-                    <button class="homepagebtn r">LIKE</button>
-                </div>
-            </div>
         </div>
+        {% endfor %}
+<!--        <div class="homecontent_item">-->
+<!--            <div class="homecontent_pic">-->
+<!--                <img height="100%" width="100%" src="/static/movie2.jfif"/>-->
+<!--            </div>-->
+<!--            <div class="homecontent_info">-->
+<!--                <div class="homecontent_info_text d1">-->
+<!--                    The Movie/TV series' Name-->
+<!--                </div>-->
+<!--                <div class="homecontent_info_text d2">-->
+<!--                    Price:$16 | comedy | PG-12-->
+<!--                </div>-->
+<!--                <div class="homecontent_info_text d3">-->
+<!--                    <button class="homepagebtn l">BUY</button>-->
+<!--                    <button class="homepagebtn r">LIKE</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="homecontent_item">
-            <div class="homecontent_pic">
-                <img height="100%" width="100%" src="/static/movie1.jfif"/>
-            </div>
-            <div class="homecontent_info">
-                <div class="homecontent_info_text d1">
-                    The Movie/TV series' Name
-                </div>
-                <div class="homecontent_info_text d2">
-                    Price:$16 | comedy | PG-12
-                </div>
-                <div class="homecontent_info_text d3">
-                    <button class="homepagebtn l">BUY</button>
-                    <button class="homepagebtn r">LIKE</button>
-                </div>
-            </div>
-        </div>
+<!--        <div class="homecontent_item">-->
+<!--            <div class="homecontent_pic">-->
+<!--                <img height="100%" width="100%" src="/static/movie1.jfif"/>-->
+<!--            </div>-->
+<!--            <div class="homecontent_info">-->
+<!--                <div class="homecontent_info_text d1">-->
+<!--                    The Movie/TV series' Name-->
+<!--                </div>-->
+<!--                <div class="homecontent_info_text d2">-->
+<!--                    Price:$16 | comedy | PG-12-->
+<!--                </div>-->
+<!--                <div class="homecontent_info_text d3">-->
+<!--                    <button class="homepagebtn l">BUY</button>-->
+<!--                    <button class="homepagebtn r">LIKE</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="homecontent_item">
-            <div class="homecontent_pic">
-                <img height="100%" width="100%" src="/static/movie2.jfif"/>
-            </div>
-            <div class="homecontent_info">
-                <div class="homecontent_info_text d1">
-                    The Movie/TV series' Name
-                </div>
-                <div class="homecontent_info_text d2">
-                    Price:$16 | comedy | PG-12
-                </div>
-                <div class="homecontent_info_text d3">
-                    <button class="homepagebtn l">BUY</button>
-                    <button class="homepagebtn r">LIKE</button>
-                </div>
-            </div>
-        </div>
+<!--        <div class="homecontent_item">-->
+<!--            <div class="homecontent_pic">-->
+<!--                <img height="100%" width="100%" src="/static/movie2.jfif"/>-->
+<!--            </div>-->
+<!--            <div class="homecontent_info">-->
+<!--                <div class="homecontent_info_text d1">-->
+<!--                    The Movie/TV series' Name-->
+<!--                </div>-->
+<!--                <div class="homecontent_info_text d2">-->
+<!--                    Price:$16 | comedy | PG-12-->
+<!--                </div>-->
+<!--                <div class="homecontent_info_text d3">-->
+<!--                    <button class="homepagebtn l">BUY</button>-->
+<!--                    <button class="homepagebtn r">LIKE</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 
     <div class="homecontent">
