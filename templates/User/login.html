@@ -6,6 +6,50 @@
 <!--    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">-->
 <!--    <link rel="stylesheet"  type="text/css" href="/static/css/font-awesome/css/font-awesome.css">-->
     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <style>
+        .register-button{
+            /*height: 30px;*/
+            /*width: 100px;*/
+            /*!*background-color: #3b5769;*!*/
+            /*margin-top: 20px;*/
+            /*cursor: pointer;*/
+            width: 170px;
+            height: 47px;
+            background-color: #27b069;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            margin-top: 20px;
+            border-radius: 5px 5px 5px 5px;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+            {#margin-left: 40px;#}
+        }
+        .register-button:hover{
+            opacity: 0.8;
+        }
+        .login-button{
+            border-radius: 5px 5px 5px 5px;
+            width: 170px;
+            height: 47px;
+            background-color: #27b069;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            margin-top: 20px;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        }
+        .login-button:hover{
+            opacity: 0.8;
+        }
+        input{
+            /*box-shadow: inset;*/
+            height: 40px;
+            border-radius: 5px 5px 5px 5px;
+            border: 1px solid #d2d2d2;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+
+        }
+    </style>
 </head>
 
 {% extends "base.html" %}
@@ -52,9 +96,9 @@
                 {% csrf_token %}
 <!--                {{form.as_p}}-->
                 <p>User Name</p>
-                <input type="text" name="username" placeholder="Usernamer" required>
+                <input type="text" name="username" placeholder="Username" required>
                 <p>Your Email</p>
-                <input type="email" name="email" placeholder="Password" required>
+                <input type="email" name="email" placeholder="Email" required>
                 <p>Your Password</p>
                 <input type="password" name="password" placeholder="Password" required>
                 <button class="register-button" type="submit" name="submit">Register</button>
