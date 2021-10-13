@@ -21,24 +21,24 @@
                 <div class="col-md-3">
                     <div class="card" style="height: 500px; width: 280px; margin-bottom: 30px;">
                         {% if product.image.url %}
-{#                            <a href="{% url "Product:product_item" product.id %}">#}
+                            <a href="{% url "Product:getProduct" product.id %}" style="text-decoration: None;">
                                 <img src="{{ product.image.url }} " style="height: 400px; width: 270px;  margin: auto;
                    " class="card-img-top">
-{#                            </a>#}
+                            </a>
 
                         {% else %}
-{#                            <a href="{% url "Product:product_item" product.id %}">#}
+                            <a href="{% url "Product:getProduct" product.id %}" style="text-decoration: None;">
                                 <img src="https://github.com/Hankin72/COMP9315_21T1/blob/master/_20t1/logo.png?raw=true"
                                      style="height: 420px; width: 300px;  margin-left: auto;
                     margin-right: auto;" class="card-img-top">
-{#                            </a>#}
+                            </a>
 
                         {% endif %}
                         <div class="card-body">
                             <div class="card-title">
-{#                                <a href="{% url "Product:product_item" product.id %}">#}
+                                <a href="{% url "Product:getProduct" product.id %}" style="text-decoration: None;">
                                     {{ product.title }}
-{#                                </a>#}
+                                </a>
                             </div>
                             <div class="card-text">
                                 ${{ product.price }} | {{ product.format }} | {{ product.category }} <br/>

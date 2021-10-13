@@ -11,7 +11,7 @@ urlpatterns = [
 
     path(r'product_id=<int:product_id>', getProduct, name='getProduct'),
 
-    path('item/', views.product_item, name='product_item'),
+
 
     path('search/', views.search, name='search'),
 

@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load embed_video_tags %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/iteminfo.css">
 
     <div class="iteminfo_content_top">
         <div class="iteminfo_pic">
-            <!--        <img height="100%" width="100%" src="/static/movie1.jfif"/>-->
-            <img height="100%" width="100%" src="./media/{{ product.image }}"/>
+            <img height="100%" width="100%" src="{{ product.image.url }}"/>
         </div>
 
         <div class="iteminfo_maininfo">
@@ -12,7 +13,7 @@
                 {{ product.title }}
             </div>
 
-            <div class="iteminfo_maininfo_text score">Score : <p_yellow>{{ score }}</p_yellow></div>
+            <div class="iteminfo_maininfo_text score">Score: <p_yellow>{{ score }}</p_yellow></div>
 
             <div class="iteminfo_maininfo_text rating">
                 Rating : {{ product.rating }}
@@ -30,10 +31,16 @@
                 Publish date : {{ product.publishDate }}
             </div>
 
+
             <div class="iteminfo_maininfo_text price">
                 Price :
-                <p_price>${{ product.discount_price }}</p_price>
-                <p_price2> was ${{ product.price }}</p_price2>
+                {% if product_object.discount_price %}
+                    <p_price>${{ product.discount_price }}</p_price>
+
+                    <p_price2> was ${{ product.price }}</p_price2>
+                      {% else %}
+                    <p_price> ${{ product.price }}</p_price>
+                {% endif %}
             </div>
 
             <div class="iteminfo_maininfo_text stock">
@@ -53,35 +60,31 @@
                 <img src="/static/payment.png">
             </div>
 
-
         </div>
     </div>
-
 
     <div class="iteminfo_content_bottom">
-    <div class="des_and_video">
         <div class="iteminfo_description">
-            <p_description>Description<br/><br/></p_description>
-            {{product.description}}
+            <p_description> Description <hr/></p_description>
+            {{ product.description|safe }}
         </div>
 
-        <div class="video">
-            {% if video %}
-                <iframe width="540" height="100%"
-                        src={{ video }}
-                                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            {% else %}
-                <li>No video.</li>
+        <div class="iteminfo_description">
+            {% if product.trailer %}
+                <p_description>Trailer<hr/></p_description>
+                <span style="display: flex; justify-content: center"> {% video product.trailer '1000x600' %}</span>
             {% endif %}
         </div>
-    </div>
+
+        <div class="iteminfo_description">
+            <p_description>Details <hr/></p_description>
+            {{ product.details|safe }}
+        </div>
+
         <div class="iteminfo_qa">
-            <p_description>Q&A<br/><br/></p_description>
+            <p_description>Q&A <hr/> </p_description>
             Q&A
         </div>
     </div>
-
 
 {% endblock content %}

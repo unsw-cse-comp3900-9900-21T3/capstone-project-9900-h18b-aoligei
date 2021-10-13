@@ -1,26 +1,29 @@
 from django.shortcuts import render
-from .models import Product, Category, Rating, Format, Availability,Score
+from .models import Product, Category, Rating, Format, Availability, Score
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.db.models import Avg
+import markdown
 
 
 def home(request):
     '''new_products = Product.objects.all().order_by("-created_time")[:4]
     context = {"new_products": new_products}
     return render(request, 'home.html', context)'''
-    if request.method=="GET":
-        product_new_release=Product.objects.filter().order_by("-publishDate")[:4]
-        #product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
-        product_spotlight=Score.objects.values("product_id").annotate(avg=Avg("title")).values("product_id", "avg").order_by('-avg')[:4]
-        product_all=Product.objects.all()
-        kwarg={
-            "product_new_release":product_new_release,
-            "product_spotlight":product_spotlight,
-            "product_all":product_all,
+    if request.method == "GET":
+        product_new_release = Product.objects.filter().order_by("-publishDate")[:4]
+        # product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
+        product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("title")).values("product_id",
+                                                                                                 "avg").order_by(
+            '-avg')[:4]
+        product_all = Product.objects.all()
+        kwarg = {
+            "product_new_release": product_new_release,
+            "product_spotlight": product_spotlight,
+            "product_all": product_all,
         }
-    return render(request, 'home.html',kwarg)
+    return render(request, 'home.html', kwarg)
 
 
 def search(request):
@@ -45,29 +48,30 @@ def search(request):
     return render(request, 'Product/search.html', context)
 
 
-def product_item(request):
-    return render(request, 'Product/item_info.html')
+def getProduct(request, product_id):
+    product = Product.objects.get(id=product_id)
 
-def getProduct(request,product_id):
-    product=Product.objects.get(id=product_id)
-    trailer = product.trailer
+    score = Score.objects.filter(product=product_id).aggregate(Avg('title'))
+    score = score['title__avg']
 
+    product.description = markdown.markdown(product.description,
+                                            extensions=[
+                                                'markdown.extensions.extra',
+                                                'markdown.extensions.codehilite',
+                                                'markdown.extensions.toc',
+                                            ])
 
-    score=Score.objects.filter(product=product_id).aggregate(Avg('title'))
-    score=score['title__avg']
-    try:
-        video = f"https://www.youtube.com/embed/{trailer.split('/')[-1]}"
-    except AttributeError:
-        pass
-
-    kwarg={
-        "product":product,
-        "video":video,
-
-        "score":score,
+    product.details = markdown.markdown(product.details,
+                                        extensions=[
+                                            'markdown.extensions.extra',
+                                            'markdown.extensions.codehilite',
+                                            'markdown.extensions.toc',
+                                        ])
+    kwarg = {
+        "product": product,
+        "score": score,
     }
-    return render(request,'Product/item_info.html',kwarg)
-
+    return render(request, 'Product/item_info.html', kwarg)
 
 
 def dashboard(request):
