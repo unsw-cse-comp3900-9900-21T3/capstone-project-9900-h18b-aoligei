@@ -2,12 +2,14 @@ from django.urls import path, include, re_path
 from Product import views
 from django.views.static import serve
 from django.conf import settings
+from .views import *
 
 app_name = 'Product'
 
 urlpatterns = [
     path('', views.home, name='home'),
 
+    path(r'product_id=<int:product_id>', getProduct, name='getProduct'),
 
     path('item/', views.product_item, name='product_item'),
 

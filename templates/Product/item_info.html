@@ -3,42 +3,43 @@
 
 <div class="iteminfo_content_top">
     <div class="iteminfo_pic">
-        <img height="100%" width="100%" src="/static/movie1.jfif"/>
+<!--        <img height="100%" width="100%" src="/static/movie1.jfif"/>-->
+        <img height="100%" width="100%" src="./media/{{product.image}}"/>
     </div>
 
     <div class="iteminfo_maininfo">
         <div class="iteminfo_maininfo_text title">
-            Movie/TV Series' Name
+            {{product.title}}
         </div>
 
-        <div class="iteminfo_maininfo_text score">Score :  <p_yellow>★★★☆☆</p_yellow></div>
+        <div class="iteminfo_maininfo_text score">Score :  <p_yellow>{{score}}</p_yellow></div>
 
         <div class="iteminfo_maininfo_text rating">
-            Rating : PG12
+            Rating : {{product.rating}}
         </div>
 
         <div class="iteminfo_maininfo_text format">
-            Format type : DVD
+            Format type : {{product.format}}
         </div>
 
         <div class="iteminfo_maininfo_text category">
-            Category : Comedy
+            Category : {{product.category}}
         </div>
 
         <div class="iteminfo_maininfo_text publishdate">
-            Publish date : 11-03-2019
+            Publish date : {{product.publishDate}}
         </div>
 
         <div class="iteminfo_maininfo_text price">
-            Price : <p_price>$90</p_price> <p_price2> was $190</p_price2>
+            Price : <p_price>${{product.discount_price}}</p_price> <p_price2> was ${{product.price}}</p_price2>
         </div>
 
         <div class="iteminfo_maininfo_text stock">
-            In Stock
+            {{product.stock}}
         </div>
 
         <div class="iteminfo_maininfo_text available">
-            Available : Online
+            Available : {{product.availability}}
         </div>
 
         <div class="iteminfo_maininfo_text buy">
@@ -55,11 +56,24 @@
 </div>
 
 <div class="iteminfo_content_bottom">
+<div class="des_and_video">
     <div class="iteminfo_description">
         <p_description>Description<br/><br/></p_description>
-        Description info
+        {{product.description}}
     </div>
 
+    <div class="video">
+        {% if video %}
+            <iframe width="540" height="310"
+                    src={{ video }}
+                            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        {% else %}
+            <li>No video.</li>
+        {% endif %}
+    </div>
+</div>
     <div class="iteminfo_qa">
         <p_description>Q&A<br/><br/></p_description>
         Q&A
