@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from .models import Product, Category, Rating, Format, Availability
+from .models import Product, Category, Rating, Format, Availability,Score
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
+from django.db.models import Avg
+
 
 def home(request):
     new_products = Product.objects.all().order_by("-created_time")[:4]
@@ -33,6 +36,26 @@ def search(request):
 
 def product_item(request):
     return render(request, 'Product/item_info.html')
+
+def getProduct(request,product_id):
+    product=Product.objects.get(id=product_id)
+    trailer = product.trailer
+
+
+    score=Score.objects.filter(product=product_id).aggregate(Avg('title'))
+    try:
+        video = f"https://www.youtube.com/embed/{trailer.split('/')[-1]}"
+    except AttributeError:
+        pass
+
+    kwarg={
+        "product":product,
+        "video":video,
+
+        "score":score,
+    }
+    return render(request,'Product/item_info.html',kwarg)
+
 
 
 def dashboard(request):

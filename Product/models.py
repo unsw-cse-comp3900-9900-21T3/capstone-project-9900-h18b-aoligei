@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from mdeditor.fields import MDTextField, MDTextFormField
 from embed_video.fields import EmbedVideoField
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -86,6 +87,17 @@ class Product(models.Model):
         ordering = ('-created_time',)
         verbose_name = 'product'
         verbose_name_plural = 'products'
+
+    def __str__(self):
+        return self.title
+
+
+class Score(models.Model):
+    title = models.FloatField(null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    class Meta:
+        verbose_name = 'score'
 
     def __str__(self):
         return self.title
