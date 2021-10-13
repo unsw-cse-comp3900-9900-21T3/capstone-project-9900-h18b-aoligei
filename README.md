@@ -1,4 +1,6 @@
 # capstone-project-9900-h18b-aoligei
+- 
+
 ## The file work-diary contains the weekly work diary maintained by each member,
 ## Python + Django framework,  AWS mysql by default, 
 
