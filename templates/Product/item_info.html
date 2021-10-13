@@ -1,82 +1,88 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="iteminfo_content_top">
-    <div class="iteminfo_pic">
-<!--        <img height="100%" width="100%" src="/static/movie1.jfif"/>-->
-        <img height="100%" width="100%" src="./media/{{product.image}}"/>
+    <div class="iteminfo_content_top">
+        <div class="iteminfo_pic">
+            <!--        <img height="100%" width="100%" src="/static/movie1.jfif"/>-->
+            <img height="100%" width="100%" src="./media/{{ product.image }}"/>
+        </div>
+
+        <div class="iteminfo_maininfo">
+            <div class="iteminfo_maininfo_text title">
+                {{ product.title }}
+            </div>
+
+            <div class="iteminfo_maininfo_text score">Score :
+                <p_yellow>{{ score }}</p_yellow>
+            </div>
+
+            <div class="iteminfo_maininfo_text rating">
+                Rating : {{ product.rating }}
+            </div>
+
+            <div class="iteminfo_maininfo_text format">
+                Format type : {{ product.format }}
+            </div>
+
+            <div class="iteminfo_maininfo_text category">
+                Category : {{ product.category }}
+            </div>
+
+            <div class="iteminfo_maininfo_text publishdate">
+                Publish date : {{ product.publishDate }}
+            </div>
+
+            <div class="iteminfo_maininfo_text price">
+                Price :
+                <p_price>${{ product.discount_price }}</p_price>
+                <p_price2> was ${{ product.price }}</p_price2>
+            </div>
+
+            <div class="iteminfo_maininfo_text stock">
+                {{ product.stock }}
+            </div>
+
+            <div class="iteminfo_maininfo_text available">
+                Available : {{ product.availability }}
+            </div>
+
+            <div class="iteminfo_maininfo_text buy">
+                <input>
+                <button class="iteminfo_buybtn">Add to Cart</button>
+            </div>
+
+            <div class="iteminfo_maininfo_text bottom">
+                <img src="/static/payment.png">
+            </div>
+
+
+        </div>
     </div>
 
-    <div class="iteminfo_maininfo">
-        <div class="iteminfo_maininfo_text title">
-            {{product.title}}
+    <div class="iteminfo_content_bottom">
+        <div class="des_and_video">
+            <div class="iteminfo_description">
+                <p_description>Description<br/><br/></p_description>
+                {{ product.description }}
+            </div>
+
+            <div class="video">
+                {% if video %}
+                    <iframe width="540" height="310"
+                            src={{ video }}
+                                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                {% else %}
+                    <li>No video.</li>
+                {% endif %}
+            </div>
         </div>
-
-        <div class="iteminfo_maininfo_text score">Score :  <p_yellow>{{score}}</p_yellow></div>
-
-        <div class="iteminfo_maininfo_text rating">
-            Rating : {{product.rating}}
+        <div class="iteminfo_qa">
+            <p_description>Q&A<br/><br/></p_description>
+            Q&A
         </div>
-
-        <div class="iteminfo_maininfo_text format">
-            Format type : {{product.format}}
-        </div>
-
-        <div class="iteminfo_maininfo_text category">
-            Category : {{product.category}}
-        </div>
-
-        <div class="iteminfo_maininfo_text publishdate">
-            Publish date : {{product.publishDate}}
-        </div>
-
-        <div class="iteminfo_maininfo_text price">
-            Price : <p_price>${{product.discount_price}}</p_price> <p_price2> was ${{product.price}}</p_price2>
-        </div>
-
-        <div class="iteminfo_maininfo_text stock">
-            Stock: {{product.stock}}
-        </div>
-
-        <div class="iteminfo_maininfo_text available">
-            Available : {{product.availability}}
-        </div>
-
-        <div class="iteminfo_maininfo_text buy">
-            <input>
-            <button class="iteminfo_buybtn">Add to Cart</button>
-        </div>
-
-        <div class="iteminfo_maininfo_text bottom">
-            <img src="/static/payment.png">
-        </div>
-
-
     </div>
-</div>
-
-<div class="iteminfo_content_bottom">
-    <div class="iteminfo_description">
-        <p_description>Description<br/><br/></p_description>
-        {{product.description}}
-    </div>
-
-    <div class="video">
-        {% if video %}
-            <iframe width="560" height="315"
-                    src={{ video }}
-                            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        {% else %}
-            <li>No video.</li>
-        {% endif %}
-    </div>
-    <div class="iteminfo_qa">
-        <p_description>Q&A<br/><br/></p_description>
-        Q&A
-    </div>
-</div>
 
 
 

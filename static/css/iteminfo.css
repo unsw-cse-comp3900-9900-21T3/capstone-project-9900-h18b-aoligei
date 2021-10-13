@@ -161,7 +161,7 @@ div.iteminfo_maininfo input {
 }
 
 .iteminfo_description{
-    width: 1144px;
+    width: 584px;
     margin: 8px;
     padding: 20px;
     line-height: 30px;
@@ -179,4 +179,11 @@ div.iteminfo_maininfo input {
     font-size: 16px;
     text-align: left;
     background-color: rgba(255, 255, 255, 0.7);
+}
+
+.des_and_video{
+    display: flex;
+    flex-direction: row;
+    /*justify-content: space-between;*/
+    width: 1200px;
 }
