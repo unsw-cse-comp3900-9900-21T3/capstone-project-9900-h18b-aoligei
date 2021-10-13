@@ -12,7 +12,7 @@
             {{product.title}}
         </div>
 
-        <div class="iteminfo_maininfo_text score">Score :  <p_yellow>{{score}}★★★☆☆</p_yellow></div>
+        <div class="iteminfo_maininfo_text score">Score :  <p_yellow>{{score}}</p_yellow></div>
 
         <div class="iteminfo_maininfo_text rating">
             Rating : {{product.rating}}
@@ -56,6 +56,7 @@
 </div>
 
 <div class="iteminfo_content_bottom">
+<div class="des_and_video">
     <div class="iteminfo_description">
         <p_description>Description<br/><br/></p_description>
         {{product.description}}
@@ -63,7 +64,7 @@
 
     <div class="video">
         {% if video %}
-            <iframe width="560" height="315"
+            <iframe width="540" height="310"
                     src={{ video }}
                             title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -72,6 +73,7 @@
             <li>No video.</li>
         {% endif %}
     </div>
+</div>
     <div class="iteminfo_qa">
         <p_description>Q&A<br/><br/></p_description>
         Q&A
