@@ -49,10 +49,8 @@
     </div>
 
     <div class="dropdown right">
-
-
         {% if request.user.is_authenticated %}
-            <a href="{% url 'User:login' %}">
+            <a href="#">
                 <button class="dropbtn">{{ request.user.username }}</button>
             </a>
             <div class="dropdown-content">
