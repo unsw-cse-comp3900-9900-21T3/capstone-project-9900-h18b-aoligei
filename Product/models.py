@@ -96,6 +96,7 @@ class Score(models.Model):
     title = models.FloatField(null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+
     class Meta:
         verbose_name = 'score'
 
