@@ -3,6 +3,7 @@ from User.models import User
 
 from django.contrib.auth.models import User
 
+
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
@@ -13,6 +14,7 @@ class UserLoginForm(forms.Form):
             'username',
             'password',
         )
+
 
 class UserRegisterForm(forms.ModelForm):
     username = forms.CharField(required=True)
@@ -26,4 +28,3 @@ class UserRegisterForm(forms.ModelForm):
             'password',
             'email',
         )
-

@@ -19,7 +19,7 @@
         <div class="row">
             {% for product in products %}
                 <div class="col-md-3">
-                    <div class="card" style="height: 500px; width: 280px; margin-bottom: 30px;">
+                    <div class="card" style="height: 550px; width: 280px; margin-bottom: 30px;">
                         {% if product.image.url %}
                             <a href="{% url "Product:getProduct" product.id %}" style="text-decoration: None;">
                                 <img src="{{ product.image.url }} " style="height: 400px; width: 270px;  margin: auto;
@@ -35,15 +35,24 @@
 
                         {% endif %}
                         <div class="card-body">
-                            <div class="card-title">
+                            <div class="card-title" style="height: 40px;">
                                 <a href="{% url "Product:getProduct" product.id %}" style="text-decoration: None;">
                                     {{ product.title }}
                                 </a>
                             </div>
-                            <div class="card-text">
-                                ${{ product.price }} | {{ product.format }} | {{ product.category }} <br/>
-                                {{ product.availability }}
+                            <div class="card-text" style="padding-bottom: 8px;">
+                                {% if product.discount_price %}
+                                    <p_price>${{ product.discount_price }}</p_price>
+
+                                    <p_price2> was ${{ product.price }}</p_price2>
+                                {% else %}
+                                    <p_price> ${{ product.price }}</p_price>
+                                {% endif %}
                             </div>
+                            <div class="card-text">
+                                 {{ product.format }} | {{ product.category }} | {{ product.availability }}
+                            </div>
+
                         </div>
                     </div>
                 </div>

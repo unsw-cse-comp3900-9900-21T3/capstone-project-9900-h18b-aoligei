@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-<!--    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">-->
-<!--    <link rel="stylesheet"  type="text/css" href="/static/css/font-awesome/css/font-awesome.css">-->
+    <!--    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">-->
+    <!--    <link rel="stylesheet"  type="text/css" href="/static/css/font-awesome/css/font-awesome.css">-->
     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
     <style>
-        .register-button{
+        .register-button {
             /*height: 30px;*/
             /*width: 100px;*/
             /*!*background-color: #3b5769;*!*/
@@ -22,12 +22,14 @@
             margin-top: 20px;
             border-radius: 5px 5px 5px 5px;
             box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-            {#margin-left: 40px;#}
+        {#margin-left: 40px;#}
         }
-        .register-button:hover{
+
+        .register-button:hover {
             opacity: 0.8;
         }
-        .login-button{
+
+        .login-button {
             border-radius: 5px 5px 5px 5px;
             width: 170px;
             height: 47px;
@@ -38,10 +40,12 @@
             margin-top: 20px;
             box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
         }
-        .login-button:hover{
+
+        .login-button:hover {
             opacity: 0.8;
         }
-        input{
+
+        input {
             /*box-shadow: inset;*/
             height: 40px;
             border-radius: 5px 5px 5px 5px;
@@ -54,68 +58,65 @@
 
 {% extends "base.html" %}
 {% block content %}
-<body>
+    <body>
 
 
+    <div class="container">
 
-<div class="container">
-
-    <div class="left-container">
-<!--        <li>Login</li>-->
-<!--        <div style="font-size: 16px;color:#ffffff;" class="li">-->
-        <div class="icon">
-            <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
-            <p style="font-size: 30px">LOGIN</p>
-<!--            </div>-->
+        <div class="left-container">
+            <!--        <li>Login</li>-->
+            <!--        <div style="font-size: 16px;color:#ffffff;" class="li">-->
+            <div class="icon">
+                <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
+                <p style="font-size: 30px">LOGIN</p>
+                <!--            </div>-->
             </div>
-        <div class="login-area">
-         <form method="post" class="signin-form" action="{% url 'User:login' %}">
-             {% csrf_token %}
-             <!--             {{ form.as_p }}-->
-             <p>User Name</p>
-             <input type="text" name="username" placeholder="Username" required>
-             <p>Your Password</p>
-             <input type="password" name="password" placeholder="Password" required>
-             {% if form.errors %}
-                <p class="error-message">Your username and password didn't match. Please try again.</p >
-             {% endif %}
-             <button class="login-button" type="submit" name="submit">Login</button>
-             <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
-         </form>
-        </div>
-        </div>
-    <div class="right-container">
-<!--        <li>Register</li>-->
-        <div class="icon">
-            <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
-            <p style="font-size: 30px">REGISTER</p>
-<!--            </div>-->
+            <div class="login-area">
+                <form method="post" class="signin-form" action="{% url 'User:login' %}">
+                    {% csrf_token %}
+                    <!--             {{ form.as_p }}-->
+                    <p>User Name</p>
+                    <input type="text" name="username" placeholder="Username" required>
+                    <p>Your Password</p>
+                    <input type="password" name="password" placeholder="Password" required>
+                    {% if form.errors %}
+                        <p class="error-message">Your username and password didn't match. Please try again.</p>
+                    {% endif %}
+                    <button class="login-button" type="submit" name="submit">Login</button>
+                    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
+                </form>
             </div>
-        <div class="register-area">
-            <form method="post" class="signin-form" action="{% url 'User:register' %}" >
-                {% csrf_token %}
-<!--                {{form.as_p}}-->
-                <p>User Name</p>
-                <input type="text" name="username" placeholder="Username" required>
-                <p>Your Email</p>
-                <input type="email" name="email" placeholder="Email" required>
-                <p>Your Password</p>
-                <input type="password" name="password" placeholder="Password" required>
-                <button class="register-button" type="submit" name="submit">Register</button>
-                <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
-            </form>
-
         </div>
+        <div class="right-container">
+            <!--        <li>Register</li>-->
+            <div class="icon">
+                <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
+                <p style="font-size: 30px">REGISTER</p>
+                <!--            </div>-->
+            </div>
+            <div class="register-area">
+                <form method="post" class="signin-form" action="{% url 'User:register' %}">
+                    {% csrf_token %}
+                    <!--                {{form.as_p}}-->
+                    <p>User Name</p>
+                    <input type="text" name="username" placeholder="Username" required>
+                    <p>Your Email</p>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <p>Your Password</p>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button class="register-button" type="submit" name="submit">Register</button>
+                    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
+                </form>
+
+            </div>
         </div>
 
 
-<!--   </form>-->
+        <!--   </form>-->
 
-</div>
-
-
+    </div>
 
 
-</body>
+    </body>
 {% endblock content %}
 </html>
