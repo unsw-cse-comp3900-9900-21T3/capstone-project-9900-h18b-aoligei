@@ -3,18 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <style>
+        .register-button {
+            /*height: 30px;*/
+            /*width: 100px;*/
+            /*!*background-color: #3b5769;*!*/
+            /*margin-top: 20px;*/
+            /*cursor: pointer;*/
+            cursor: pointer;
+            width: 170px;
+            height: 47px;
+            background-color: #27b069;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            margin-top: 20px;
+            border-radius: 5px 5px 5px 5px;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        {#margin-left: 40px;#}
+        }
+
+        .register-button:hover {
+            opacity: 0.8;
+        }
+
+        input {
+            /*box-shadow: inset;*/
+            height: 40px;
+            border-radius: 5px 5px 5px 5px;
+            border: 1px solid #d2d2d2;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+
+        }
+    </style>
 </head>
+{% extends "base.html" %}
+{% block content %}
 <body>
-<form method="post" action="{% url 'User:register' %}" class="form">
-    {% csrf_token %}
-    {{form.as_p}}
+{#<form method="post" action="{% url 'User:register' %}" class="form">#}
+{#    {% csrf_token %}#}
+{#    {{form.as_p}}#}
+{##}
+{##}
+{##}
+{#    <button name="submit" class="btn btn-primary">register</button>#}
+{#    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>#}
+{##}
+{#</form>#}
+<div class="container" style="display: flex; justify-content: center">
 
+      <div class="right-container">
+            <!--        <li>Register</li>-->
+            <div class="icon">
+                <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
+                <p style="font-size: 30px">REGISTER</p>
+                <!--            </div>-->
+            </div>
+            <div class="register-area">
+                <form method="post" class="signin-form" action="{% url 'User:register' %}">
+                    {% csrf_token %}
+                    <!--                {{form.as_p}}-->
+                    <p>User Name</p>
+                    <input type="text" name="username" placeholder="Username" required>
+                    <p>Your Email</p>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <p>Your Password</p>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button class="register-button" type="submit" name="submit">Register</button>
+                    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
+                </form>
 
-
-    <button name="submit" class="btn btn-primary">register</button>
-    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
-
-</form>
+            </div>
+        </div>
+</div>
 
 </body>
+{% endblock content %}
 </html>
