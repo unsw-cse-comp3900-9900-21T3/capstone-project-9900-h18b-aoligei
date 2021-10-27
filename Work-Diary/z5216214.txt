@@ -40,5 +40,9 @@ week 5
 
 
 week 6
+1. product added to the cart
+2. product orders and orderItem
+
 
 week 7
+1. orders checked by admin
