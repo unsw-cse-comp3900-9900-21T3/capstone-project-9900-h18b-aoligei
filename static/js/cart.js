@@ -24,19 +24,8 @@ $(document).on("click", ".atc", function () {
     // console.log(Object.keys(cart).length);
 
 });
+
 //display cart function
-
-
-// var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-// document.getElementById('cart_function').setAttribute('data-bs-content', cartString)
-// var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-//     return new bootstrap.Popover(popoverTriggerEl);
-// });
-// $(function () {
-//     $('[data-toggle="popover"]').popover();
-//     document.getElementById("cart").setAttribute('data-content', "<h2>this is your cart</h2>h2>");
-// });
-
 displayCart(cart);
 
 function displayCart(cart) {

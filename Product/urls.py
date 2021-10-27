@@ -11,9 +11,9 @@ urlpatterns = [
 
     path(r'product_id=<int:product_id>', getProduct, name='getProduct'),
 
-
-
     path('search/', views.search, name='search'),
+
+    path('category_list/', views.CategoryIndexView.as_view(), name='category_list'),
 
     path('products/dashboard/', views.dashboard, name='dashboard'),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),

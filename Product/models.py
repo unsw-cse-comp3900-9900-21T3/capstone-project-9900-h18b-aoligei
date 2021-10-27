@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 from mdeditor.fields import MDTextField, MDTextFormField
 from embed_video.fields import EmbedVideoField
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 
 # Create your models here.
 class Category(models.Model):
@@ -90,6 +90,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('Product:getProduct', args=[self.id])
 
 
 class Score(models.Model):

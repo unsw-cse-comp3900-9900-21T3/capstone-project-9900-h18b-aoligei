@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>ALL</h2>
+<a class="ui red label" style="margin-left: 20px" href="{% url "Product:category_list" %}">
+    <button>ALL</button>
+</a>
+
+
+<h2>Category</h2>
+{% for category in category_list %}
+    <input type="checkbox">
+    <a href="?c={{ category.id }}" >
+        <button class="btn btn-secondary">{{ category.title }}({{ category.num_products }}) </button>
+    </a>
+
+{% endfor %}
+<hr/>
+<h2>Format</h2>
+{% for format in format_list %}
+    <input type="checkbox">
+    <a href="?f={{ format.id }}" >
+        <button class="btn btn-secondary">{{ format.title }} ({{ format.num_products }})</button>
+    </a>
+{% endfor %}
+<hr/>
+
+<h2>Rating</h2>
+{% for rating in rating_list %}
+    <input type="checkbox">
+    <a href="?r={{ rating.id }}">
+        <button class="btn btn-secondary">{{ rating.title }} ({{ rating.num_products }})</button>
+    </a>
+{% endfor %}
+<hr/>
+
+<h2>Availability</h2>
+{% for availability in availability_list %}
+    <input type="checkbox">
+    <a href="?a={{ availability.id }}" >
+        <button class="btn btn-secondary">{{ availability.title }}({{ availability.num_products }}) </button>
+    </a>
+{% endfor %}
+<hr/>
+
+<div align="center">
+    {% for product in products %}
+        <ul>
+            <p>{{ product.title }}</p>
+            <img src="{{ product.image.url }}" style="width: 200px; height: 300px;">
+            <p>{{ product.format }}</p>
+            <p>{{ product.rating }}</p>
+            <p>{{ product.availability }}</p>
+            <p>{{ product.category }}</p>
+
+        </ul>
+
+    {% endfor %}
+</div>
+
+</body>
+</html>

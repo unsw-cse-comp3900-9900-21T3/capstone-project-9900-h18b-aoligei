@@ -5,6 +5,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.db.models import Avg
 import markdown
+from django.views import generic
+from django.shortcuts import get_object_or_404, redirect
+from django.db.models.aggregates import Count
 
 
 def home(request):
@@ -44,7 +47,9 @@ def search(request):
     page = request.GET.get('page')
     products = paginator.get_page(page)
 
-    context = {'products': products}
+    category_list = Category.objects.filter(status=True).values()
+
+    context = {'products': products, 'category_list': category_list}
     return render(request, 'Product/search.html', context)
 
 
@@ -79,3 +84,44 @@ def dashboard(request):
     product_count = Product.objects.count()
     context = {'user_count': user_count, 'product_count': product_count}
     return render(request, 'Product/dashboard.html', context)
+
+
+class CategoryIndexView(generic.ListView):
+    model = Product
+    template_name = 'Product/category.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CategoryIndexView, self).get_context_data(**kwargs)
+        # category_list = Category.objects.filter(status=True).values()
+        category_list = Category.objects.annotate(num_products=Count('product'))
+        format_list = Format.objects.annotate(num_products=Count('product'))
+        rating_list = Rating.objects.annotate(num_products=Count('product'))
+        availability_list = Availability.objects.annotate(num_products=Count('product'))
+
+
+        context['category_list'] = category_list
+        context['format_list'] = format_list
+        context['rating_list'] = rating_list
+        context['availability_list'] = availability_list
+        return context
+
+    def get_queryset(self):
+        self.c = self.request.GET.get("c", None)
+        self.f = self.request.GET.get("f", None)
+        self.r = self.request.GET.get("r", None)
+        self.a = self.request.GET.get("a", None)
+        if self.c:
+            category = get_object_or_404(Category, pk=self.c)
+            return category.product_set.all().order_by('-publishDate')
+        elif self.f:
+            format = get_object_or_404(Format, pk=self.f)
+            return format.product_set.all().order_by('-publishDate')
+        elif self.r:
+            rating = get_object_or_404(Rating, pk=self.r)
+            return rating.product_set.all().order_by('-publishDate')
+        elif self.a:
+            availability = get_object_or_404(Availability, pk=self.a)
+            return availability.product_set.all().order_by('-publishDate')
+        else:
+            return Product.objects.filter().order_by('-publishDate')
