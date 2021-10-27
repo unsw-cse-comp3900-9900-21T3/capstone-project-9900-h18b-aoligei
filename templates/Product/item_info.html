@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% load embed_video_tags %}
 {% block content %}
-    <link rel="stylesheet" type="text/css" href="/static/css/iteminfo.css">
+{#    <link rel="stylesheet" type="text/css" href="/static/css/iteminfo.css">#}
+{#    <script type="text/javascript" src="/static/js/cart.js"></script>#}
+{#    <script src="https://code.jquery.com/jquery-3.6.0.js"#}
+{#            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>#}
 
     <div class="iteminfo_content_top">
         <div class="iteminfo_pic">
@@ -9,7 +12,7 @@
         </div>
 
         <div class="iteminfo_maininfo">
-            <div class="iteminfo_maininfo_text title">
+            <div class="iteminfo_maininfo_text title" id="nm{{ product.id }}">
                 {{ product.title }}
             </div>
 
@@ -53,7 +56,7 @@
 
             <div class="iteminfo_maininfo_text buy">
                 <input>
-                <button class="iteminfo_buybtn">Add to Cart</button>
+                <button id="{{ product.id }}" class="iteminfo_buybtn atc">Add to Cart</button>
             </div>
 
             <div class="iteminfo_maininfo_text bottom">
@@ -88,5 +91,7 @@
             Q&A
         </div>
     </div>
+
+
 
 {% endblock content %}

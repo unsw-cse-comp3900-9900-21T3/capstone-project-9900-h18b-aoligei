@@ -4,7 +4,7 @@ z5216214 Haojin GUO
 
 Week 1
 1. Discuss the selection of the project with the team members,
-    and finally choose -- project5, e-commerce recommend system, as our project theme.
+    and finally choose -- project 5, e-commerce recommend system, as our project theme.
 2. Search for information about the recommendation algorithm, determine the recommendation
     algorithm of the product recommendation system, mainly use the collaborative filtering
     algorithm, and temporarily determine the algorithm based on user and content.
@@ -20,8 +20,24 @@ Week 3
 2. Complete the class diagram (PonyORM)
 
 Week 4
+1. Create a database related to the product
+    --Product
+        -- models.py
+                --class Product
+                --class Category
+                --class Format
+                --class Availability
+                --class Rating
+2. Initially create web admin interface, and using third-party api (simpleui) to optimize the background,
+    admin address: localhost:8000/admin
+    Meanwhile, Part of the structure of Web traffic of admin system is initially created
 
 week 5
+1. Complete product search function, basically support all kinds of search methods (price, product_name, categroy, etc)
+    backend: Product--> views.py--> search()
+    frontend: search.html
+2. Help team member yoyo complete the CSS layout of the product detail page (item_info.html);
+
 
 week 6
 
