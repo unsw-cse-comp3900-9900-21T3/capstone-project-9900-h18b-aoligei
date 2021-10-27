@@ -15,6 +15,11 @@
         .icon p{
             margin-left: 5px;
         }
+        .botton-container{
+            display: flex;
+            justify-content: center;
+        }
+
     </style>
 </head>
 {% extends "base.html" %}
@@ -23,11 +28,52 @@
 <div class="container">
     <div class="icon">
         <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
-        <p style="font-size: 30px">LOGIN</p>
+        <p style="font-size: 30px">Order History</p>
     </div>
+    <div class="botton-container">
     <div class="order-history">
+        <table border="1">
+            <tbody>
+            <tr>
+                <th>Image</th>
+                <th>Qty</th>
+                <th>Product Name</th>
+                <th>Total</th>
+                <th>Order ID</th>
+            </tr>
+            <tr>
+                <td>
+                    <img src="/static/myimage.png">
+                </td>
+                <td>X3</td>
+                <td>
+                    <h4>
+                        <a href="/templates/Product/item_info.html">Inception</a>
+                    </h4>
+                    <p>Type: blue ray</p>
+                </td>
+                <td>$50</td>
+                <td>88888</td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="/static/myimage.png">
+                </td>
+                <td>X3</td>
+                <td>
+                    <h4>
+                        <a href="/templates/Product/item_info.html">Inception</a>
+                    </h4>
+                    <p>Type: blue ray</p>
+                </td>
+                <td>$50</td>
+                <td>88888</td>
+            </tr>
 
+            </tbody>
+        </table>
     </div>
+        </div>
 </div>
 </body>
 {% endblock content %}
