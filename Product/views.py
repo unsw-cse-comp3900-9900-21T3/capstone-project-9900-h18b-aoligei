@@ -26,7 +26,7 @@ def home(request):
             "product_spotlight": product_spotlight,
             "product_all": product_all,
         }
-    return render(request, 'home.html', kwarg)
+        return render(request, 'home.html', kwarg)
 
 
 def search(request):
@@ -98,7 +98,6 @@ class CategoryIndexView(generic.ListView):
         format_list = Format.objects.annotate(num_products=Count('product'))
         rating_list = Rating.objects.annotate(num_products=Count('product'))
         availability_list = Availability.objects.annotate(num_products=Count('product'))
-
 
         context['category_list'] = category_list
         context['format_list'] = format_list
