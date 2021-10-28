@@ -5,6 +5,7 @@ from embed_video.fields import EmbedVideoField
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=20, blank=True, null=True)
@@ -96,12 +97,14 @@ class Product(models.Model):
 
 
 class Score(models.Model):
-    title = models.FloatField(null=True)
+    score = models.FloatField(null=True, default=1.0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    created_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        ordering = ('-created_time',)
         verbose_name = 'score'
 
-    def __str__(self):
-        return self.title
+    def __float__(self):
+        return self.score

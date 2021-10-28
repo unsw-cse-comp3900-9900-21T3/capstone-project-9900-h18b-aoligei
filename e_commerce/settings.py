@@ -160,13 +160,12 @@ SIMPLEUI_HOME_PAGE = '/products/dashboard/'
 SIMPLEUI_HOME_TITLE = 'Website traffic'
 SIMPLEUI_HOME_ICON = 'fa fa-eye'
 
-
 SIMPLEUI_CONFIG = {
     # Whether to use the system default menu, it is recommended to close it when customizing the menu.
     'system_keep': False,
 
     #  用于菜单排序和过滤, 不填此字段为默认排序和全部显示。空列表[] 为全部不显示.
-    'menu_display': ['Product', 'Authentication and Authorization'],
+    'menu_display': ['Product', 'Score', 'Authentication and Authorization'],
 
     # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时刷新展示菜单内容。
     # 一般建议关闭。
@@ -224,6 +223,20 @@ SIMPLEUI_CONFIG = {
 
             ]
         },
+
+        {
+            'name': 'Score',
+            'icon': 'fa fa-th-list',
+            'models': [
+                {
+                    'name': 'Score',
+                    'url': 'Product/score/',
+                    'icon': 'fa fa-tasks'
+                },
+            ]
+
+        },
+
     ]
 }
 
@@ -231,5 +244,5 @@ EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = "aoligei_9900@163.com"
 EMAIL_HOST_PASSWORD = "LVULKCYNQVNYGQKM"
-EMAIL_USE_TLS = False    # 一般都为False
+EMAIL_USE_TLS = False  # 一般都为False
 EMAIL_FROM = "aoligei_9900@163.com"
