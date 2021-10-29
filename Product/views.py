@@ -17,7 +17,7 @@ def home(request):
     if request.method == "GET":
         product_new_release = Product.objects.filter().order_by("-publishDate")[:4]
         # product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
-        product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("title")).values("product_id",
+        product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("score")).values("product_id",
                                                                                                  "avg").order_by(
             '-avg')[:4]
         product_all = Product.objects.all()

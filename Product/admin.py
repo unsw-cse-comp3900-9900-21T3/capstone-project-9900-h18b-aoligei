@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Product.models import Category, Product, Rating, Format, Availability
+from Product.models import Category, Product, Rating, Format, Availability, Score
 from django.utils.safestring import mark_safe
 from embed_video.admin import AdminVideoMixin
 
@@ -9,10 +9,13 @@ class ProductAdmin(AdminVideoMixin, admin.ModelAdmin):
         'title', 'image_data', 'publishDate', 'category', 'format', 'rating', 'price_dollar', 'availability',
         'created_time')
 
-    # fields = ('title', 'image', 'publishDate', "category", 'format', 'rating', 'price', 'availability',)
+    # fields = ('title', 'image_data', 'publishDate', "category", 'format', 'rating', 'price_dollar', 'availability',)
 
     def price_dollar(self, obj):
-        return mark_safe("$" + str(obj.price))
+        if obj.discount_price:
+            return mark_safe("$" + str(obj.discount_price))
+        else:
+            return mark_safe("$" + str(obj.price))
 
     def image_data(self, obj):
         return mark_safe(u'<img src="%s" width="100px" />' % obj.image.url)
@@ -30,3 +33,21 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(Rating)
 admin.site.register(Format)
 admin.site.register(Availability)
+
+
+class ScoreAdmin(admin.ModelAdmin):
+    list_display = (
+        'product_cover', 'product_title', 'score', 'user', 'created_time'
+    )
+
+    def product_title(self, obj):
+        title = obj.product.title
+        return mark_safe(str(title))
+
+    def product_cover(self, obj):
+        res = obj.product.image.url
+        # return mark_safe(str(res))
+        return mark_safe(u'<img src="%s" width="100px" />' % res)
+
+
+admin.site.register(Score, ScoreAdmin)
