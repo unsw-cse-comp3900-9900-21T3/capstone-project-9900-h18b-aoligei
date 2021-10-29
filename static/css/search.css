@@ -1,0 +1,103 @@
+.search_content{
+    width: 1200px;
+    margin: 0 auto;
+    height: 1200px;
+}
+
+.search_left_bar{
+    width: 300px;
+    float: left;
+    background: #333333;
+    max-height: 1200px;
+    overflow: auto;
+}
+
+.search_left_bar:hover{
+    overflow: auto;
+}
+
+.search_left_bar_text{
+    width: 280px;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: left;
+    color: black;
+    background: white;
+    text-align: left;
+}
+
+.search_left_bar_box{
+    width: 300px;
+}
+
+.search_left_bar_text.title{
+    line-height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    background: #cccccc;
+}
+
+.search_left_bar_text.subtitle{
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.search_left_bar_text.text{
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.search_right_bar{
+    height: 1200px;
+    width: 900px;
+    float: right;
+}
+
+.search_content_item{
+    height: 600px;
+    width: 284px;
+    margin-left: 8px;
+    margin-right: 8px;
+    float: left;
+    background: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+}
+
+.search_content_body{
+    height: 200px;
+    width: 284px;
+    background: rgba(255,255,255,0.7);
+}
+
+.search_content_body_text{
+    color: black;
+    text-align: center;
+}
+
+.search_content_body_text.title{
+    line-height: 30px;
+    height: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.search_content_body_text.text{
+    line-height: 30px;
+    height: 30px;
+    overflow: hidden;
+}
+
+.search_page_buy_button{
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 120px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background: #d71345;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px 5px 5px 5px;
+}

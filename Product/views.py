@@ -43,7 +43,7 @@ def search(request):
                    products.filter(availability__title__icontains=item_name)
 
     # paginator code
-    paginator = Paginator(products, 8)
+    paginator = Paginator(products, 6)
     page = request.GET.get('page')
     products = paginator.get_page(page)
 

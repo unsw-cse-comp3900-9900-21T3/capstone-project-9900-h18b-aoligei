@@ -158,4 +158,5 @@ div.headpage input {
     padding-top: 55px;
     padding-bottom: 80px;
     text-align: center;
+    clear: both;
 }
