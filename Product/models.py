@@ -4,7 +4,7 @@ from mdeditor.fields import MDTextField, MDTextFormField
 from embed_video.fields import EmbedVideoField
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+from django.db.models.aggregates import Count
 
 # Create your models here.
 class Category(models.Model):
@@ -19,6 +19,12 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def total_items(self):
+        total = self.product_set.all()
+        return len(total)
+
+
 
 class Format(models.Model):
     title = models.CharField(max_length=20, blank=True, null=True)
@@ -31,6 +37,11 @@ class Format(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def total_items(self):
+        total = self.product_set.all()
+        return len(total)
 
 
 class Rating(models.Model):
@@ -45,6 +56,11 @@ class Rating(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def total_items(self):
+        total = self.product_set.all()
+        return len(total)
+
 
 class Availability(models.Model):
     title = models.CharField(max_length=20, blank=True, null=True)
@@ -57,6 +73,11 @@ class Availability(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def total_items(self):
+        total = self.product_set.all()
+        return len(total)
 
 
 class Product(models.Model):
@@ -81,8 +102,11 @@ class Product(models.Model):
     details = MDTextField(blank=True, null=True)
 
     available = models.BooleanField(default=True)
+    digital = models.BooleanField(default=False, null=True, blank=True)
+
     created_time = models.DateTimeField(auto_now_add=True)
-    updated_time = models.DateTimeField(auto_now_add=True)
+
+    # updated_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('-created_time',)
@@ -94,6 +118,70 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('Product:getProduct', args=[self.id])
+
+
+# class Customer(models.Model):
+#     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=200, null=True)
+#     email = models.CharField(max_length=200)
+
+
+class Order(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    date_ordered = models.DateTimeField(auto_now_add=True)
+    complete = models.BooleanField(default=False)
+    transaction_id = models.CharField(max_length=100, null=True)
+
+    class Meta:
+        ordering = ('-date_ordered',)
+
+    def __str__(self):
+        return str(self.id)
+
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_total for item in orderitems])
+        return total
+
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+
+
+class OrderItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-date_added',)
+
+    @property
+    def get_total(self):
+        if self.product.discount_price:
+            total = self.product.discount_price * self.quantity
+            return total
+        total = self.product.price * self.quantity
+        return total
+
+
+
+class ShippingAddress(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=200, null=False)
+    city = models.CharField(max_length=200, null=False)
+    state = models.CharField(max_length=200, null=False)
+    zipcode = models.CharField(max_length=200, null=False)
+    country = models.CharField(max_length=200, null=False)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.address
 
 
 class Score(models.Model):

@@ -2,93 +2,101 @@
 
 {% block content %}
 
-<div class="search_content">
-    <div class="search_left_bar">
-        <div class="search_left_bar_text title">
-            SHOP BY
+    <div class="search_content">
+        <div class="search_left_bar">
+            <div class="search_left_bar_text title">
+                SHOP BY
+            </div>
+
+            <div class="search_left_bar_box">
+                <div class="search_left_bar_text subtitle">
+                    Categories
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+            </div>
+
+            <div class="search_left_bar_box">
+                <div class="search_left_bar_text subtitle">
+                    Categories
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+            </div>
+
+            <div class="search_left_bar_box">
+                <div class="search_left_bar_text subtitle">
+                    Categories
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+                <div class="search_left_bar_text text">
+                    Comedy
+                </div>
+            </div>
+
         </div>
 
-        <div class="search_left_bar_box">
-            <div class="search_left_bar_text subtitle">
-                Categories
+        <div class="search_right_bar">
+
+
+            <div class="search_div_change_page">
+                {% if products.has_previous %}
+                    <a href="?page=1">
+                        <button class="search_div_change_page_btn">&laquo; first</button>
+                    </a>
+                    <a href="?page={{ products.previous_page_number }}">
+                        <button class="search_div_change_page_btn">previous</button>
+                    </a>
+                {% endif %}
+                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                {% if products.has_next %}
+                    <a href="?page={{ products.next_page_number }}">
+                        <button class="search_div_change_page_btn">next</button>
+                    </a>
+                    <a href="?page={{ products.paginator.num_pages }}">
+                        <button class="search_div_change_page_btn">last &raquo;</button>
+                    </a>
+                {% endif %}
             </div>
-            <div class="search_left_bar_text text">
-                Comedy
-            </div>
-            <div class="search_left_bar_text text">
-                Comedy
-            </div>
-            <div class="search_left_bar_text text">
-                Comedy
-            </div>
-            <div class="search_left_bar_text text">
-                Comedy
-            </div>
-            <div class="search_left_bar_text text">
-                Comedy
-            </div>
-        </div>
 
-        <div class="search_left_bar_box">
-    <div class="search_left_bar_text subtitle">
-        Categories
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-</div>
-
-        <div class="search_left_bar_box">
-    <div class="search_left_bar_text subtitle">
-        Categories
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-    <div class="search_left_bar_text text">
-        Comedy
-    </div>
-</div>
-
-    </div>
-
-    <div class="search_right_bar">
-
-
-        <div class="search_div_change_page">
-            {% if products.has_previous %}
-            <a href="?page=1"> <button class="search_div_change_page_btn">&laquo; first</button></a>
-            <a href="?page={{ products.previous_page_number }}"> <button class="search_div_change_page_btn">previous</button></a>
-            {% endif %}
-            Page {{ products.number }} of {{ products.paginator.num_pages }}.
-            {% if products.has_next %}
-            <a href="?page={{ products.next_page_number }}"><button class="search_div_change_page_btn">next</button></a>
-            <a href="?page={{ products.paginator.num_pages }}"><button class="search_div_change_page_btn">last &raquo;</button></a>
-            {% endif %}
-        </div>
-
-        {% for product in products %}
+            {% for product in products %}
                 <div class="search_content_item">
                     {% if product.image.url %}
                         <a href="{% url "Product:getProduct" product.id %}" style="text-decoration: None;">
@@ -112,10 +120,10 @@
                         </div>
                         <div class="search_content_body_text text" style="padding-bottom: 8px;">
                             {% if product.discount_price %}
-                                <p_price>${{ product.discount_price }}</p_price>
-                                <p_price2> was ${{ product.price }}</p_price2>
+                                <p_price>${{ product.discount_price|floatformat:2 }}</p_price>
+                                <p_price2> was ${{ product.price|floatformat:2 }}</p_price2>
                             {% else %}
-                                <p_price> ${{ product.price }}</p_price>
+                                <p_price> ${{ product.price|floatformat:2 }}</p_price>
                             {% endif %}
                         </div>
                         <div class="search_content_body_text text">
@@ -127,19 +135,20 @@
                             {#                                           style="border: 1px solid #d71345; width: 70px; cursor: auto;">#}
                             {#                                </div>#}
                             <div class="col-md-9">
-                                <button id="{{ product.id }}" class="search_page_buy_button">Add to Cart
+                                <button data-product="{{ product.id }}" data-action="add"
+                                        class="search_page_buy_button update-cart">Add to Cart
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+
+
     </div>
 
-
-</div>
-
-</html>
+    </html>
 
 
 {% endblock content %}

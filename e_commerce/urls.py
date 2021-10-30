@@ -24,10 +24,9 @@ urlpatterns = [
     path('mdeditor/', include(('mdeditor.urls', 'mdeditor'))),
 
     path('', include(('Product.urls', 'Product'), namespace='Product')),
-    path(r'User/', include(('User.urls', 'User'), namespace='User')),
 
+    path(r'User/', include(('User.urls', 'User'), namespace='User')),
 
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

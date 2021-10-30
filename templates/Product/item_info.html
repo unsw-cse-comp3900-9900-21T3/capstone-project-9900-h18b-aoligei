@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load embed_video_tags %}
 {% block content %}
-{#    <link rel="stylesheet" type="text/css" href="/static/css/iteminfo.css">#}
-{#    <script type="text/javascript" src="/static/js/cart.js"></script>#}
-{#    <script src="https://code.jquery.com/jquery-3.6.0.js"#}
-{#            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>#}
+    {#    <link rel="stylesheet" type="text/css" href="/static/css/iteminfo.css">#}
+    {#    <script type="text/javascript" src="/static/js/cart.js"></script>#}
+    {#    <script src="https://code.jquery.com/jquery-3.6.0.js"#}
+    {#            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>#}
 
     <div class="iteminfo_content_top">
         <div class="iteminfo_pic">
@@ -16,7 +16,8 @@
                 {{ product.title }}
             </div>
 
-            <div class="iteminfo_maininfo_text score">Score: <p_yellow>{{ score }}</p_yellow></div>
+            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow>
+            </div>
 
             <div class="iteminfo_maininfo_text rating">
                 Rating : {{ product.rating }}
@@ -38,11 +39,11 @@
             <div class="iteminfo_maininfo_text price">
                 Price :
                 {% if product.discount_price %}
-                    <p_price>${{ product.discount_price }}</p_price>
+                    <p_price>${{ product.discount_price|floatformat:2 }}</p_price>
 
-                    <p_price2> was ${{ product.price }}</p_price2>
+                    <p_price2> was ${{ product.price|floatformat:2 }}</p_price2>
                 {% else %}
-                    <p_price> ${{ product.price }}</p_price>
+                    <p_price> ${{ product.price|floatformat:2 }}</p_price>
                 {% endif %}
             </div>
 
@@ -56,7 +57,9 @@
 
             <div class="iteminfo_maininfo_text buy">
                 <input>
-                <button id="{{ product.id }}" class="iteminfo_buybtn atc">Add to Cart</button>
+                <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
+                    Add to Cart
+                </button>
             </div>
 
             <div class="iteminfo_maininfo_text bottom">
@@ -76,18 +79,24 @@
 
         <div class="iteminfo_description">
             {% if product.trailer %}
-                <p_description>Trailer<hr/></p_description>
+                <p_description>Trailer
+                    <hr/>
+                </p_description>
                 <span style="display: flex; justify-content: center"> {% video product.trailer '1000x600' %}</span>
             {% endif %}
         </div>
 
         <div class="iteminfo_description">
-            <p_description>Details<hr/></p_description>
+            <p_description>Details
+                <hr/>
+            </p_description>
             {{ product.details|safe }}
         </div>
 
         <div class="iteminfo_qa">
-            <p_description>Q&A<hr/></p_description>
+            <p_description>Q&A
+                <hr/>
+            </p_description>
             Q&A
         </div>
     </div>

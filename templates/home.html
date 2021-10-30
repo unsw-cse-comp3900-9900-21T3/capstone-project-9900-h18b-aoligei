@@ -20,7 +20,11 @@
                         </a>
                     </div>
                     <div class="homecontent_info_text d2">
-                        Price:${{ single_product.discount_price }} | {{ single_product.category }}
+                        {% if single_product.discount_price %}
+                            Price:${{ single_product.discount_price|floatformat:2 }} | {{ single_product.category }}
+                        {% else %}
+                            Price:${{ single_product.price|floatformat:2 }} | {{ single_product.category }}
+                        {% endif %}
                         | {{ single_product.rating }}
                     </div>
                     <div class="homecontent_info_text d3">
@@ -55,7 +59,12 @@
                         </div>
 
                         <div class="homecontent_info_text d2">
-                            Price:${{ long.discount_price }} | Score: {{ short.avg }}
+                            {% if single_product.discount_price %}
+                                Price:${{ long.discount_price|floatformat:2 }} | Score: {{ short.avg }}
+                                {% else %}
+                                Price:${{ long.price|floatformat:2 }} | Score: {{ short.avg }}
+                                {% endif %}
+
                         </div>
                         <div class="homecontent_info_text d3">
                             <button class="homepagebtn l">BUY</button>

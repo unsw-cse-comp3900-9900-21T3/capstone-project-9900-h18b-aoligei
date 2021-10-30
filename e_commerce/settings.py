@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # project apps
-    'Product',
-    'User',
+    'Product.apps.ProductConfig',
+    'User.apps.UserConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -155,7 +156,8 @@ SIMPLEUI_ANALYSIS = False
 SIMPLEUI_HOME_QUICK = False
 SIMPLEUI_HOME_ACTION = False
 
-SIMPLEUI_LOGO = 'https://github.com/Hankin72/COMP9315_21T1/blob/master/_20t1/LogoMakr-9VRdnu.png?raw=true'
+# SIMPLEUI_LOGO = 'static/img/admin_logo.png'
+# SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
 SIMPLEUI_HOME_PAGE = '/products/dashboard/'
 SIMPLEUI_HOME_TITLE = 'Website traffic'
 SIMPLEUI_HOME_ICON = 'fa fa-eye'
@@ -165,7 +167,8 @@ SIMPLEUI_CONFIG = {
     'system_keep': False,
 
     #  用于菜单排序和过滤, 不填此字段为默认排序和全部显示。空列表[] 为全部不显示.
-    'menu_display': ['Product', 'Score', 'Authentication and Authorization'],
+    'menu_display': ['Product', 'Score', 'Order', 'OrderItem', 'ShippingAddress',
+                     'Authentication and Authorization'],
 
     # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时刷新展示菜单内容。
     # 一般建议关闭。
@@ -180,45 +183,45 @@ SIMPLEUI_CONFIG = {
                 {
                     'name': 'Users',
                     'icon': 'fa fa-user',
-                    'url': 'auth/user/'
+                    'url': 'auth/user/',
                 },
                 {
                     'name': 'Group',
                     'icon': 'fa fa-th-list',
-                    'url': 'auth/group/'
+                    'url': 'auth/group/',
                 }
             ]
         },
 
         {
             'name': 'Product',
-            'icon': 'fa fa-th-list',
+            'icon': 'fas fa-bars',
             'models': [
                 {
                     'name': 'Product',
                     'url': 'Product/product/',
-                    'icon': 'fa fa-tasks'
+                    'icon': 'fas fa-compact-disc',
                 },
                 {
                     'name': 'Category',
 
                     'url': 'Product/category/',
-                    'icon': 'fa fa-tasks'
+                    'icon': 'fas fa-angle-double-right',
                 },
                 {
                     'name': 'Rating',
                     'url': 'Product/rating/',
-                    'icon': 'fa fa-tasks'
+                    'icon': 'fas fa-child',
                 },
                 {
                     'name': 'Format',
                     'url': 'Product/format/',
-                    'icon': 'fa fa-tasks'
+                    'icon': 'fas fa-compact-disc'
                 },
                 {
                     'name': 'Availability',
                     'url': 'Product/availability/',
-                    'icon': 'fa fa-tasks'
+                    'icon': 'fas fa-globe',
                 },
 
             ]
@@ -226,15 +229,39 @@ SIMPLEUI_CONFIG = {
 
         {
             'name': 'Score',
-            'icon': 'fa fa-th-list',
+            'icon': 'fas fa-star-half-alt',
+            'url': 'Product/score/',
+
+        },
+
+        {
+            'name': 'Order',
+            'icon': 'fas fa-shopping-cart',
             'models': [
                 {
-                    'name': 'Score',
-                    'url': 'Product/score/',
-                    'icon': 'fa fa-tasks'
+                    'name': 'Order',
+                    'url': 'Product/order/',
+                    'icon': 'fas fa-shopping-cart',
                 },
-            ]
 
+                {
+                    'name': 'OrderItem',
+                    'url': 'Product/orderitem/',
+                    'icon': 'fas fa-list-ol',
+                },
+
+                # {
+                #     'name': 'Customer',
+                #     'url': 'Product/customer/',
+                #     'icon': 'fas fa-users'
+                # },
+                {
+                    'name': 'ShippingAddress',
+                    'url': 'Product/shippingaddress/',
+                    'icon': 'fas fa-shipping-fast',
+                },
+
+            ]
         },
 
     ]

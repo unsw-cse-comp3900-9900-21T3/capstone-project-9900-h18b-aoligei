@@ -15,6 +15,10 @@ urlpatterns = [
 
     path('category_list/', views.CategoryIndexView.as_view(), name='category_list'),
 
+    path('cart/', views.cart, name='cart'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('update_item/', views.updateItem, name='update_item'),
+
     path('products/dashboard/', views.dashboard, name='dashboard'),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
