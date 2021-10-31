@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.db.models.aggregates import Count
 from django.http import JsonResponse
 import json
+import datetime
 
 
 def home(request):
@@ -33,7 +34,7 @@ def home(request):
     else:
         # create empty cart for none logged in users
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     kwarg['cartItems'] = cartItems
@@ -68,9 +69,8 @@ def search(request):
     else:
         # create empty cart for none logged in users
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
-
 
     context = {'products': products, 'category_list': category_list, 'cartItems': cartItems}
     return render(request, 'Product/search.html', context)
@@ -103,7 +103,7 @@ def getProduct(request, product_id):
     else:
         # create empty cart for none logged in users
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     kwarg = {
@@ -170,7 +170,7 @@ def cart(request):
     else:
         # create empty cart for none logged in users
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
@@ -186,7 +186,7 @@ def checkout(request):
     else:
         # create empty cart for none logged in users
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
@@ -219,3 +219,31 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+
+def processOder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+        if total == float(order.get_cart_total):
+            order.complete = True
+        order.save()
+
+        if order.shipping == True:
+            ShippingAddress.objects.create(
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                state=data['shipping']['state'],
+                zipcode=data['shipping']['zipcode'],
+                country=data['shipping']['country'],
+            )
+    else:
+        print("User is not logged in")
+
+    return JsonResponse("Payment submitted ...", safe=False)

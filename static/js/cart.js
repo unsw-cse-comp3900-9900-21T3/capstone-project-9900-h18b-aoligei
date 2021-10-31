@@ -9,7 +9,7 @@ for (let i = 0; i < updateBtns.length; i++) {
         // console.log('USER: ', user);
         if (user == 'AnonymousUser') {
             console.log('User is not authenticated');
-
+            alert("Sorry, please log in firstly");
         } else {
             // console.log('User is authenticated, sending data...');
             updateUserOrder(productId, action);

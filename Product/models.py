@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.db.models.aggregates import Count
 
+
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=20, blank=True, null=True)
@@ -23,7 +24,6 @@ class Category(models.Model):
     def total_items(self):
         total = self.product_set.all()
         return len(total)
-
 
 
 class Format(models.Model):
@@ -120,12 +120,6 @@ class Product(models.Model):
         return reverse('Product:getProduct', args=[self.id])
 
 
-# class Customer(models.Model):
-#     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=200, null=True)
-#     email = models.CharField(max_length=200)
-
-
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
@@ -139,10 +133,19 @@ class Order(models.Model):
         return str(self.id)
 
     @property
+    def shipping(self):
+        shipping = False
+        orderItems = self.orderitem_set.all()
+        for item in orderItems:
+            if item.product.digital == False:
+                shipping = True
+        return shipping
+
+    @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
-        return total
+        return float(total)
 
     @property
     def get_cart_items(self):
@@ -166,8 +169,7 @@ class OrderItem(models.Model):
             total = self.product.discount_price * self.quantity
             return total
         total = self.product.price * self.quantity
-        return total
-
+        return float(total)
 
 
 class ShippingAddress(models.Model):

@@ -140,9 +140,9 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = (
         'transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',
     )
-    exclude = ['transaction_id', 'customer', 'complete',]
+    # exclude = ['transaction_id', 'customer', 'complete',]
 
-    readonly_fields = ['transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',]
+    # readonly_fields = ['transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',]
     list_per_page = 8
 
     def total_quantity(self, obj):
@@ -156,21 +156,23 @@ admin.site.register(Order, OrderAdmin)
 
 
 class OrderItemAdmin(admin.ModelAdmin):
+
+
     list_display = (
-        'transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer', 'complete',
+        'transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer', 'completed',
         'date_added',
     )
     list_per_page = 8
 
     readonly_fields = ['transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer',
-                       'complete',
+                       'completed',
                        'date_added', ]
+
 
     def product_title(self, obj):
         return mark_safe(str(obj.product.title))
 
     def product_cover(self, obj):
-
         return mark_safe(u'<img src="%s" width="100px" />' % (obj.product.image.url))
 
     def price(self, obj):
@@ -189,7 +191,7 @@ class OrderItemAdmin(admin.ModelAdmin):
         total = obj.get_total
         return mark_safe(str(total))
 
-    def complete(self, obj):
+    def completed(self, obj):
         return mark_safe(obj.order.complete)
 
 

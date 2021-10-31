@@ -18,6 +18,7 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('update_item/', views.updateItem, name='update_item'),
+    path('process_order', views.processOder, name='process_order'),
 
     path('products/dashboard/', views.dashboard, name='dashboard'),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
