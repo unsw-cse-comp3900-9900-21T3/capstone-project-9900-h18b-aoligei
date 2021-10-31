@@ -14,13 +14,13 @@ for (let i = 0; i < updateBtns.length; i++) {
             // console.log('User is authenticated, sending data...');
             updateUserOrder(productId, action);
 
+
         }
     });
 }
 
 function updateUserOrder(productId, action) {
     console.log('User is authenticated, sending data...');
-
     var url = '/update_item/';
 
     fetch(url, {
@@ -35,6 +35,16 @@ function updateUserOrder(productId, action) {
             return response.json();
         })
         .then((data) => {
+            if (action=='add'){
+                 alert("add  successful");
+            }
+            else if (action=='remove'){
+                alert("remove successful");
+            }
+            else{
+                 alert("delete successful");
+            }
+
             location.reload();
             // console.log('Data:', data)
         });
