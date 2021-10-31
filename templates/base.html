@@ -36,8 +36,6 @@
         }
 
         var csrftoken = getToken('csrftoken');
-
-
     </script>
 
 </head>
@@ -58,11 +56,26 @@
     </div>
 
     <div class="dropdown">
+
+        <a href="{% url "Product:home" %}">
+            <button class="dropbtn">
+                Home
+            </button>
+        </a>
+    </div>
+    <div class="dropdown">
+        <a href="{% url "Product:search" %}">
+            <button class="dropbtn">
+                ALL Movies
+            </button>
+        </a>
+    </div>
+
+    <div class="dropdown">
         <button class="dropbtn">Category</button>
         <div class="dropdown-content">
             <a>check</a>
         </div>
-
     </div>
 
     <div class="dropdown">
@@ -89,7 +102,6 @@
         </div>
     </div>
 
-
     <div class="dropdown">
         <a href="{% url 'Product:cart' %}">
             <img id="cart-icon" src="{% static 'img/cart.png' %}">
@@ -98,9 +110,7 @@
 
     </div>
 
-
     <div class="dropdown right">
-
         {% if request.user.is_authenticated %}
             <a href="#">
                 <button class="dropbtn">{{ request.user.username }}</button>
@@ -117,7 +127,6 @@
             <div class="dropdown-content">
                 <a href="{% url 'User:login' %}">Sign in</a>
                 <a href="{% url 'User:login' %}">Sign up</a>
-
             </div>
         {% endif %}
 
@@ -170,7 +179,6 @@
 
 
 <script type="text/javascript" src="{% static "js/cart.js" %}"></script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
