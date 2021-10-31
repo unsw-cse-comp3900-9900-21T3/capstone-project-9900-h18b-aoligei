@@ -50,10 +50,8 @@
             <br>
             <div class="box-element hidden" id="payment-info">
                 <small>Paypal Options</small><br/><br/>
-
                 <div id="paypal-button-container"></div>
                  <button id="make-payment" class="btn btn-success">Completed Payment</button>
-
             </div>
 
         </div>
@@ -88,31 +86,27 @@
     <script type="text/javascript">
         let shipping = '{{ order.shipping }}';
         let total = '{{ order.get_cart_total }}';
-
+        let total_num ='{{ order.get_cart_items }}';
 
         if (shipping == 'False') {
             document.getElementById('shipping-info').innerHTML = '';
         }
-
         if (user != 'AnonymousUser') {
             document.getElementById('user-info').innerHTML = '';
         }
-
-
         if (shipping == 'False' && user != 'AnonymousUser') {
             //Hide entire form if user is logged in and shipping is false
-            // 登录用户虚拟在线产品不显示shipping information
             document.getElementById('form-wrapper').classList.add('hidden');
             // show payment if logged in users want to buy an item that does not required shipping
-            document.getElementById('payment-info').classList.remove('hidden');
+            if (total_num != 0){
+                document.getElementById('payment-info').classList.remove('hidden');
+            }
         }
 
         let form = document.getElementById('form');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-
             console.log('Form Submitted ...');
-
             document.getElementById('form-button').classList.add('hidden');
             document.getElementById(('payment-info')).classList.remove('hidden');
         })
