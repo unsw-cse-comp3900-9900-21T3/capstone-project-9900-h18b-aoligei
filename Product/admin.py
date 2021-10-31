@@ -156,8 +156,6 @@ admin.site.register(Order, OrderAdmin)
 
 
 class OrderItemAdmin(admin.ModelAdmin):
-
-
     list_display = (
         'transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer', 'completed',
         'date_added',
@@ -167,7 +165,6 @@ class OrderItemAdmin(admin.ModelAdmin):
     readonly_fields = ['transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer',
                        'completed',
                        'date_added', ]
-
 
     def product_title(self, obj):
         return mark_safe(str(obj.product.title))

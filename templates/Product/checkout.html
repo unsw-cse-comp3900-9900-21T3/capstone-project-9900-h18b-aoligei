@@ -26,19 +26,19 @@
                         <p>Shipping Information:</p>
                         <hr>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="address" placeholder="Address..">
+                            <input required class="form-control" type="text" name="address" placeholder="Address..">
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="city" placeholder="City/Suburb..">
+                            <input required class="form-control" type="text" name="city" placeholder="City/Suburb..">
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="state" placeholder="State..">
+                            <input required class="form-control" type="text" name="state" placeholder="State..">
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="zipcode" placeholder="Postcode..">
+                            <input required class="form-control" type="text" name="zipcode" placeholder="Postcode..">
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="country" placeholder="Country..">
+                            <input required class="form-control" type="text" name="country" placeholder="Country..">
                         </div>
                     </div>
 
@@ -50,9 +50,9 @@
             <br>
             <div class="box-element hidden" id="payment-info">
                 <small>Paypal Options</small><br/><br/>
-                {#                <button id="make-payment" class="btn btn-success">Make payment</button>#}
+                <button id="make-payment" class="btn btn-success">Make payment</button>
 
-                <div id="paypal-button-container"></div>
+                {#                <div id="paypal-button-container"></div>#}
 
             </div>
 

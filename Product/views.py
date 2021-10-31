@@ -11,6 +11,8 @@ from django.db.models.aggregates import Count
 from django.http import JsonResponse
 import json
 import datetime
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.urls import reverse
 
 
 def home(request):
@@ -88,7 +90,6 @@ def getProduct(request, product_id):
                                                 'markdown.extensions.codehilite',
                                                 'markdown.extensions.toc',
                                             ])
-
     product.details = markdown.markdown(product.details,
                                         extensions=[
                                             'markdown.extensions.extra',
@@ -112,13 +113,6 @@ def getProduct(request, product_id):
         'cartItems': cartItems,
     }
     return render(request, 'Product/item_info.html', kwarg)
-
-
-def dashboard(request):
-    user_count = User.objects.count()
-    product_count = Product.objects.count()
-    context = {'user_count': user_count, 'product_count': product_count}
-    return render(request, 'Product/dashboard.html', context)
 
 
 class CategoryIndexView(generic.ListView):
@@ -190,7 +184,6 @@ def checkout(request):
         cartItems = order['get_cart_items']
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
-
     return render(request, 'Product/checkout.html', context)
 
 
@@ -213,8 +206,9 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity - 1)
 
     orderItem.save()
-
     if orderItem.quantity <= 0:
+        orderItem.delete()
+    if action == 'delete':
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
@@ -247,3 +241,12 @@ def processOder(request):
         print("User is not logged in")
 
     return JsonResponse("Payment submitted ...", safe=False)
+
+
+def dashboard(request):
+    user_count = User.objects.count()
+    product_count = Product.objects.count()
+    context = {'user_count': user_count, 'product_count': product_count}
+    return render(request, 'Product/dashboard.html', context)
+
+

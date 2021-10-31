@@ -145,7 +145,7 @@ class Order(models.Model):
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
-        return float(total)
+        return total
 
     @property
     def get_cart_items(self):
@@ -169,7 +169,7 @@ class OrderItem(models.Model):
             total = self.product.discount_price * self.quantity
             return total
         total = self.product.price * self.quantity
-        return float(total)
+        return total
 
 
 class ShippingAddress(models.Model):
