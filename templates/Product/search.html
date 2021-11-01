@@ -16,7 +16,7 @@
                 <div class="search_left_bar_text text">
                     {% for category in category_list %}
                         <a href="?c={{ category.id }}">
-                            <button>{{ category.title }}({{ category.num_products }})</button>
+                            <button class="search_left_bar_btn">{{ category.title }}({{ category.num_products }})</button>
                         </a>
                     {% endfor %}
                 </div>
@@ -28,7 +28,7 @@
                 <div class="search_left_bar_text text">
                     {% for format in format_list %}
                         <a href="?f={{ format.id }}">
-                            <button>{{ format.title }} ({{ format.num_products }})</button>
+                            <button class="search_left_bar_btn">{{ format.title }} ({{ format.num_products }})</button>
                         </a>
                     {% endfor %}
                 </div>
@@ -41,7 +41,7 @@
                 <div class="search_left_bar_text text">
                     {% for rating in rating_list %}
                         <a href="?r={{ rating.id }}">
-                            <button>{{ rating.title }} ({{ rating.num_products }})</button>
+                            <button class="search_left_bar_btn">{{ rating.title }} ({{ rating.num_products }})</button>
                         </a>
                     {% endfor %}
                 </div>
@@ -53,7 +53,7 @@
                 <div class="search_left_bar_text text">
                     {% for availability in availability_list %}
                         <a href="?a={{ availability.id }}">
-                            <button>{{ availability.title }}({{ availability.num_products }})</button>
+                            <button class="search_left_bar_btn">{{ availability.title }}({{ availability.num_products }})</button>
                         </a>
                     {% endfor %}
                 </div>
