@@ -1,11 +1,13 @@
 html, body {
     margin: 0;
+    font-family: 'Helvetica';
 }
 
 html {
     background-image: url("/static/bg.jfif");
     background-attachment: fixed;
 }
+
 
 .logo {
     float: left;
@@ -167,3 +169,5 @@ div.headpage input {
     text-align: center;
     clear: both;
 }
+
+
