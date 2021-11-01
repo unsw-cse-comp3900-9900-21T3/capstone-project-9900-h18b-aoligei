@@ -1,11 +1,12 @@
-.homecontent{
+.homecontent {
     width: 1200px;
     height: 640px;
     margin: 0 auto;
     margin-top: 40px;
+
 }
 
-.homecontent_title{
+.homecontent_title {
     height: 90px;
     font-size: 20px;
     text-align: center;
@@ -14,7 +15,7 @@
     font-weight: bold;
 }
 
-.homecontent_item{
+.homecontent_item {
     height: 400px;
     width: 284px;
     margin-left: 8px;
@@ -22,19 +23,19 @@
     float: left;
 }
 
-.homecontent_pic{
+.homecontent_pic {
     height: 400px;
     width: 284px;
 }
 
-.homecontent_info{
+.homecontent_info {
     height: 150px;
     width: 284px;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
 }
 
-.homecontent_info_text{
+.homecontent_info_text {
     padding-left: 5px;
     padding-right: 5px;
     width: 274px;
@@ -42,7 +43,7 @@
     overflow: hidden;
 }
 
-.homecontent_info_text.d1{
+.homecontent_info_text.d1 {
     padding-top: 10px;
     height: 45px;
     line-height: 45px;
@@ -51,21 +52,21 @@
     font-weight: bold;
 }
 
-.homecontent_info_text.d2{
+.homecontent_info_text.d2 {
     height: 30px;
     line-height: 30px;
     color: black;
     font-size: 14px;
 }
 
-.homecontent_info_text.d3{
+.homecontent_info_text.d3 {
     height: 70px;
     width: 264px;
     padding-right: 10px;
     text-align: right;
 }
 
-.homepagebtn{
+.homepagebtn {
     height: 30px;
     margin-top: 20px;
     margin-left: 5px;
@@ -75,10 +76,24 @@
     border: none;
 }
 
-.homepagebtn.l{
-    background-color:#45b97c;
+.homepagebtn.l {
+    background-color: #45b97c;
 }
 
-.homepagebtn.r{
-    background-color:#f58f98;
+.homepagebtn.r {
+    background-color: #f58f98;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
