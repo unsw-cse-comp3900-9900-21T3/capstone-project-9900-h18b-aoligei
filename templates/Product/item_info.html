@@ -12,12 +12,11 @@
         </div>
 
         <div class="iteminfo_maininfo">
-            <div class="iteminfo_maininfo_text title" id="nm{{ product.id }}">
+            <div class="iteminfo_maininfo_text title detail-hover" >
                 {{ product.title }}
             </div>
 
-            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow>
-            </div>
+            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow></div>
 
             <div class="iteminfo_maininfo_text rating">
                 Rating : {{ product.rating }}
@@ -39,25 +38,25 @@
             <div class="iteminfo_maininfo_text price">
                 Price :
                 {% if product.discount_price %}
-                    <p_price>${{ product.discount_price|floatformat:2 }}</p_price>
+                    <p_price class="detail-hover">${{ product.discount_price|floatformat:2 }}</p_price>
 
-                    <p_price2> was ${{ product.price|floatformat:2 }}</p_price2>
+                    <p_price2 class="detail-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
                 {% else %}
-                    <p_price> ${{ product.price|floatformat:2 }}</p_price>
+                    <p_price class="detail-hover"> ${{ product.price|floatformat:2 }}</p_price>
                 {% endif %}
             </div>
 
-            <div class="iteminfo_maininfo_text stock">
-                Stock : {{ product.stock }}
-            </div>
+{#            <div class="iteminfo_maininfo_text stock">#}
+{#                Stock : {{ product.stock }}#}
+{#            </div>#}
 
-            <div class="iteminfo_maininfo_text available">
-                Available : {{ product.availability }}
+            <div class="iteminfo_maininfo_text available" id="availability">
+                Availability : {{ product.availability }}
             </div>
 
             <div class="iteminfo_maininfo_text buy">
-                <input>
-                <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
+{#                <input>#}
+                <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn update-cart cart-hover-big">
                     Add to Cart
                 </button>
             </div>
@@ -100,7 +99,6 @@
             Q&A
         </div>
     </div>
-
 
 
 {% endblock content %}

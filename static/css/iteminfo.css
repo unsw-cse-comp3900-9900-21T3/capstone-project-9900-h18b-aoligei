@@ -187,3 +187,7 @@ div.iteminfo_maininfo input {
     /*justify-content: space-between;*/
     width: 1200px;
 }
+
+.detail-hover:hover{
+    font-size:2em;
+}

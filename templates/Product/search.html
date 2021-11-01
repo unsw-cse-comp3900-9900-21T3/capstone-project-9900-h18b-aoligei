@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
     <div class="search_content">
@@ -71,7 +71,14 @@
                         <button class="search_div_change_page_btn">previous</button>
                     </a>
                 {% endif %}
-                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+
+                <a>
+                    <button class="search_div_change_page_btn" style="background-color: #999;cursor: text;">
+                        Page {{ products.number }}
+                        of {{ products.paginator.num_pages }}.
+                    </button>
+                </a>
+
                 {% if products.has_next %}
                     <a href="?page={{ products.next_page_number }}">
                         <button class="search_div_change_page_btn">next</button>
@@ -85,34 +92,38 @@
             {% for product in products %}
                 <div class="search_content_item">
                     {% if product.image.url %}
-                        <a href="{% url "Product:getProduct" product.id %}" style="text-decoration: None;">
-                            <img src="{{ product.image.url }} " style="height: 400px; width: 284px;  margin: auto;
-               " class="card-img-top">
+                        <a href="{% url "Product:getProduct" product.id %}"
+                           style="text-decoration: None;">
+                            <img src="{{ product.image.url }} "
+                                 style="height: 400px; width: 284px;  margin: auto; border-radius: 10px;"
+                                 class="card-img-top">
                         </a>
                     {% else %}
-                        <a href="{% url "Product:getProduct" product.id %}" style="text-decoration: None;">
-                            <img src="https://github.com/Hankin72/COMP9315_21T1/blob/master/_20t1/logo.png?raw=true"
-                                 style="height: 400px; width: 284px;  margin-left: auto;
-                margin-right: auto;" class="card-img-top">
+                        <a href="{% url "Product:getProduct" product.id %}"
+                           style="text-decoration: None;">
+                            <img src="{% static "img/admin_logo.png" %}"
+                                 style="height: 400px; width: 284px;  margin-left: auto; margin-right: auto; border-radius: 10px;"
+                                 class="card-img-top">
                         </a>
                     {% endif %}
 
                     <div class="search_content_body">
                         <div class="search_content_body_text title">
-                            <a id="nm{{ product.id }}" href="{% url "Product:getProduct" product.id %}"
-                               style="text-decoration: None;">
+                            <a href="{% url "Product:getProduct" product.id %}" class="search-hover"
+                               style="text-decoration: None;color: black; font-weight: bold; vertical-align:center;">
                                 {{ product.title }}
                             </a>
                         </div>
                         <div class="search_content_body_text text" style="padding-bottom: 8px;">
                             {% if product.discount_price %}
-                                <p_price>${{ product.discount_price|floatformat:2 }}</p_price>
-                                <p_price2> was ${{ product.price|floatformat:2 }}</p_price2>
+                                <p_price class="search-price-hover">
+                                    ${{ product.discount_price|floatformat:2 }}</p_price>
+                                <p_price2 class="search-price-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
                             {% else %}
-                                <p_price> ${{ product.price|floatformat:2 }}</p_price>
+                                <p_price class="search-price-hover"> ${{ product.price|floatformat:2 }}</p_price>
                             {% endif %}
                         </div>
-                        <div class="search_content_body_text text">
+                        <div class="search_content_body_text text search-hover">
                             {{ product.format }} | {{ product.category }} | {{ product.availability }}
                         </div>
                         <div class="row" style="margin-top: 12px; margin-left: 10px;">
@@ -122,7 +133,7 @@
                             {#                                </div>#}
                             <div class="col-md-9">
                                 <button data-product="{{ product.id }}" data-action="add"
-                                        class="search_page_buy_button update-cart">Add to Cart
+                                        class="search_page_buy_button update-cart cart-hover-big">Add to Cart
                                 </button>
                             </div>
                         </div>
@@ -130,11 +141,6 @@
                 </div>
             {% endfor %}
         </div>
-
-
     </div>
-
-    </html>
-
 
 {% endblock content %}

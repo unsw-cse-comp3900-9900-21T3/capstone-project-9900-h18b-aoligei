@@ -64,8 +64,8 @@
     </div>
     <div class="dropdown">
         <a href="{% url "Product:search" %}">
-            <button class="dropbtn">
-                ALL Movies
+            <button class="dropbtn" >
+                All Sales
             </button>
         </a>
     </div>
@@ -102,9 +102,9 @@
     </div>
 
     <div class="dropdown">
-        <a href="{% url 'Product:cart' %}">
-            <img id="cart-icon" src="{% static 'img/cart.png' %}">
-            <p id="cart-total">{{ cartItems }}</p>
+        <a href="{% url 'Product:cart' %}" class="dropbtn" >
+            <img id="cart-icon" src="{% static 'img/cart.png' %}" style="padding-top: 12px;">
+            <p id="cart-total" class="cart-total">{{ cartItems }}</p>
         </a>
 
     </div>

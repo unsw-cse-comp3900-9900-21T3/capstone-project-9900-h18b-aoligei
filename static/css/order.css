@@ -5,17 +5,23 @@
     margin-left: 15px;
 }
 
+
+
 #cart-total {
     display: inline-block;
-    text-align: center;
+    /*text-align: center;*/
+    line-height:25px;
+    align-items: center;
     color: #ffffff;
     background-color: red;
     width: 20px;
     height: 25px;
     border-radius: 50%;
     font-size: 14px;
-    margin-top: 10px;
+    font-weight: bold;
+
 }
+
 
 
 .box-element {
@@ -107,7 +113,8 @@
 }
 
 .cart_btn {
-    border: 1px solid #909090;
+    /*border: 1px solid #909090;*/
+    border: none;
     border-radius: 5px 5px 5px 5px;
     background: #cdcdcd;
     height: 30px;
