@@ -153,6 +153,9 @@ div.iteminfo_maininfo input {
     cursor: pointer;
 }
 
+.iteminfo_buybtn:hover{
+    background-color: #1d953f;
+}
 
 .iteminfo_content_bottom{
     width: 1200px;

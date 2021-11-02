@@ -16,8 +16,7 @@
                 {{ product.title }}
             </div>
 
-            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow>
-            </div>
+            <div class="iteminfo_maininfo_text score">Score : <p_yellow>{{ score }}</p_yellow></div>
 
             <div class="iteminfo_maininfo_text rating">
                 Rating : {{ product.rating }}
@@ -56,7 +55,6 @@
             </div>
 
             <div class="iteminfo_maininfo_text buy">
-                <input>
                 <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
                     Add to Cart
                 </button>
