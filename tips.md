@@ -35,4 +35,6 @@ pip install static3
 pip install django-embed-video
 
 test message
+pip install django-mptt
+pip install django-ckeditor
 ```
