@@ -1,10 +1,10 @@
 .carousel-4 {
-    width: 1200px;
+    width: 1100px;
     height: 400px;
     margin: 0 auto;
     margin-top: 40px;
     background-color: rgba(51, 53, 67, 0.5);
-    border-radius: 5px;
+    border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
