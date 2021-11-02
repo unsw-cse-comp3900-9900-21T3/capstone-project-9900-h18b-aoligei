@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'Product.apps.ProductConfig',
     'User.apps.UserConfig',
 
+    'Comment.apps.CommentConfig',
+    'mptt',
+
 ]
 
 MIDDLEWARE = [

@@ -12,11 +12,12 @@
         </div>
 
         <div class="iteminfo_maininfo">
-            <div class="iteminfo_maininfo_text title detail-hover" >
+            <div class="iteminfo_maininfo_text title" id="nm{{ product.id }}">
                 {{ product.title }}
             </div>
 
-            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow></div>
+            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow>
+            </div>
 
             <div class="iteminfo_maininfo_text rating">
                 Rating : {{ product.rating }}
@@ -38,25 +39,25 @@
             <div class="iteminfo_maininfo_text price">
                 Price :
                 {% if product.discount_price %}
-                    <p_price class="detail-hover">${{ product.discount_price|floatformat:2 }}</p_price>
+                    <p_price>${{ product.discount_price|floatformat:2 }}</p_price>
 
-                    <p_price2 class="detail-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
+                    <p_price2> was ${{ product.price|floatformat:2 }}</p_price2>
                 {% else %}
-                    <p_price class="detail-hover"> ${{ product.price|floatformat:2 }}</p_price>
+                    <p_price> ${{ product.price|floatformat:2 }}</p_price>
                 {% endif %}
             </div>
 
-{#            <div class="iteminfo_maininfo_text stock">#}
-{#                Stock : {{ product.stock }}#}
-{#            </div>#}
+            <div class="iteminfo_maininfo_text stock">
+                Stock : {{ product.stock }}
+            </div>
 
-            <div class="iteminfo_maininfo_text available" id="availability">
-                Availability : {{ product.availability }}
+            <div class="iteminfo_maininfo_text available">
+                Available : {{ product.availability }}
             </div>
 
             <div class="iteminfo_maininfo_text buy">
-{#                <input>#}
-                <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn update-cart cart-hover-big">
+                <input>
+                <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
                     Add to Cart
                 </button>
             </div>
@@ -97,8 +98,124 @@
                 <hr/>
             </p_description>
             Q&A
+            {% if user.is_authenticated %}
+                <div>
+                    <form action="{% url "Comment:post_comment" product.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="normal">
+                                <p1>Post a Comment:</p1>
+                            </div>
+                            <textarea type="text" class="form-control" id="body" name="body" rows="4"
+                                      placeholder="Please enter a comment"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary ">Post</button>
+                    </form>
+                </div>
+
+                <br>
+            {% else %}
+                <br>
+                <h5 class="row justify-content-center">
+                    Please <a href="{% url 'User:login' %}"> login </a> to reply.
+                </h5>
+                <br>
+            {% endif %}
+
+            <div class="all_comment">
+                {% load mptt_tags %}
+                <h4>Total comments: {{ comments.count }}</h4>
+                <div class="row">
+                    {% recursetree comments %}
+                        {% with comment=node %}
+                            <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
+                                <hr/>
+                                <p>
+                                    <strong style="color: pink">
+                                        {{ comment.user }}
+                                    </strong>
+
+                                    {% if comment.reply_to %}
+                                        <i class="far fa-arrow-alt-circle-right"
+                                           style="color: cornflowerblue;"
+                                        ></i>
+                                        <strong style="color: pink">
+                                            <span style="color: black"
+                                                  class="arrow-outer">  @</span> {{ comment.reply_to }}
+                                        </strong>
+                                    {% endif %}
+
+                                </p>
+                                <div>{{ comment.body|safe }}</div>
+
+                                <div>
+                                    <span style="color: gray">
+                                    {{ comment.created|date:"Y-m-d H:i:s" }}
+                                    </span>
+
+                                    {% if user.is_authenticated %}
+                                        <button type="button"
+                                                class="btn btn-light btn-sm text-muted"
+                                                onclick="load_modal({{ product.id }}, {{ comment.id }})">Reply
+                                        </button>
+                                    {% else %}
+                                        <a class="btn btn-light btn-sm text-muted"
+                                           href="{% url 'User:login' %}">
+                                            Reply
+                                        </a>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="modal fade"
+                                     id="comment_{{ comment.id }}"
+                                     tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="CommentModalCenter"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content" style="height: 480px">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Replying
+                                                    to {{ comment.user }}：</h5>
+                                            </div>
+                                            <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if not comment.is_leaf_node %}
+                                    <div class="children">
+                                        {{ children }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endwith %}
+                    {% endrecursetree %}
+                </div>
+
+
+                <script>
+
+                    function load_modal(product_id, comment_id) {
+                        let modal_body = '#modal_body_' + comment_id;
+                        let modal_id = '#comment_' + comment_id;
+
+
+                        if ($(modal_body).children().length === 0) {
+                            let content = '<iframe src="/Comment/post_comment/' + product_id + '/' + comment_id + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+                            $(modal_body).append(content);
+                        }
+                        ;
+                        $(modal_id).modal('show');
+                    }
+                </script>
+            </div>
+
+
         </div>
     </div>
+
 
 
 {% endblock content %}

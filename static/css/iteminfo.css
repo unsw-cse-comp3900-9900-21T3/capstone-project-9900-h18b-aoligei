@@ -188,6 +188,14 @@ div.iteminfo_maininfo input {
     width: 1200px;
 }
 
-.detail-hover:hover{
-    font-size:2em;
-}
+div.comment {
+            border-style: solid;
+            background: white;
+            width: 100%;
+            padding: 15px;
+            border-color: #f1f1f1;
+        }
+
+        div.all_comment {
+            width: 100%;
+        }

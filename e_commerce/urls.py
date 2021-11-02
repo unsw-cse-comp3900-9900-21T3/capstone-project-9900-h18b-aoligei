@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include(('Product.urls', 'Product'), namespace='Product')),
 
     path(r'User/', include(('User.urls', 'User'), namespace='User')),
+    path(r'Comment/', include(('Comment.urls', 'Comment'), namespace='Comment')),
 
 ]
 
