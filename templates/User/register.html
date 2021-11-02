@@ -5,6 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+
+</head>
+
+{% block content %}
     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
     <style>
         .register-button {
@@ -39,9 +43,6 @@
 
         }
     </style>
-</head>
-
-{% block content %}
 <body>
 {#<form method="post" action="{% url 'User:register' %}" class="form">#}
 {#    {% csrf_token %}#}
@@ -53,7 +54,7 @@
 {#    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>#}
 {##}
 {#</form>#}
-<div class="container" style="display: flex; justify-content: center">
+<div class="container" style="display: flex; justify-content: center; height: 700px">
 
       <div class="right-container">
             <!--        <li>Register</li>-->
