@@ -21,6 +21,7 @@ Week 3
 
 Week 4
 1. Create a database related to the product
+     Code workload：
     --Product
         -- models.py
                 --class Product
@@ -40,9 +41,24 @@ week 5
 
 
 week 6
-1. product added to the cart
-2. product orders and orderItem
+1. product added to the cart,
+    1)frontend: (cart.html, checkout.html, cart.js)
+    2) backend: Product -- views.py -- cart(),checkout(),
+
 
 
 week 7
-1. orders checked by admin
+1.  product orders, orderItem and shipping address
+    (database created and After the transaction is successful, the order is stored in the database)
+    Code workload：
+        Product --> models.py
+                    -->class Order(), class OrderItem() and class ShippingAddress();
+        Product --> views.py --> processOrder(), updateItems()
+
+
+week 8
+1. payment
+    (1)By using paypal api, try to complete a simple payment process ($0.01)
+    (2)Use the JS monitoring function and click "Complete Payment" to successfully generate an order and empty the shopping cart
+
+2. admin: Order display, completed search function within different parts (products, order, orderItem, shippingAddress)
