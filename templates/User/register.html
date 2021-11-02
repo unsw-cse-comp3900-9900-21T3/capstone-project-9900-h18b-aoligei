@@ -63,7 +63,7 @@
             <div class="register-area">
                 <form method="post" class="signin-form" action="{% url 'User:register' %}">
                     {% csrf_token %}
-                    <!--                {{form.as_p}}-->
+{#                    <!--                {{form.as_p}}-->#}
                     <p>User Name</p>
                     <input type="text" name="username" placeholder="Username" required>
                     <p>Your Email</p>

@@ -129,7 +129,7 @@
                 <div class="dropdown-content">
 
                     <a href="{% url 'User:logout' %}">Sign out</a>
-                    <a href="{% url 'User:personal_info' %}">Personal</a>
+                    <a href="{% url 'User:personal_info' request.user.id %}">Personal</a>
                 </div>
             {% else %}
                 <a href="{% url 'User:login' %}">

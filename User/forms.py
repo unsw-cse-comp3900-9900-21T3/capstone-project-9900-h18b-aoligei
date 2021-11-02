@@ -1,5 +1,7 @@
 from django import forms
-from User.models import User
+from User.models import User,PersonalInfo
+from django.db import models
+
 
 from django.contrib.auth.models import User
 
@@ -28,3 +30,19 @@ class UserRegisterForm(forms.ModelForm):
             'password',
             'email',
         )
+class Personal_info_form(forms.ModelForm):
+    class Meta:
+        model = PersonalInfo
+        fields = (
+
+                  'firstname',
+                  'lastname',
+                  'gender',
+                  'address',
+                  'city',
+                  'state',
+                  'zipcode',
+                  'country'
+                  )
+
+
