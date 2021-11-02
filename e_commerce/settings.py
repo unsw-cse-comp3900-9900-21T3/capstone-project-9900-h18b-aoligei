@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     # project apps
     'Product.apps.ProductConfig',
     'User.apps.UserConfig',
-
     'Comment.apps.CommentConfig',
     'mptt',
 
@@ -128,11 +127,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Australia/Sydney'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
@@ -148,12 +144,11 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 LOGIN_URL = 'Users/login/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 MEDIA_URL = "/media/"
+
 
 SIMPLEUI_HOME_INFO = False
 SIMPLEUI_ANALYSIS = False
@@ -165,19 +160,15 @@ SIMPLEUI_HOME_ACTION = False
 SIMPLEUI_HOME_PAGE = '/products/dashboard/'
 SIMPLEUI_HOME_TITLE = 'Website traffic'
 SIMPLEUI_HOME_ICON = 'fa fa-eye'
-
 SIMPLEUI_CONFIG = {
     # Whether to use the system default menu, it is recommended to close it when customizing the menu.
     'system_keep': False,
-
     #  用于菜单排序和过滤, 不填此字段为默认排序和全部显示。空列表[] 为全部不显示.
     'menu_display': ['Product', 'Score', 'Order', 'OrderItem', 'ShippingAddress',
                      'Authentication and Authorization'],
-
     # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时刷新展示菜单内容。
     # 一般建议关闭。
     'dynamic': False,
-
     'menus': [
         {
             'app': 'auth',
@@ -254,11 +245,6 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fas fa-list-ol',
                 },
 
-                # {
-                #     'name': 'Customer',
-                #     'url': 'Product/customer/',
-                #     'icon': 'fas fa-users'
-                # },
                 {
                     'name': 'ShippingAddress',
                     'url': 'Product/shippingaddress/',
