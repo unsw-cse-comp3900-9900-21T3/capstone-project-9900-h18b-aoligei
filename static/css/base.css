@@ -19,6 +19,7 @@ html {
     background-color: #a04417;
     padding: 2px;
     position: fixed;
+    z-index:999;
 }
 
 .dropbtn {

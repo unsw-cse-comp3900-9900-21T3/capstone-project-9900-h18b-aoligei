@@ -1,0 +1,343 @@
+Index: templates/home.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% extends \"base.html\" %}\n{% load static %}\n{% block content %}\n    <style>\n        .carousel-4 {\n            width: 1200px;\n            height: 400px;\n            margin: 0 auto;\n            margin-top: 40px;\n            background-color: rgba(51, 53, 67, 0.5);\n            border-radius: 5px;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            overflow: hidden;\n        }\n\n        .carousel-container {\n            width: 284px;\n            height: 400px;\n            {#background-color: lightgreen;#}\n            position: relative;\n            perspective: 900px;\n        }\n\n        .carousel-cards-wrap {\n            position: absolute;\n            width: 100%;\n            height: 100%;\n            {#background-color: yellow;#}\n            transform-style: preserve-3d;\n            transform: rotateY(0) translateZ(-700px);\n            animation: carousel 10s infinite cubic-bezier(0.77, 0, 0.175, 1);\n        }\n\n        .carousel-cards {\n            position: absolute;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            top: 0;\n            width: 100%;\n            height: 100%;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n        }\n\n        .carousel-cards:nth-child(1) {\n            background-color: #fdd94f;\n            transform: rotateY(0) translateZ(700px);\n        }\n\n        .carousel-cards:nth-child(2) {\n            background-color: #f78949;\n            transform: rotateY(90deg) translateZ(700px);\n\n        }\n\n        .carousel-cards:nth-child(3) {\n            background-color: #fbab48;\n            transform: rotateY(180deg) translateZ(700px);\n        }\n\n        .carousel-cards:nth-child(4) {\n            background-color: lightskyblue;\n            transform: rotateY(240deg) translateZ(700px);\n        }\n\n        @keyframes carousel {\n            0% {\n                transform: translateZ(-700px) rotateY(0);\n            }\n            20% {\n                transform: translateZ(-700px) rotateY(-90deg);\n            }\n\n            45% {\n                transform: translateZ(-700px) rotateY(-120deg);\n            }\n\n            75% {\n                transform: translateZ(-700px) rotateY(-240deg);\n            }\n\n            100% {\n                transform: translateZ(-700px) rotateY(-360deg);\n            }\n        }\n    </style>\n\n    <div class=\"carousel-4\">\n        <div class=\"carousel-container\">\n            <div class=\"carousel-cards-wrap\">\n                {% for single_product in product_new_release %}\n                    <div class=\"carousel-cards\">\n                        <a class=\"homecontent_pic\" href=\"product_id={{ single_product.id }}\" style=\"text-decoration: None;\">\n                            <img height=\"100%\" width=\"100%\" src=\"{{ single_product.image.url }}\"/>\n                        </a>\n                    </div>\n                {% endfor %}\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"homecontent\">\n        <div class=\"homecontent_title\">\n            NEW RELEASE\n        </div>\n        {% for single_product in product_new_release %}\n            <div class=\"homecontent_item\">\n                <a href=\"product_id={{ single_product.id }}\" style=\"text-decoration: None;\">\n                    <div class=\"homecontent_pic\">\n                        <img height=\"100%\" width=\"100%\" src=\"{{ single_product.image.url }}\"/>\n                    </div>\n                </a>\n                <div class=\"homecontent_info\">\n\n                    <div class=\"homecontent_info_text d1\">\n                        <a href=\"product_id={{ single_product.id }}\" style=\"text-decoration: None;\">\n                            {{ single_product.title }}\n                        </a>\n                    </div>\n                    <div class=\"homecontent_info_text d2\">\n                        {% if single_product.discount_price %}\n                            Price:${{ single_product.discount_price|floatformat:2 }} | {{ single_product.category }}\n                        {% else %}\n                            Price:${{ single_product.price|floatformat:2 }} | {{ single_product.category }}\n                        {% endif %}\n                        | {{ single_product.rating }}\n                    </div>\n                    <div class=\"homecontent_info_text d3\">\n                        <button class=\"homepagebtn l\">BUY</button>\n                        <button class=\"homepagebtn r\">LIKE</button>\n                    </div>\n                </div>\n            </div>\n        {% endfor %}\n    </div>\n\n    <div class=\"homecontent\">\n        <div class=\"homecontent_title\">\n            SPOTLIGHT\n        </div>\n        {% for short in product_spotlight %}{% for long in product_all %}\n            {% if short.product_id == long.id %}\n                <div class=\"homecontent_item\">\n                    <a href=\"product_id={{ short.product_id }}\" style=\"text-decoration: None;\">\n                        <div class=\"homecontent_pic\">\n                            <img height=\"100%\" width=\"100%\" src=\"{{ long.image.url }}\"/>\n                        </div>\n                    </a>\n                    <div class=\"homecontent_info\">\n\n                        <div class=\"homecontent_info_text d1\">\n                            <a href=\"product_id={{ short.product_id }}\"\n                               style=\"text-decoration: None;\">{{ long.title }}</a>\n                        </div>\n\n                        <div class=\"homecontent_info_text d2\">\n                            {% if single_product.discount_price %}\n                                Price:${{ long.discount_price|floatformat:2 }} | Score: {{ short.avg }}\n                            {% else %}\n                                Price:${{ long.price|floatformat:2 }} | Score: {{ short.avg }}\n                            {% endif %}\n\n                        </div>\n                        <div class=\"homecontent_info_text d3\">\n                            <button class=\"homepagebtn l\">BUY</button>\n                            <button class=\"homepagebtn r\">LIKE</button>\n                        </div>\n\n                    </div>\n                </div>\n            {% endif %}\n        {% endfor %}{% endfor %}\n        <!--        <div class=\"homecontent_item\">-->\n        <!--            <div class=\"homecontent_pic\">-->\n        <!--                <img height=\"100%\" width=\"100%\" src=\"/static/movie2.jfif\"/>-->\n        <!--            </div>-->\n        <!--            <div class=\"homecontent_info\">-->\n        <!--                <div class=\"homecontent_info_text d1\">-->\n        <!--                    The Movie/TV series' Name-->\n        <!--                </div>-->\n        <!--                <div class=\"homecontent_info_text d2\">-->\n        <!--                    Price:$16 | comedy | PG-12-->\n        <!--                </div>-->\n        <!--                <div class=\"homecontent_info_text d3\">-->\n        <!--                    <button class=\"homepagebtn l\">BUY</button>-->\n        <!--                    <button class=\"homepagebtn r\">LIKE</button>-->\n        <!--                </div>-->\n        <!--            </div>-->\n        <!--        </div>-->\n\n        <!--        <div class=\"homecontent_item\">-->\n        <!--            <div class=\"homecontent_pic\">-->\n        <!--                <img height=\"100%\" width=\"100%\" src=\"/static/movie1.jfif\"/>-->\n        <!--            </div>-->\n        <!--            <div class=\"homecontent_info\">-->\n        <!--                <div class=\"homecontent_info_text d1\">-->\n        <!--                    The Movie/TV series' Name-->\n        <!--                </div>-->\n        <!--                <div class=\"homecontent_info_text d2\">-->\n        <!--                    Price:$16 | comedy | PG-12-->\n        <!--                </div>-->\n        <!--                <div class=\"homecontent_info_text d3\">-->\n        <!--                    <button class=\"homepagebtn l\">BUY</button>-->\n        <!--                    <button class=\"homepagebtn r\">LIKE</button>-->\n        <!--                </div>-->\n        <!--            </div>-->\n        <!--        </div>-->\n\n        <!--        <div class=\"homecontent_item\">-->\n        <!--            <div class=\"homecontent_pic\">-->\n        <!--                <img height=\"100%\" width=\"100%\" src=\"/static/movie2.jfif\"/>-->\n        <!--            </div>-->\n        <!--            <div class=\"homecontent_info\">-->\n        <!--                <div class=\"homecontent_info_text d1\">-->\n        <!--                    The Movie/TV series' Name-->\n        <!--                </div>-->\n        <!--                <div class=\"homecontent_info_text d2\">-->\n        <!--                    Price:$16 | comedy | PG-12-->\n        <!--                </div>-->\n        <!--                <div class=\"homecontent_info_text d3\">-->\n        <!--                    <button class=\"homepagebtn l\">BUY</button>-->\n        <!--                    <button class=\"homepagebtn r\">LIKE</button>-->\n        <!--                </div>-->\n        <!--            </div>-->\n        <!--        </div>-->\n    </div>\n\n    <div class=\"homecontent\">\n        <div class=\"homecontent_title\">\n            RECOMMENDATION\n        </div>\n        <div class=\"homecontent_item\">\n            <div class=\"homecontent_pic\">\n                <img height=\"100%\" width=\"100%\" src=\"/static/movie1.jfif\"/>\n            </div>\n            <div class=\"homecontent_info\">\n                <div class=\"homecontent_info_text d1\">\n                    The Movie/TV series' Name\n                </div>\n                <div class=\"homecontent_info_text d2\">\n                    Price:$16 | comedy | PG-12\n                </div>\n                <div class=\"homecontent_info_text d3\">\n                    <button class=\"homepagebtn l\">BUY</button>\n                    <button class=\"homepagebtn r\">LIKE</button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"homecontent_item\">\n            <div class=\"homecontent_pic\">\n                <img height=\"100%\" width=\"100%\" src=\"/static/movie2.jfif\"/>\n            </div>\n            <div class=\"homecontent_info\">\n                <div class=\"homecontent_info_text d1\">\n                    The Movie/TV series' Name\n                </div>\n                <div class=\"homecontent_info_text d2\">\n                    Price:$16 | comedy | PG-12\n                </div>\n                <div class=\"homecontent_info_text d3\">\n                    <button class=\"homepagebtn l\">BUY</button>\n                    <button class=\"homepagebtn r\">LIKE</button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"homecontent_item\">\n            <div class=\"homecontent_pic\">\n                <img height=\"100%\" width=\"100%\" src=\"/static/movie1.jfif\"/>\n            </div>\n            <div class=\"homecontent_info\">\n                <div class=\"homecontent_info_text d1\">\n                    The Movie/TV series' Name\n                </div>\n                <div class=\"homecontent_info_text d2\">\n                    Price:$16 | comedy | PG-12\n                </div>\n                <div class=\"homecontent_info_text d3\">\n                    <button class=\"homepagebtn l\">BUY</button>\n                    <button class=\"homepagebtn r\">LIKE</button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"homecontent_item\">\n            <div class=\"homecontent_pic\">\n                <img height=\"100%\" width=\"100%\" src=\"/static/movie2.jfif\"/>\n            </div>\n            <div class=\"homecontent_info\">\n                <div class=\"homecontent_info_text d1\">\n                    The Movie/TV series' Name\n                </div>\n                <div class=\"homecontent_info_text d2\">\n                    Price:$16 | comedy | PG-12\n                </div>\n                <div class=\"homecontent_info_text d3\">\n                    <button class=\"homepagebtn l\">BUY</button>\n                    <button class=\"homepagebtn r\">LIKE</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n{% endblock content %}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/home.html b/templates/home.html
+--- a/templates/home.html	(revision 0ff7aaeb39e7d48dd9a77b261eb804859502e89f)
++++ b/templates/home.html	(date 1635861475259)
+@@ -18,18 +18,16 @@
+         .carousel-container {
+             width: 284px;
+             height: 400px;
+-            {#background-color: lightgreen;#}
+             position: relative;
+-            perspective: 900px;
++            perspective: 1000px;
+         }
+ 
+         .carousel-cards-wrap {
+             position: absolute;
+             width: 100%;
+             height: 100%;
+-            {#background-color: yellow;#}
+             transform-style: preserve-3d;
+-            transform: rotateY(0) translateZ(-700px);
++            transform: rotateY(0) translateZ(-500px);
+             animation: carousel 10s infinite cubic-bezier(0.77, 0, 0.175, 1);
+         }
+ 
+@@ -48,53 +46,67 @@
+ 
+         .carousel-cards:nth-child(1) {
+             background-color: #fdd94f;
+-            transform: rotateY(0) translateZ(700px);
++            transform: rotateY(0) translateZ(800px);
+         }
+ 
+         .carousel-cards:nth-child(2) {
+             background-color: #f78949;
+-            transform: rotateY(90deg) translateZ(700px);
+-
++            transform: rotateY(60deg) translateZ(800px);
+         }
+ 
+         .carousel-cards:nth-child(3) {
+             background-color: #fbab48;
+-            transform: rotateY(180deg) translateZ(700px);
++            transform: rotateY(120deg) translateZ(800px);
+         }
+ 
+         .carousel-cards:nth-child(4) {
+             background-color: lightskyblue;
+-            transform: rotateY(240deg) translateZ(700px);
++            transform: rotateY(180deg) translateZ(800px);
++        }
++
++        .carousel-cards:nth-child(5) {
++            background-color: green;
++            transform: rotateY(240deg) translateZ(800px);
++        }
++
++        .carousel-cards:nth-child(6) {
++            background-color: blue;
++            transform: rotateY(300deg) translateZ(800px);
+         }
+ 
+         @keyframes carousel {
+-            0% {
+-                transform: translateZ(-700px) rotateY(0);
++            0%, 10% {
++                transform: translateZ(-800px) rotateY(0);
++            }
++            25% {
++                transform: translateZ(-800px) rotateY(-60deg);
+             }
+-            20% {
+-                transform: translateZ(-700px) rotateY(-90deg);
++            40% {
++                transform: translateZ(-800px) rotateY(-120deg);
+             }
+-
+-            45% {
+-                transform: translateZ(-700px) rotateY(-120deg);
++            55% {
++                transform: translateZ(-800px) rotateY(-180deg);
+             }
+-
+-            75% {
+-                transform: translateZ(-700px) rotateY(-240deg);
++            70% {
++                transform: translateZ(-800px) rotateY(-240deg);
+             }
+-
++            85% {
++                transform: translateZ(-800px) rotateY(-300deg);
++            }
+             100% {
+-                transform: translateZ(-700px) rotateY(-360deg);
++                transform: translateZ(-800px) rotateY(-360deg);
+             }
+         }
+     </style>
+ 
++
+     <div class="carousel-4">
+         <div class="carousel-container">
+             <div class="carousel-cards-wrap">
+                 {% for single_product in product_new_release %}
+                     <div class="carousel-cards">
+-                        <a class="homecontent_pic" href="product_id={{ single_product.id }}" style="text-decoration: None;">
++                        <a class="homecontent_pic" href="product_id={{ single_product.id }}"
++                           style="text-decoration: None;">
+                             <img height="100%" width="100%" src="{{ single_product.image.url }}"/>
+                         </a>
+                     </div>
+@@ -164,7 +176,6 @@
+                             {% else %}
+                                 Price:${{ long.price|floatformat:2 }} | Score: {{ short.avg }}
+                             {% endif %}
+-
+                         </div>
+                         <div class="homecontent_info_text d3">
+                             <button class="homepagebtn l">BUY</button>
+Index: static/css/base.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>html, body {\n    margin: 0;\n    font-family: 'Helvetica';\n}\n\nhtml {\n    background-image: url(\"/static/bg.jfif\");\n    background-attachment: fixed;\n}\n\n\n.logo {\n    float: left;\n}\n\n.headpage {\n    width: 100%;\n    height: 50px;\n    background-color: #a04417;\n    padding: 2px;\n    position: fixed;\n}\n\n.dropbtn {\n    background-color: #a04417;\n    color: white;\n    height: 50px;\n    width: 100px;\n    text-align: center;\n    line-height: 50px;\n    cursor: pointer;\n    font-size: 14px;\n    border: 0;\n}\n\n.dropdown {\n    float: left;\n    position: relative;\n    display: inline-block;\n    height: 50px;\n    width: 100px;\n    text-align: center;\n    line-height: 50px;\n    text-decoration: none;\n}\n\n.dropdown.right {\n    float: right;\n}\n\n.dropdown-content {\n    display: none;\n    position: absolute;\n    background-color: #f9f9f9;\n    min-width: 100px;\n    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);\n}\n\n.dropdown-content a {\n    color: black;\n    text-decoration: none;\n    display: block;\n    cursor: pointer;\n    height: 50px;\n    line-height: 50px;\n}\n\n.dropdown:hover .dropdown-content {\n    display: block;\n}\n\n.dropdown:hover .dropbtn {\n    font-weight: bold;\n    text-decoration: none;\n}\n\n.dropbtn:hover {\n    font-size: 1.2em;\n}\n\n.dropdown-content a:hover {\n    background-color: #f1f1f1\n}\n\n\ndiv.headpage input {\n    float: right;\n    height: 40px;\n    outline: none;\n    border: none;\n    width: 15%;\n    margin-top: 5px;\n    padding-left: 10px;\n    font-size: 14px;\n    border-radius: 10px 0px 0px 10px;\n}\n\n.searchbtn {\n    float: right;\n    height: 40px;\n    background-color: #909090;\n    color: white;\n    border-style: none;\n    outline: none;\n    font-size: 12px;\n    margin-top: 5px;\n    width: 60px;\n    border-radius: 0px 10px 10px 0px;\n    border: none;\n}\n\n.searchbtn:hover {\n    background-color: #45b97c;;\n}\n\n@media screen and (max-width: 1000px) {\n    .headpage {\n        width: 1000px;\n    }\n}\n\n.footpage {\n    background-color: #a04417;\n    width: 100%;\n    min-height: 150px;\n    text-align: center;\n    position: absolute;\n}\n\n\n.footcolumnl {\n    margin-top: 30px;\n    float: left;\n    width: 60%;\n    color: white;\n}\n\n.footcolumnr {\n    margin-top: 30px;\n    float: left;\n    width: 40%;\n    color: white;\n}\n\n.foottext {\n    text-align: left;\n    padding-left: 60px;\n    padding-right: 60px;\n}\n\n/* 列后清除浮动 */\n.footrow:after {\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n.footend {\n    width: 100%;\n    text-align: center;\n    padding-top: 40px;\n    padding-bottom: 20px;\n}\n\n.container {\n    min-height: 500px;\n    padding-top: 55px;\n    padding-bottom: 20px;\n    text-align: center;\n    clear: both;\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/static/css/base.css b/static/css/base.css
+--- a/static/css/base.css	(revision 0ff7aaeb39e7d48dd9a77b261eb804859502e89f)
++++ b/static/css/base.css	(date 1635860889814)
+@@ -19,6 +19,7 @@
+     background-color: #a04417;
+     padding: 2px;
+     position: fixed;
++    z-index:999;
+ }
+ 
+ .dropbtn {
+Index: static/js/loading.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const loadingPage = document.getElementById(\"loading_page\");\nconst mainPage = document.getElementById(\"main\");\n\nfunction hideLoadingPage() {\n    loadingPage.style.display = 'none';\n    mainPage.style.display = 'block';\n}\n\nsetTimeout(function () {\n    hideLoadingPage();\n}, 900);
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/static/js/loading.js b/static/js/loading.js
+--- a/static/js/loading.js	(revision 0ff7aaeb39e7d48dd9a77b261eb804859502e89f)
++++ b/static/js/loading.js	(date 1635860889818)
+@@ -8,4 +8,4 @@
+ 
+ setTimeout(function () {
+     hideLoadingPage();
+-}, 900);
+\ No newline at end of file
++}, 800);
+\ No newline at end of file
+Index: e_commerce/settings.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"\"\"\nDjango settings for e_commerce project.\n\nGenerated by 'django-admin startproject' using Django 3.2.7.\n\nFor more information on this file, see\nhttps://docs.djangoproject.com/en/3.2/topics/settings/\n\nFor the full list of settings and their values, see\nhttps://docs.djangoproject.com/en/3.2/ref/settings/\n\"\"\"\n\nfrom pathlib import Path\nimport os\nimport sys\n\n# Build paths inside the project like this: BASE_DIR / 'subdir'.\nBASE_DIR = Path(__file__).resolve().parent.parent\n\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure-0b5sxdud%h5in(&+#2stqoqt17=@s0*7e3$wsn_^7q0k7ew9(f'\n\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\n\nALLOWED_HOSTS = []\n\n# Application definition\n\nINSTALLED_APPS = [\n    'simpleui',\n    'mdeditor',\n    'embed_video',\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n\n    # project apps\n    'Product.apps.ProductConfig',\n    'User.apps.UserConfig',\n\n    'Comment.apps.CommentConfig',\n    'mptt',\n\n]\n\nMIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\n\nROOT_URLCONF = 'e_commerce.urls'\n\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [os.path.join(BASE_DIR, 'templates')],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',\n                'django.contrib.messages.context_processors.messages',\n            ],\n        },\n    },\n]\n\nWSGI_APPLICATION = 'e_commerce.wsgi.application'\n\n# Database\n# https://docs.djangoproject.com/en/3.2/ref/settings/#databases\n\n# DATABASES = {\n#     'default': {\n#         'ENGINE': 'django.db.backends.sqlite3',\n#         'NAME': BASE_DIR / 'db.sqlite3',\n#     }\n# }\n\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'develop',\n        'USER': 'hello',\n        'PASSWORD': '93239323',\n        'HOST': 'comp9323db.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',\n        'PORT': '3306',\n        'OPTIONS': {\n            \"init_command\": \"SET sql_mode = 'STRICT_TRANS_TABLES ' \",\n        }\n    }\n}\n\n# Password validation\n# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators\n\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',\n    },\n]\n\n# Internationalization\n# https://docs.djangoproject.com/en/3.2/topics/i18n/\n\nLANGUAGE_CODE = 'en-us'\n\nTIME_ZONE = 'Australia/Sydney'\n\nUSE_I18N = True\n\nUSE_L10N = True\n\nUSE_TZ = True\n\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\n\nSTATIC_URL = '/static/'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nSTATICFILES_DIRS = (\n    os.path.join(BASE_DIR, 'static'),\n)\n\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\n\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n\nLOGIN_URL = 'Users/login/'\n\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media/')\n\nMEDIA_URL = \"/media/\"\n\nSIMPLEUI_HOME_INFO = False\nSIMPLEUI_ANALYSIS = False\nSIMPLEUI_HOME_QUICK = False\nSIMPLEUI_HOME_ACTION = False\n\n# SIMPLEUI_LOGO = 'static/img/admin_logo.png'\n# SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'\nSIMPLEUI_HOME_PAGE = '/products/dashboard/'\nSIMPLEUI_HOME_TITLE = 'Website traffic'\nSIMPLEUI_HOME_ICON = 'fa fa-eye'\n\nSIMPLEUI_CONFIG = {\n    # Whether to use the system default menu, it is recommended to close it when customizing the menu.\n    'system_keep': False,\n\n    #  用于菜单排序和过滤, 不填此字段为默认排序和全部显示。空列表[] 为全部不显示.\n    'menu_display': ['Product', 'Score', 'Order', 'OrderItem', 'ShippingAddress',\n                     'Authentication and Authorization'],\n\n    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时刷新展示菜单内容。\n    # 一般建议关闭。\n    'dynamic': False,\n\n    'menus': [\n        {\n            'app': 'auth',\n            'name': 'Authentication and Authorization',\n            'icon': 'fas fa-user-shield',\n            'models': [\n                {\n                    'name': 'Users',\n                    'icon': 'fa fa-user',\n                    'url': 'auth/user/',\n                },\n                {\n                    'name': 'Group',\n                    'icon': 'fa fa-th-list',\n                    'url': 'auth/group/',\n                }\n            ]\n        },\n\n        {\n            'name': 'Product',\n            'icon': 'fas fa-bars',\n            'models': [\n                {\n                    'name': 'Product',\n                    'url': 'Product/product/',\n                    'icon': 'fas fa-compact-disc',\n                },\n                {\n                    'name': 'Category',\n\n                    'url': 'Product/category/',\n                    'icon': 'fas fa-angle-double-right',\n                },\n                {\n                    'name': 'Rating',\n                    'url': 'Product/rating/',\n                    'icon': 'fas fa-child',\n                },\n                {\n                    'name': 'Format',\n                    'url': 'Product/format/',\n                    'icon': 'fas fa-compact-disc'\n                },\n                {\n                    'name': 'Availability',\n                    'url': 'Product/availability/',\n                    'icon': 'fas fa-globe',\n                },\n\n            ]\n        },\n\n        {\n            'name': 'Score',\n            'icon': 'fas fa-star-half-alt',\n            'url': 'Product/score/',\n\n        },\n\n        {\n            'name': 'Order',\n            'icon': 'fas fa-shopping-cart',\n            'models': [\n                {\n                    'name': 'Order',\n                    'url': 'Product/order/',\n                    'icon': 'fas fa-shopping-cart',\n                },\n\n                {\n                    'name': 'OrderItem',\n                    'url': 'Product/orderitem/',\n                    'icon': 'fas fa-list-ol',\n                },\n\n                # {\n                #     'name': 'Customer',\n                #     'url': 'Product/customer/',\n                #     'icon': 'fas fa-users'\n                # },\n                {\n                    'name': 'ShippingAddress',\n                    'url': 'Product/shippingaddress/',\n                    'icon': 'fas fa-shipping-fast',\n                },\n            ]\n        },\n\n    ]\n}\n\nEMAIL_HOST = \"smtp.163.com\"\nEMAIL_PORT = 25\nEMAIL_HOST_USER = \"aoligei_9900@163.com\"\nEMAIL_HOST_PASSWORD = \"LVULKCYNQVNYGQKM\"\nEMAIL_USE_TLS = False  # 一般都为False\nEMAIL_FROM = \"aoligei_9900@163.com\"\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/e_commerce/settings.py b/e_commerce/settings.py
+--- a/e_commerce/settings.py	(revision 0ff7aaeb39e7d48dd9a77b261eb804859502e89f)
++++ b/e_commerce/settings.py	(date 1635860889789)
+@@ -44,7 +44,6 @@
+     # project apps
+     'Product.apps.ProductConfig',
+     'User.apps.UserConfig',
+-
+     'Comment.apps.CommentConfig',
+     'mptt',
+ 
+@@ -128,11 +127,8 @@
+ LANGUAGE_CODE = 'en-us'
+ 
+ TIME_ZONE = 'Australia/Sydney'
+-
+ USE_I18N = True
+-
+ USE_L10N = True
+-
+ USE_TZ = True
+ 
+ # Static files (CSS, JavaScript, Images)
+@@ -148,13 +144,9 @@
+ # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+ 
+ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+-
+ LOGIN_URL = 'Users/login/'
+-
+ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+-
+ MEDIA_URL = "/media/"
+-
+ SIMPLEUI_HOME_INFO = False
+ SIMPLEUI_ANALYSIS = False
+ SIMPLEUI_HOME_QUICK = False
+@@ -165,19 +157,15 @@
+ SIMPLEUI_HOME_PAGE = '/products/dashboard/'
+ SIMPLEUI_HOME_TITLE = 'Website traffic'
+ SIMPLEUI_HOME_ICON = 'fa fa-eye'
+-
+ SIMPLEUI_CONFIG = {
+     # Whether to use the system default menu, it is recommended to close it when customizing the menu.
+     'system_keep': False,
+-
+     #  用于菜单排序和过滤, 不填此字段为默认排序和全部显示。空列表[] 为全部不显示.
+     'menu_display': ['Product', 'Score', 'Order', 'OrderItem', 'ShippingAddress',
+                      'Authentication and Authorization'],
+-
+     # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时刷新展示菜单内容。
+     # 一般建议关闭。
+     'dynamic': False,
+-
+     'menus': [
+         {
+             'app': 'auth',
+@@ -254,11 +242,6 @@
+                     'icon': 'fas fa-list-ol',
+                 },
+ 
+-                # {
+-                #     'name': 'Customer',
+-                #     'url': 'Product/customer/',
+-                #     'icon': 'fas fa-users'
+-                # },
+                 {
+                     'name': 'ShippingAddress',
+                     'url': 'Product/shippingaddress/',
+Index: Product/admin.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.contrib import admin\nfrom Product.models import Category, Product, Rating, Format, Availability, Score, Order, OrderItem, ShippingAddress\nfrom django.utils.safestring import mark_safe\nfrom embed_video.admin import AdminVideoMixin\n\nadmin.site.site_header = \"Aoligei E-Commerce Administration\"\nadmin.site.site_title = \"Aoligei E-Commerce Administration\"\nadmin.site.index_title = \"Aoligei E-Commerce Administration\"\n\n\nclass ProductAdmin(AdminVideoMixin, admin.ModelAdmin):\n    list_display = (\n        'title', 'image_data', 'publishDate', 'category', 'format', 'rating', 'price_dollar', 'availability',\n        'created_time')\n    list_per_page = 8\n    search_fields = ['title', ]\n\n    # fields = ('title', 'image_data', 'publishDate', \"category\", 'format', 'rating', 'price_dollar', 'availability',)\n\n    def price_dollar(self, obj):\n        if obj.discount_price:\n            return mark_safe(\"$\" + str(obj.discount_price))\n        else:\n            return mark_safe(\"$\" + str(obj.price))\n\n    def image_data(self, obj):\n        return mark_safe(u'<img src=\"%s\" width=\"100px\" />' % obj.image.url)\n\n    image_data.short_description = u'image desc'\n    price_dollar.short_description = u'price'\n\n\nadmin.site.register(Product, ProductAdmin)\n\n\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('Categories', 'Count')\n    search_fields = ['title']\n    list_per_page = 20\n\n    def Categories(self, obj):\n        return mark_safe(str(obj.title))\n\n    def Count(self, obj):\n        return mark_safe(str(obj.total_items))\n\n\nadmin.site.register(Category, CategoryAdmin)\n\n\nclass RatingAdmin(admin.ModelAdmin):\n    list_display = ('Rating', 'Count')\n    search_fields = ['title']\n    list_per_page = 20\n\n    def Rating(self, obj):\n        return mark_safe(str(obj.title))\n\n    def Count(self, obj):\n        return mark_safe(str(obj.total_items))\n\n\nadmin.site.register(Rating, RatingAdmin)\n\n\nclass FormatAdmin(admin.ModelAdmin):\n    list_display = ('Format', 'Count')\n    search_fields = ['title']\n    list_per_page = 20\n\n    def Format(self, obj):\n        return mark_safe(str(obj.title))\n\n    def Count(self, obj):\n        return mark_safe(str(obj.total_items))\n\n\nadmin.site.register(Format, FormatAdmin)\n\n\nclass AvailabilityAdmin(admin.ModelAdmin):\n    list_display = ('Availability', 'Count')\n    search_fields = ['title']\n    list_per_page = 20\n\n    def Availability(self, obj):\n        return mark_safe(str(obj.title))\n\n    def Count(self, obj):\n        return mark_safe(str(obj.total_items))\n\n\nadmin.site.register(Availability, AvailabilityAdmin)\n\n\nclass ScoreAdmin(admin.ModelAdmin):\n    list_display = (\n        'product_cover', 'product_title', 'score_mark', 'user', 'created_time'\n    )\n    list_per_page = 8\n\n    def product_title(self, obj):\n        title = obj.product.title\n        return mark_safe(str(title))\n\n    def product_cover(self, obj):\n        res = obj.product.image.url\n        # return mark_safe(str(res))\n        return mark_safe(u'<img src=\"%s\" width=\"100px\" />' % res)\n\n    def score_mark(self, obj):\n        temp_score = int(obj.score)\n        if temp_score <= 0.5:\n            temp_score = \"\" + str(obj.score)\n        elif temp_score <= 1.0:\n            temp_score = \"⭐ \" + str(obj.score)\n        elif temp_score <= 1.5:\n            temp_score = \"⭐ \" + str(obj.score)\n        elif temp_score <= 2.0:\n            temp_score = \"⭐⭐ \" + str(obj.score)\n        elif temp_score <= 2.5:\n            temp_score = \"⭐⭐ \" + str(obj.score)\n        elif temp_score <= 3.0:\n            temp_score = \"⭐⭐⭐ \" + str(obj.score)\n        elif temp_score <= 3.5:\n            temp_score = \"⭐⭐⭐ \" + str(obj.score)\n        elif temp_score <= 4.0:\n            temp_score = \"⭐⭐⭐⭐ \" + str(obj.score)\n        elif temp_score <= 4.5:\n            temp_score = \"⭐⭐⭐⭐ \" + str(obj.score)\n        else:\n            temp_score = \"⭐⭐⭐⭐⭐ \" + str(obj.score)\n        return mark_safe(temp_score)\n\n\nadmin.site.register(Score, ScoreAdmin)\n\n\nclass OrderAdmin(admin.ModelAdmin):\n    list_display = (\n        'transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',\n    )\n    # exclude = ['transaction_id', 'customer', 'complete',]\n\n    # readonly_fields = ['transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',]\n    list_per_page = 8\n\n    def total_quantity(self, obj):\n        return mark_safe(str(obj.get_cart_items))\n\n    def total_price(self, obj):\n        return mark_safe(str(obj.get_cart_total))\n\n\nadmin.site.register(Order, OrderAdmin)\n\n\nclass OrderItemAdmin(admin.ModelAdmin):\n    list_display = (\n        'transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer', 'completed',\n        'date_added',\n    )\n    list_per_page = 8\n\n    readonly_fields = ['transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer',\n                       'completed',\n                       'date_added', ]\n\n    def product_title(self, obj):\n        return mark_safe(str(obj.product.title))\n\n    def product_cover(self, obj):\n        return mark_safe(u'<img src=\"%s\" width=\"100px\" />' % (obj.product.image.url))\n\n    def price(self, obj):\n        if obj.product.discount_price:\n            return mark_safe(\"$\" + str(obj.product.discount_price))\n        else:\n            return mark_safe(\"$\" + str(obj.product.price))\n\n    def transaction_id(self, obj):\n        return mark_safe(str(obj.order.transaction_id))\n\n    def customer(self, obj):\n        return mark_safe(str(obj.order.customer))\n\n    def total(self, obj):\n        total = obj.get_total\n        return mark_safe(str(total))\n\n    def completed(self, obj):\n        return mark_safe(obj.order.complete)\n\n\nadmin.site.register(OrderItem, OrderItemAdmin)\nadmin.site.register(ShippingAddress)\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Product/admin.py b/Product/admin.py
+--- a/Product/admin.py	(revision 0ff7aaeb39e7d48dd9a77b261eb804859502e89f)
++++ b/Product/admin.py	(date 1635860889798)
+@@ -138,13 +138,19 @@
+ 
+ class OrderAdmin(admin.ModelAdmin):
+     list_display = (
+-        'transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',
++        'transaction_Id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',
+     )
+     # exclude = ['transaction_id', 'customer', 'complete',]
+ 
+     # readonly_fields = ['transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',]
+     list_per_page = 8
+ 
++    def transaction_Id(self, obj):
++        if obj.transaction_id != None and obj.transaction_id != 'NULL':
++            return mark_safe(obj.transaction_id)
++        else:
++            obj.delete()
++
+     def total_quantity(self, obj):
+         return mark_safe(str(obj.get_cart_items))
+ 
+@@ -162,34 +168,44 @@
+     )
+     list_per_page = 8
+ 
+-    readonly_fields = ['transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer',
+-                       'completed',
+-                       'date_added', ]
++    # readonly_fields = ['transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer',
++    #                    'completed',
++    #                    'date_added', ]
+ 
+     def product_title(self, obj):
+-        return mark_safe(str(obj.product.title))
++        if obj.product:
++            return mark_safe(str(obj.product.title))
+ 
+     def product_cover(self, obj):
+-        return mark_safe(u'<img src="%s" width="100px" />' % (obj.product.image.url))
++        if obj.product:
++            return mark_safe(u'<img src="%s" width="100px" />' % (obj.product.image.url))
+ 
+     def price(self, obj):
+         if obj.product.discount_price:
+             return mark_safe("$" + str(obj.product.discount_price))
+-        else:
++        elif obj.product.price:
+             return mark_safe("$" + str(obj.product.price))
++        else:
++            return mark_safe(str(1))
+ 
+     def transaction_id(self, obj):
+-        return mark_safe(str(obj.order.transaction_id))
++        if obj.order:
++            return mark_safe(obj.order.transaction_id)
++        else:
++            obj.delete()
+ 
+     def customer(self, obj):
+-        return mark_safe(str(obj.order.customer))
++        if obj.order:
++            return mark_safe(str(obj.order.customer))
+ 
+     def total(self, obj):
+-        total = obj.get_total
+-        return mark_safe(str(total))
++        if obj:
++            total = obj.get_total
++            return mark_safe(str(total))
+ 
+     def completed(self, obj):
+-        return mark_safe(obj.order.complete)
++        if obj.order:
++            return mark_safe(obj.order.complete)
+ 
+ 
+ admin.site.register(OrderItem, OrderItemAdmin)
+Index: Product/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.shortcuts import render\nfrom .models import Product, Category, Rating, Format, Availability, Score, Order, OrderItem, ShippingAddress\nfrom django.contrib.auth.models import User\nfrom django.core.paginator import Paginator\nfrom django.contrib.auth.models import User\nfrom Comment.models import Comment\nfrom Comment.forms import CommentForm\nfrom django.db.models import Avg\nimport markdown\nfrom django.views import generic\nfrom django.shortcuts import get_object_or_404, redirect\nfrom django.db.models.aggregates import Count\nfrom django.http import JsonResponse\nimport json\nimport datetime\n\n\ndef home(request):\n    kwarg = {}\n    product_new_release = Product.objects.filter().order_by(\"-publishDate\")[:4]\n    # product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]\n    product_spotlight = Score.objects.values(\"product_id\").annotate(avg=Avg(\"score\")).values(\"product_id\",\n                                                                                             \"avg\").order_by(\n        '-avg')[:4]\n    product_all = Product.objects.all()\n\n    kwarg['product_new_release'] = product_new_release\n    kwarg['product_spotlight'] = product_spotlight\n    kwarg['product_all'] = product_all\n\n    if request.user.is_authenticated:\n        customer = request.user\n        order, created = Order.objects.get_or_create(customer=customer, complete=False)\n        items = order.orderitem_set.all()\n        cartItems = order.get_cart_items\n    else:\n        # create empty cart for none logged in users\n        items = []\n        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}\n        cartItems = order['get_cart_items']\n\n    kwarg['cartItems'] = cartItems\n\n    return render(request, 'home.html', kwarg)\n\n\ndef search(request):\n    products = Product.objects.all()\n\n    # search code\n    item_name = request.GET.get(\"item_name\")\n    if item_name != '' and item_name is not None:\n        products = products.filter(title__icontains=item_name) | \\\n                   products.filter(price__icontains=item_name) | \\\n                   products.filter(format__title__icontains=item_name) | \\\n                   products.filter(category__title__icontains=item_name) | \\\n                   products.filter(rating__title__icontains=item_name) | \\\n                   products.filter(availability__title__icontains=item_name)\n\n    # paginator code\n    paginator = Paginator(products, 6)\n    page = request.GET.get('page')\n    products = paginator.get_page(page)\n    category_list = Category.objects.filter(status=True).values()\n\n    if request.user.is_authenticated:\n        customer = request.user\n        order, created = Order.objects.get_or_create(customer=customer, complete=False)\n        items = order.orderitem_set.all()\n        cartItems = order.get_cart_items\n    else:\n        # create empty cart for none logged in users\n        items = []\n        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}\n        cartItems = order['get_cart_items']\n\n    context = {'products': products, 'category_list': category_list, 'cartItems': cartItems}\n    return render(request, 'Product/search.html', context)\n\n\ndef getProduct(request, product_id):\n    product = Product.objects.get(id=product_id)\n\n    score = Score.objects.filter(product=product_id).aggregate(Avg('score'))\n    score = score['score__avg']\n\n    product.description = markdown.markdown(product.description,\n                                            extensions=[\n                                                'markdown.extensions.extra',\n                                                'markdown.extensions.codehilite',\n                                                'markdown.extensions.toc',\n                                            ])\n\n    product.details = markdown.markdown(product.details,\n                                        extensions=[\n                                            'markdown.extensions.extra',\n                                            'markdown.extensions.codehilite',\n                                            'markdown.extensions.toc',\n                                        ])\n    if request.user.is_authenticated:\n        customer = request.user\n        order, created = Order.objects.get_or_create(customer=customer, complete=False)\n        items = order.orderitem_set.all()\n        cartItems = order.get_cart_items\n    else:\n        # create empty cart for none logged in users\n        items = []\n        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}\n        cartItems = order['get_cart_items']\n\n    comments = Comment.objects.filter(product=product_id)\n    comment_form = CommentForm()\n\n    kwarg = {\n        \"product\": product,\n        \"score\": score,\n        'cartItems': cartItems,\n        'comments': comments,\n        'comment_form': comment_form,\n    }\n    return render(request, 'Product/item_info.html', kwarg)\n\n\ndef dashboard(request):\n    user_count = User.objects.count()\n    product_count = Product.objects.count()\n    context = {'user_count': user_count, 'product_count': product_count}\n    return render(request, 'Product/dashboard.html', context)\n\n\nclass CategoryIndexView(generic.ListView):\n    model = Product\n    template_name = 'Product/category.html'\n    context_object_name = 'products'\n\n    def get_context_data(self, *, object_list=None, **kwargs):\n        context = super(CategoryIndexView, self).get_context_data(**kwargs)\n        # category_list = Category.objects.filter(status=True).values()\n        category_list = Category.objects.annotate(num_products=Count('product'))\n        format_list = Format.objects.annotate(num_products=Count('product'))\n        rating_list = Rating.objects.annotate(num_products=Count('product'))\n        availability_list = Availability.objects.annotate(num_products=Count('product'))\n\n        context['category_list'] = category_list\n        context['format_list'] = format_list\n        context['rating_list'] = rating_list\n        context['availability_list'] = availability_list\n        return context\n\n    def get_queryset(self):\n        self.c = self.request.GET.get(\"c\", None)\n        self.f = self.request.GET.get(\"f\", None)\n        self.r = self.request.GET.get(\"r\", None)\n        self.a = self.request.GET.get(\"a\", None)\n        if self.c:\n            category = get_object_or_404(Category, pk=self.c)\n            return category.product_set.all().order_by('-publishDate')\n        elif self.f:\n            format = get_object_or_404(Format, pk=self.f)\n            return format.product_set.all().order_by('-publishDate')\n        elif self.r:\n            rating = get_object_or_404(Rating, pk=self.r)\n            return rating.product_set.all().order_by('-publishDate')\n        elif self.a:\n            availability = get_object_or_404(Availability, pk=self.a)\n            return availability.product_set.all().order_by('-publishDate')\n        else:\n            return Product.objects.filter().order_by('-publishDate')\n\n\ndef cart(request):\n    if request.user.is_authenticated:\n        customer = request.user\n        order, created = Order.objects.get_or_create(customer=customer, complete=False)\n        items = order.orderitem_set.all()\n        cartItems = order.get_cart_items\n    else:\n        # create empty cart for none logged in users\n        items = []\n        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}\n        cartItems = order['get_cart_items']\n\n    context = {'items': items, 'order': order, 'cartItems': cartItems}\n    return render(request, 'Product/cart.html', context)\n\n\ndef checkout(request):\n    if request.user.is_authenticated:\n        customer = request.user\n        order, created = Order.objects.get_or_create(customer=customer, complete=False)\n        items = order.orderitem_set.all()\n        cartItems = order.get_cart_items\n    else:\n        # create empty cart for none logged in users\n        items = []\n        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}\n        cartItems = order['get_cart_items']\n\n    context = {'items': items, 'order': order, 'cartItems': cartItems}\n\n    return render(request, 'Product/checkout.html', context)\n\n\ndef updateItem(request):\n    data = json.loads(request.body)\n    productId = data['productId']\n    action = data['action']\n    print('Action:', action)\n    print('Product:', productId)\n\n    customer = request.user\n    product = Product.objects.get(id=productId)\n    order, created = Order.objects.get_or_create(customer=customer, complete=False)\n\n    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)\n\n    if action == 'add':\n        orderItem.quantity = (orderItem.quantity + 1)\n    elif action == 'remove':\n        orderItem.quantity = (orderItem.quantity - 1)\n\n    orderItem.save()\n\n    if orderItem.quantity <= 0:\n        orderItem.delete()\n\n    return JsonResponse('Item was added', safe=False)\n\n\ndef processOder(request):\n    transaction_id = datetime.datetime.now().timestamp()\n    data = json.loads(request.body)\n    if request.user.is_authenticated:\n        customer = request.user\n        order, created = Order.objects.get_or_create(customer=customer, complete=False)\n\n        total = float(data['form']['total'])\n        order.transaction_id = transaction_id\n        if total == float(order.get_cart_total):\n            order.complete = True\n        order.save()\n\n        if order.shipping == True:\n            ShippingAddress.objects.create(\n                customer=customer,\n                order=order,\n                address=data['shipping']['address'],\n                city=data['shipping']['city'],\n                state=data['shipping']['state'],\n                zipcode=data['shipping']['zipcode'],\n                country=data['shipping']['country'],\n            )\n    else:\n        print(\"User is not logged in\")\n\n    return JsonResponse(\"Payment submitted ...\", safe=False)\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Product/views.py b/Product/views.py
+--- a/Product/views.py	(revision 0ff7aaeb39e7d48dd9a77b261eb804859502e89f)
++++ b/Product/views.py	(date 1635860889822)
+@@ -17,7 +17,7 @@
+ 
+ def home(request):
+     kwarg = {}
+-    product_new_release = Product.objects.filter().order_by("-publishDate")[:4]
++    product_new_release = Product.objects.filter().order_by("-publishDate")[:6]
+     # product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
+     product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("score")).values("product_id",
+                                                                                              "avg").order_by(

@@ -8,4 +8,4 @@ function hideLoadingPage() {
 
 setTimeout(function () {
     hideLoadingPage();
-}, 900);
+}, 800);

@@ -52,7 +52,11 @@
             </div>
 
             <div class="iteminfo_maininfo_text available">
-                Available : {{ product.availability }}
+                {% if product.digital %}
+                    Available : {{ product.availability }} - online
+                {% else %}
+                    Available : {{ product.availability }}
+                {% endif %}
             </div>
 
             <div class="iteminfo_maininfo_text buy">
