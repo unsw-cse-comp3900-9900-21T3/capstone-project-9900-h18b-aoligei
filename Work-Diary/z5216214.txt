@@ -54,6 +54,8 @@ week 7
         Product --> models.py
                     -->class Order(), class OrderItem() and class ShippingAddress();
         Product --> views.py --> processOrder(), updateItems()
+2. Homepage realizes the function of carousel display
+    code file： carousel.css
 
 
 week 8
