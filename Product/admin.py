@@ -11,11 +11,10 @@ admin.site.index_title = "Aoligei E-Commerce Administration"
 class ProductAdmin(AdminVideoMixin, admin.ModelAdmin):
     list_display = (
         'title', 'image_data', 'publishDate', 'category', 'format', 'rating', 'price_dollar', 'availability',
-        'created_time')
+        'updated_time')
     list_per_page = 10
-    search_fields = ['title', ]
-
-    # fields = ('title', 'image_data', 'publishDate', "category", 'format', 'rating', 'price_dollar', 'availability',)
+    search_fields = ['title', 'category__title', 'format__title', 'rating__title', 'availability__title',
+                     'price', 'discount_price']
 
     def price_dollar(self, obj):
         if obj.discount_price:
@@ -34,14 +33,14 @@ admin.site.register(Product, ProductAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('Categories', 'Count')
+    list_display = ('Categories', 'Product_Count')
     search_fields = ['title']
     list_per_page = 20
 
     def Categories(self, obj):
         return mark_safe(str(obj.title))
 
-    def Count(self, obj):
+    def Product_Count(self, obj):
         return mark_safe(str(obj.total_items))
 
 
@@ -49,14 +48,14 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class RatingAdmin(admin.ModelAdmin):
-    list_display = ('Rating', 'Count')
+    list_display = ('Rating', 'Product_Count')
     search_fields = ['title']
     list_per_page = 20
 
     def Rating(self, obj):
         return mark_safe(str(obj.title))
 
-    def Count(self, obj):
+    def Product_Count(self, obj):
         return mark_safe(str(obj.total_items))
 
 
@@ -64,14 +63,14 @@ admin.site.register(Rating, RatingAdmin)
 
 
 class FormatAdmin(admin.ModelAdmin):
-    list_display = ('Format', 'Count')
+    list_display = ('Format', 'Product_Count')
     search_fields = ['title']
     list_per_page = 20
 
     def Format(self, obj):
         return mark_safe(str(obj.title))
 
-    def Count(self, obj):
+    def Product_Count(self, obj):
         return mark_safe(str(obj.total_items))
 
 
@@ -79,14 +78,14 @@ admin.site.register(Format, FormatAdmin)
 
 
 class AvailabilityAdmin(admin.ModelAdmin):
-    list_display = ('Availability', 'Count')
+    list_display = ('Availability', 'Product_Count')
     search_fields = ['title']
     list_per_page = 20
 
     def Availability(self, obj):
         return mark_safe(str(obj.title))
 
-    def Count(self, obj):
+    def Product_Count(self, obj):
         return mark_safe(str(obj.total_items))
 
 
@@ -140,6 +139,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = (
         'transaction_Id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',
     )
+
     # exclude = ['transaction_id', 'customer', 'complete',]
 
     # readonly_fields = ['transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',]
@@ -159,6 +159,8 @@ class OrderAdmin(admin.ModelAdmin):
         if obj:
             return mark_safe(str(obj.get_cart_total))
 
+    search_fields = ['transaction_id', 'complete', 'customer__username', ]
+
 
 admin.site.register(Order, OrderAdmin)
 
@@ -169,6 +171,9 @@ class OrderItemAdmin(admin.ModelAdmin):
         'date_added',
     )
     list_per_page = 8
+
+    search_fields = ['order__transaction_id', 'product__title', 'product__price', 'product__discount_price', 'quantity',
+                     'order__complete', 'order__customer__username']
 
     # readonly_fields = ['transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer',
     #                    'completed',
@@ -209,4 +214,18 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OrderItem, OrderItemAdmin)
-admin.site.register(ShippingAddress)
+
+
+class ShippingAddressAdmin(admin.ModelAdmin):
+    list_display = ['customer', 'transaction_Id', 'address', 'city', 'state', 'country', 'zipcode', 'date_added']
+    search_fields = ['customer__username', 'order__transaction_id', 'address', 'city', 'state', 'country', 'zipcode',
+                     'date_added']
+
+    def transaction_Id(self, obj):
+        if obj.order:
+            return mark_safe(obj.order.transaction_id)
+        else:
+            obj.delete()
+
+
+admin.site.register(ShippingAddress, ShippingAddressAdmin)

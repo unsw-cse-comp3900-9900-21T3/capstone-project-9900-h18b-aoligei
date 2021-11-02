@@ -104,12 +104,11 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     digital = models.BooleanField(default=False, null=True, blank=True)
 
-    created_time = models.DateTimeField(auto_now_add=True)
-
-    # updated_time = models.DateTimeField(auto_now_add=True)
+    created_time = models.DateTimeField(auto_now_add=True, null=True)
+    updated_time = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
-        ordering = ('-created_time',)
+        ordering = ['-updated_time', '-created_time']
         verbose_name = 'product'
         verbose_name_plural = 'products'
 
