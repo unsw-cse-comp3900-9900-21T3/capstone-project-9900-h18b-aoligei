@@ -19,7 +19,7 @@ from Comment.forms import CommentForm
 
 def home(request):
     kwarg = {}
-    product_new_release = Product.objects.filter().order_by("-publishDate")[:6]
+    product_new_release = Product.objects.filter().order_by("-publishDate")[:10]
     # product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
     product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("score")).values("product_id",
                                                                                              "avg").order_by(

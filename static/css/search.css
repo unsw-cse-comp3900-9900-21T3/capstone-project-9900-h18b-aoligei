@@ -167,3 +167,11 @@ a {
 .search-price-hover:hover {
     font-size: 2em;
 }
+.product-title-hover:hover{
+    font-size: 1.2em;
+}
+
+#detail-available-online:hover{
+    color: darkred;
+    font-size: 1.2em;
+}

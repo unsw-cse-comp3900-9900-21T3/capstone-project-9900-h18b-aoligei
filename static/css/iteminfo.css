@@ -1,27 +1,27 @@
-p_yellow{
+p_yellow {
     color: #f47920;
 }
 
-p_price{
+p_price {
     color: #f47920;
     font-size: 24px;
     font-weight: bold;
 }
 
-p_price2{
+p_price2 {
     color: black;
     font-size: 18px;
     font-weight: bold;
     text-decoration: line-through;
 }
 
-p_description{
+p_description {
     color: #f47920;
     font-size: 20px;
     font-weight: bold;
 }
 
-.iteminfo_content_top{
+.iteminfo_content_top {
     width: 1200px;
     height: 560px;
     margin: 0 auto;
@@ -29,14 +29,14 @@ p_description{
     padding-bottom: 30px;
 }
 
-.iteminfo_pic{
+.iteminfo_pic {
     width: 384px;
     margin: 8px;
     height: 560px;
     float: left;
 }
 
-.iteminfo_maininfo{
+.iteminfo_maininfo {
     width: 784px;
     margin: 8px;
     height: 560px;
@@ -44,7 +44,7 @@ p_description{
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-.iteminfo_maininfo_text{
+.iteminfo_maininfo_text {
     width: 754px;
     padding-left: 20px;
     padding-right: 10px;
@@ -55,7 +55,7 @@ p_description{
     text-align: left;
 }
 
-.iteminfo_maininfo_text.title{
+.iteminfo_maininfo_text.title {
     line-height: 70px;
     font-weight: bold;
     font-size: 24px;
@@ -63,62 +63,62 @@ p_description{
     margin-bottom: 15px;
 }
 
-.iteminfo_maininfo_text.score{
+.iteminfo_maininfo_text.score {
     padding-top: 10px;
     line-height: 30px;
     font-size: 16px;
     white-space: pre;
 }
 
-.iteminfo_maininfo_text.rating{
+.iteminfo_maininfo_text.rating {
     line-height: 30px;
     font-size: 16px;
 }
 
-.iteminfo_maininfo_text.format{
+.iteminfo_maininfo_text.format {
     line-height: 30px;
     font-size: 16px;
 }
 
-.iteminfo_maininfo_text.category{
+.iteminfo_maininfo_text.category {
     line-height: 30px;
     font-size: 16px;
 }
 
-.iteminfo_maininfo_text.publishdate{
+.iteminfo_maininfo_text.publishdate {
     line-height: 30px;
     font-size: 16px;
     padding-bottom: 10px;
 }
 
 
-.iteminfo_maininfo_text.price{
+.iteminfo_maininfo_text.price {
     padding-top: 10px;
     line-height: 50px;
     font-size: 20px;
     margin-top: 15px;
 }
 
-.iteminfo_maininfo_text.stock{
+.iteminfo_maininfo_text.stock {
     line-height: 30px;
     font-size: 16px;
     font-weight: bold;
     color: #1d953f;
 }
 
-.iteminfo_maininfo_text.available{
+.iteminfo_maininfo_text.available {
     line-height: 30px;
     font-size: 16px;
 }
 
-.iteminfo_maininfo_text.buy{
+.iteminfo_maininfo_text.buy {
     padding-top: 20px;
     height: 50px;
     font-size: 16px;
     padding-bottom: 10px;
 }
 
-.iteminfo_maininfo_text.bottom{
+.iteminfo_maininfo_text.bottom {
     padding-top: 10px;
     height: 60px;
     padding-bottom: 20px;
@@ -154,13 +154,13 @@ div.iteminfo_maininfo input {
 }
 
 
-.iteminfo_content_bottom{
+.iteminfo_content_bottom {
     width: 1200px;
     min-height: 300px;
     margin: 0 auto;
 }
 
-.iteminfo_description{
+.iteminfo_description {
     width: 1144px;
     margin: 8px;
     padding: 20px;
@@ -170,7 +170,7 @@ div.iteminfo_maininfo input {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
-.iteminfo_qa{
+.iteminfo_qa {
     width: 1144px;
     margin: 8px;
     margin-top: 32px;
@@ -181,7 +181,7 @@ div.iteminfo_maininfo input {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
-.des_and_video{
+.des_and_video {
     display: flex;
     flex-direction: row;
     /*justify-content: space-between;*/
@@ -189,13 +189,13 @@ div.iteminfo_maininfo input {
 }
 
 div.comment {
-            border-style: solid;
-            background: white;
-            width: 100%;
-            padding: 15px;
-            border-color: #f1f1f1;
-        }
+    border-style: solid;
+    background: white;
+    width: 100%;
+    padding: 15px;
+    border-color: #f1f1f1;
+}
 
-        div.all_comment {
-            width: 100%;
-        }
+div.all_comment {
+    width: 100%;
+}
