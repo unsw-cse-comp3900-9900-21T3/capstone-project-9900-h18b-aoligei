@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
-from User.forms import UserLoginForm,UserRegisterForm
+from User.forms import UserLoginForm,UserRegisterForm,Personal_info_form
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth.hashers import make_password,check_password
+from .models import PersonalInfo
+
+
 
 from django.core.mail import send_mail
 from .send_email_tool import send_email_code
@@ -51,25 +53,19 @@ def register(request):
     else:
         # 处理填写好的表单
         form = UserRegisterForm(request.POST)
-        # hash_form = UserRegisterForm()
-        # hash_form.username = request.POST['username']
-        # password_hash = request.POST['password']
-        # hash_form.password = make_password(password_hash, 'pbkdf2_sha256')
-        # hash_form.email = request.POST['email']
-        # print(hash_form.username ,hash_form.password,hash_form.email)
-        # print(hash_form.is_valid())
-        # if hash_form.is_valid():
         if form.is_valid():
-            # form.password = make_password(request.POST['password'],'pbkdf2_sha256')
-            # new_user = form.save()
-
             print("yeah")
             new_user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
 
             new_user.save()
             # 让用户自动登陆，再重定向 到主页位置
-            authenticate_user = authenticate(username=new_user.username, password=new_user.password)
+            print(new_user.password)
+            print(request.POST['password'])
+            authenticate_user = authenticate(username=new_user.username, password=request.POST['password'])
+
+            print(111)
             login(request, authenticate_user)
+            print("2222")
             email = request.POST['email']
 
             send_email_code(email, 1)
@@ -79,8 +75,56 @@ def register(request):
     context = {'form': form}
     return render(request, 'User/register.html', context)
 
-def personal_info(request):
-    pass
+def personal_info(request,userid):
+
+    user_info = User.objects.get(id=userid)
+    print("1234567890")
+    if PersonalInfo.objects.filter(user_id=userid).exists():
+        profile = PersonalInfo.objects.get(user_id=userid)
+    else:
+
+        profile = PersonalInfo.objects.create(user_id=user_info)
+        print(44444444444)
+
+    print(333333)
+    if request.method == 'POST':
+        data = request.POST
+        firstname = data.get("firstname")
+        lastname = data.get("lastname")
+        gender = data.get("gender")
+        address = data.get("address")
+        city = data.get("city")
+        state = data.get("state")
+        zipcode = data.get("zipcode")
+        country = data.get("country")
+
+        profile.firstname = firstname
+        profile.lastname = lastname
+        profile.gender = gender
+        profile.address = address
+        profile.city = city
+        profile.state =state
+        profile.zipcode = zipcode
+        profile.country = country
+        try:
+            # 如果未获取当前用户，save会新建一个没有密码的用户，操作是错误的
+            profile.save()
+        except:
+
+            print("ops,error")
+            # 和查看用户信息同理，每个用户都有自己的路由，修改后，重定向到新的路由
+            # 因为该路由由用户名决定
+        # return render(request, 'User/register.html', '')
+        return HttpResponseRedirect(reverse("User:personal_info", args=[userid]))
+    elif request.method == 'GET':
+        personal_form = Personal_info_form
+        context = {'profile_form': personal_form,
+                   'profile':profile,
+                   }
+        return render(request, 'User/Personal_Info.html', context)
+    context = {'userinfo':user_info }
+
+    return render(request,'User/Personal_Info.html',context)
 
 
 def activate(request,code):
