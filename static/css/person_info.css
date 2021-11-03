@@ -1,0 +1,74 @@
+.person_info_body{
+    width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    margin-top: 30px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 15px 15px 15px 15px;
+}
+
+.person_info_current{
+    width: 440px;
+    margin: 10px auto;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px 15px 15px 15px;
+    text-align: left;
+}
+
+.person_info_row{
+    width: 400px;
+    padding-left: 20px;
+    padding-right: 20px;
+    line-height: 40px;
+    min-height: 40px;
+    color: black;
+    font-size: 18px;
+}
+
+.person_info_btn{
+    width: 100px;
+    height: 25px;
+    margin-top: 10px;
+    float: right;
+    color: black;
+    border: 1px solid #333333;
+    border-radius: 5px 5px 5px 5px;
+    background: white;
+    cursor: pointer;
+}
+
+.person_info_btn:hover{
+    color: white;
+    background: #f58220;
+}
+
+.person_info_btn.green:hover{
+    color: white;
+    background: #1d953f;
+}
+
+.person_info_edit{
+    width: 440px;
+    margin: 10px auto;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px 15px 15px 15px;
+    display: none;
+    text-align: left;
+}
+
+.person_info_edit input{
+    width: 150px;
+    height: 20px;
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid black;
+}
+
+.person_history_content{
+    width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    min-height: 150px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px 15px 15px 15px;
+}

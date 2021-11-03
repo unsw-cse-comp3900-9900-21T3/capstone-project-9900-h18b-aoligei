@@ -2,29 +2,66 @@
 
 {% extends "base.html" %}
 {% block content %}
+<div class="person_info_body">
+    <div class="row">
+        <div class="column_2">
+            <div class="person_info_current">
+                <div class="person_info_row">Name : name</div>
+                <div class="person_info_row">Email : email</div>
+                <div class="person_info_row"><button class="person_info_btn" id="person_info_show_edit">EDIT</button></div>
+            </div>
+        </div>
+        <div class="column_2">
+            <div class="person_info_edit" id="person_info_edit_area">
+                <div class="person_info_row">Name : <input></div>
+                <div class="person_info_row">Email : <input></div>
+                <div class="person_info_row">Email : <input></div>
+                <div class="person_info_row">Email : <input></div>
+                <div class="person_info_row"><button class="person_info_btn green">SUBMIT</button></div>
+
+                <div class="person_info_row"><button class="person_info_btn" id="person_info_cancel_edit">CANCEL</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="person_info_body">
+    <div class="person_history_content">
+
+    </div>
+</div>
+<script>
+    var b = document.getElementById('person_info_show_edit');
+    b.addEventListener('click',()=>{
+        var a = document.getElementById('person_info_edit_area');
+        a.style.display = 'block';
+    });
+
+    b = document.getElementById('person_info_cancel_edit');
+    b.addEventListener('click',()=>{
+        var a = document.getElementById('person_info_edit_area');
+        a.style.display = 'none';
+    });
+</script>
+
+
     <form action="{% url 'User:personal_info' request.user.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-{#        {{ profile.as_p }}#}
-{#        读取原来的personal info 是在profile     上传编辑过的personal info 是在 profile_form  #}
          <div class="form-row">
-                                <div class="form-group col-md-4 offset-md-2">
-                                    <label>First Name</label>
-                                    <input id="first_name" name="first_name" type="text" class="form-control" value={{ profile_form.firstname }} placeholder={{ profile.firstname}}>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Last Name</label>
-                                    <input id="last_name" name="last_name" type="text" value="{{ profile_form.lastname }}" class="form-control" placeholder="{{ profile.firstname}}">
-                                </div>
-                            </div>
+            <div class="form-group col-md-4 offset-md-2">
+                <label>First Name</label>
+                <input id="first_name" name="first_name" type="text" class="form-control" value={{ profile_form.firstname }} placeholder={{ profile.firstname}}>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Last Name</label>
+                <input id="last_name" name="last_name" type="text" value="{{ profile_form.lastname }}" class="form-control" placeholder="{{ profile.firstname}}">
+            </div>
+        </div>
 
          <button name="submit" type="submit" class="btn btn-primary btn-block"
                                     style="width: 680px; margin-left: 190px">Save
                             </button>
-
-{#        <p>{{profile_form.as_p  }}</p>#}
-
     </form>
-   >
 
 {% endblock content %}
 

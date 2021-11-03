@@ -47,3 +47,27 @@ def post_comment(request, product_id, parent_comment_id=None):
             'parent_comment_id': parent_comment_id,
         }
         return render(request, 'Comment/reply.html', context)
+
+
+def edit_comment(request,comment_id):
+    comment=Comment.objects.get(id=comment_id)
+    if request.method=="GET":
+        form=CommentForm(instance=comment)
+        kwargs={
+            'form':form,
+            'comment':comment,
+        }
+        return render(request,'edit.html',kwargs)
+    elif request.method=='POST':
+        kwargs={}
+        form=CommentForm(instance=comment,data=request.POST)
+        if request.POST.get('body'):
+            comment.body=request.POST.get('body')
+            comment.save()
+            return HttpResponseRedirect(reverse("Product:getProduct", args=[comment.product.id]))
+
+def delete_comment(request,comment_id):
+    comment=Comment.objects.filter(id=comment_id)
+    if comment:
+        comment.delete()
+    return HttpResponseRedirect(reverse("Product:getProduct", args=[comment.product.id]))
