@@ -21,13 +21,16 @@ def home(request):
     kwarg = {}
     product_new_release = Product.objects.filter().order_by("-publishDate")[:10]
     # product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
+
     product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("score")).values("product_id",
                                                                                              "avg").order_by(
         '-avg')[:4]
-    product_all = Product.objects.all().update()
+
+    product_all = Product.objects.all()
 
     kwarg['product_new_release'] = product_new_release
     kwarg['product_spotlight'] = product_spotlight
+
     kwarg['product_all'] = product_all
 
     if request.user.is_authenticated:

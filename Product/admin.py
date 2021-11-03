@@ -108,31 +108,31 @@ class ScoreAdmin(admin.ModelAdmin):
         return mark_safe(u'<img src="%s" width="100px" />' % res)
 
     def score_mark(self, obj):
-        temp_score = int(obj.score)
+        temp_score = float(obj.score)
         if temp_score <= 0.5:
-            temp_score = "" + str(obj.score)
+            temp_score = "" + str(temp_score)
         elif temp_score <= 1.0:
-            temp_score = "⭐ " + str(obj.score)
+            temp_score = "⭐ " + str(temp_score)
         elif temp_score <= 1.5:
-            temp_score = "⭐ " + str(obj.score)
+            temp_score = "⭐ " + str(temp_score)
         elif temp_score <= 2.0:
-            temp_score = "⭐⭐ " + str(obj.score)
+            temp_score = "⭐⭐ " + str(temp_score)
         elif temp_score <= 2.5:
-            temp_score = "⭐⭐ " + str(obj.score)
+            temp_score = "⭐⭐ " + str(temp_score)
         elif temp_score <= 3.0:
-            temp_score = "⭐⭐⭐ " + str(obj.score)
+            temp_score = "⭐⭐⭐ " + str(temp_score)
         elif temp_score <= 3.5:
-            temp_score = "⭐⭐⭐ " + str(obj.score)
+            temp_score = "⭐⭐⭐ " + str(temp_score)
         elif temp_score <= 4.0:
-            temp_score = "⭐⭐⭐⭐ " + str(obj.score)
+            temp_score = "⭐⭐⭐⭐ " + str(temp_score)
         elif temp_score <= 4.5:
-            temp_score = "⭐⭐⭐⭐ " + str(obj.score)
+            temp_score = "⭐⭐⭐⭐ " + str(temp_score)
         else:
-            temp_score = "⭐⭐⭐⭐⭐ " + str(obj.score)
+            temp_score = "⭐⭐⭐⭐⭐ " + str(temp_score)
         return mark_safe(temp_score)
 
 
-admin.site.register(Score, ScoreAdmin)
+admin.site.register(Score,ScoreAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
