@@ -100,9 +100,7 @@
             //Hide entire form if user is logged in and shipping is false
             document.getElementById('form-wrapper').classList.add('hidden');
             // show payment if logged in users want to buy an item that does not required shipping
-            if (total_num != 0) {
-                document.getElementById('payment-info').classList.remove('hidden');
-            }
+            document.getElementById('payment-info').classList.remove('hidden');
         }
 
         let form = document.getElementById('form');
@@ -183,7 +181,7 @@
 
 
     <!-- Include the PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=AUD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=AUD"></script>
     <script>
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
@@ -199,7 +197,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '0.01'
+                            value: parseFloat(total).toFixed(2)
                         }
                     }]
                 });
@@ -209,15 +207,13 @@
             onApprove: function (data, actions) {
                 return actions.order.capture().then(function (details) {
                     // Show a success message to the buyer
+                    {#submitFormData()#}
                     alert('Transaction completed by ' + details.payer.name.given_name + '!');
                 });
             }
 
         }).render('#paypal-button-container');
     </script>
-
-
-
 
 {% endblock content %}
 

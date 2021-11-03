@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils import timezone
 from .models import Product, Category, Rating, Format, Availability, Score, Order, OrderItem, ShippingAddress
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
@@ -10,11 +11,12 @@ from django.shortcuts import get_object_or_404, redirect
 from django.db.models.aggregates import Count
 from django.http import JsonResponse
 import json
-import datetime
+# import datetime
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from Comment.models import Comment
 from Comment.forms import CommentForm
+import datetime
 
 
 def home(request):
@@ -43,9 +45,7 @@ def home(request):
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
-
     kwarg['cartItems'] = cartItems
-
     return render(request, 'home.html', kwarg)
 
 
@@ -60,7 +60,6 @@ def search(request):
                    products.filter(category__title__icontains=item_name) | \
                    products.filter(rating__title__icontains=item_name) | \
                    products.filter(availability__title__icontains=item_name)
-
     # paginator code
     paginator = Paginator(products, 6)
     page = request.GET.get('page')
@@ -242,7 +241,80 @@ def processOder(request):
 
 
 def dashboard(request):
+    today = datetime.datetime.now().date()
+    weekdelta = datetime.datetime.now().date() - datetime.timedelta(weeks=1)
+
+    orders = Order.objects.all()
+    products = Product.objects.all()
+
     user_count = User.objects.count()
-    product_count = Product.objects.count()
-    context = {'user_count': user_count, 'product_count': product_count}
+    total_product = Product.objects.count()
+    total_customer = User.objects.filter(is_superuser=False).count()
+    total_comment = Comment.objects.count()
+    total_price = 0
+    total_cost = 0
+    for product in products:
+        if product.discount_price:
+            total_price += product.discount_price
+        else:
+            total_price += product.price
+        if product.cost:
+            total_cost += product.cost
+
+    avg_price = total_price / total_product
+    avg_cost = total_cost / total_product
+
+    total_sales_quantity = sum([order.get_cart_items for order in orders])
+    orders_count = orders.count()
+    total_sales = sum([order.get_cart_total for order in orders])
+    profit = ((total_sales - total_cost) / total_cost) * 100
+
+    # weekly new_users
+    new_users = User.objects.filter(date_joined__gte=weekdelta, date_joined__lte=today, is_superuser=False).count()
+    new_products = Product.objects.filter(created_time__gte=weekdelta, created_time__lte=today).count()
+    new_comments = Comment.objects.filter(created__gte=weekdelta, created__lte=today).count()
+
+    # week sales 7 days
+    now_time = datetime.datetime.now()
+    # # 距离周日相隔的天数，这里得到int型数值
+    day_num = now_time.isoweekday()
+
+    days = []
+    for i in range(day_num + 1):
+        day = (now_time - datetime.timedelta(days=day_num - i)).date()
+        days.append(day)
+
+    weekly_sales = []
+    for i in range(len(days) - 1):
+        day_orders = Order.objects.filter(date_ordered__lt=days[i + 1], date_ordered__gt=days[i], complete=True)
+        print(day_orders)
+        if day_orders:
+            day_sales = sum([order.get_cart_total for order in day_orders])
+            weekly_sales.append(day_sales)
+        else:
+            weekly_sales.append(0)
+    today_ret_orders = Order.objects.filter(date_ordered__gt=now_time.date(), complete=True)
+    if today_ret_orders:
+        today_sales = sum([order.get_cart_total for order in today_ret_orders])
+        weekly_sales.append(today_sales)
+    else:
+        weekly_sales.append(0)
+
+    context = {
+        'user_count': user_count,
+        'total_product': total_product,
+        'total_sales': total_sales,
+        'total_sales_quantity': total_sales_quantity,
+        'orders_count': orders_count,
+        'total_customer': total_customer,
+        'total_comment': total_comment,
+        'avg_price': avg_price,
+        'avg_cost': avg_cost,
+        'total_cost': total_cost,
+        'profit': profit,
+        'new_users': new_users,
+        'new_products': new_products,
+        'new_comments': new_comments,
+        'weekly_sales': weekly_sales,
+    }
     return render(request, 'Product/dashboard.html', context)
