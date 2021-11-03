@@ -6,17 +6,77 @@
     {#    <script src="https://code.jquery.com/jquery-3.6.0.js"#}
     {#            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>#}
 
+     <style>
+        .newtextarea{
+            border:0;
+            border-radius:5px;
+            background-color:rgba(241,241,241,.98);
+            width: 1000px;
+            height: 200px;
+            padding: 10px;
+            resize: none;
+            margin-left: 50px;
+        }
+
+        .post-button {
+            cursor: pointer;
+            border-radius: 5px 5px 5px 5px;
+            width: 170px;
+            height: 47px;
+            background-color: #27b069;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            margin-top: 20px;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+            margin-right: 70px;
+            float: right;
+        }
+
+
+        .reply-button {
+            cursor: pointer;
+            border-radius: 5px 5px 5px 5px;
+            width: 100px;
+            height: 30px;
+            background-color: #27b069;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            margin-top: 40px;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+            {#margin-right: 30px;#}
+            float: right;
+        }
+
+        .comment-area{
+            {#border: 1px solid #d2d2d2;#}
+            border-radius: 5px 5px 5px 5px;
+
+        }
+
+        .small-comment-area{
+            border-radius: 5px 5px 5px 5px;
+            background-color:rgba(241,241,241,.5);
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        }
+    </style>
+
+
+
+
     <div class="iteminfo_content_top">
         <div class="iteminfo_pic">
             <img height="100%" width="100%" src="{{ product.image.url }}"/>
         </div>
 
         <div class="iteminfo_maininfo">
-            <div class="iteminfo_maininfo_text title product-title-hover" id="nm{{ product.id }}">
+            <div class="iteminfo_maininfo_text title" id="nm{{ product.id }}">
                 {{ product.title }}
             </div>
 
-            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow></div>
+            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow>
+            </div>
 
             <div class="iteminfo_maininfo_text rating">
                 Rating : {{ product.rating }}
@@ -38,29 +98,25 @@
             <div class="iteminfo_maininfo_text price">
                 Price :
                 {% if product.discount_price %}
-                    <p_price class="search-price-hover">${{ product.discount_price|floatformat:2 }}</p_price>
+                    <p_price>${{ product.discount_price|floatformat:2 }}</p_price>
 
-                    <p_price2 class="search-price-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
+                    <p_price2> was ${{ product.price|floatformat:2 }}</p_price2>
                 {% else %}
-                    <p_price class="search-price-hover"> ${{ product.price|floatformat:2 }}</p_price>
+                    <p_price> ${{ product.price|floatformat:2 }}</p_price>
                 {% endif %}
             </div>
 
-{#            <div class="iteminfo_maininfo_text stock">#}
-{#                Stock : {{ product.stock }}#}
-{#            </div>#}
+            <div class="iteminfo_maininfo_text stock">
+                Stock : {{ product.stock }}
+            </div>
 
-            <div class="iteminfo_maininfo_text available" id="detail-available-online">
-                {% if product.digital %}
-                    Available : {{ product.availability }} - online
-                {% else %}
-                    Available : {{ product.availability }}
-                {% endif %}
+            <div class="iteminfo_maininfo_text available">
+                Available : {{ product.availability }}
             </div>
 
             <div class="iteminfo_maininfo_text buy">
-{#                <input>#}
-                <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart cart-hover-big">
+                <input>
+                <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
                     Add to Cart
                 </button>
             </div>
@@ -100,7 +156,6 @@
             <p_description>Q&A
                 <hr/>
             </p_description>
-            Q&A
             {% if user.is_authenticated %}
                 <div>
                     <form action="{% url "Comment:post_comment" product.id %}" method="post">
@@ -109,11 +164,11 @@
                             <div class="normal">
                                 <p1>Post a Comment:</p1>
                             </div>
-                            <textarea type="text" class="form-control" id="body" name="body" rows="4"
+                            <textarea  type="text" class="newtextarea" id="body" name="body"
                                       placeholder="Please enter a comment"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary ">Post</button>
+                        <button class="post-button" type="submit" >Post</button>
                     </form>
                 </div>
 
@@ -129,13 +184,14 @@
             <div class="all_comment">
                 {% load mptt_tags %}
                 <h4>Total comments: {{ comments.count }}</h4>
-                <div class="row">
+                <div class="comment-area">
                     {% recursetree comments %}
                         {% with comment=node %}
                             <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
-                                <hr/>
+{#                                <hr/>#}
+                            <div class="small-comment-area">
                                 <p>
-                                    <strong style="color: pink">
+                                    <strong style="color: #e47f3a;font-size: 20px">
                                         {{ comment.user }}
                                     </strong>
 
@@ -143,9 +199,9 @@
                                         <i class="far fa-arrow-alt-circle-right"
                                            style="color: cornflowerblue;"
                                         ></i>
-                                        <strong style="color: pink">
+                                        <strong style="color: cornflowerblue;font-size: 20px">
                                             <span style="color: black"
-                                                  class="arrow-outer">  @</span> {{ comment.reply_to }}
+                                                  class="arrow-outer">  reply to</span> {{ comment.reply_to }}
                                         </strong>
                                     {% endif %}
 
@@ -158,17 +214,20 @@
                                     </span>
 
                                     {% if user.is_authenticated %}
+{#                                        div class="reply-button-container" style="display: flex; flex-direction: row-reverse;line-height: 0">#}
                                         <button type="button"
-                                                class="btn btn-light btn-sm text-muted"
+                                                class="reply-button"
                                                 onclick="load_modal({{ product.id }}, {{ comment.id }})">Reply
                                         </button>
+{#                                        </div>#}
                                     {% else %}
-                                        <a class="btn btn-light btn-sm text-muted"
+                                        <a class="reply-button"
                                            href="{% url 'User:login' %}">
                                             Reply
                                         </a>
                                     {% endif %}
                                 </div>
+                            </div>
 
 
                                 <div class="modal fade"
@@ -178,11 +237,11 @@
                                      aria-labelledby="CommentModalCenter"
                                      aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                        <div class="modal-content" style="height: 480px">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalCenterTitle">Replying
-                                                    to {{ comment.user }}：</h5>
-                                            </div>
+                                        <div class="modal-content" style="height: 80px">
+{#                                            <div class="modal-header">#}
+{#                                                <h5 class="modal-title" id="exampleModalCenterTitle">Replying#}
+{#                                                    to {{ comment.user }}：</h5>#}
+{#                                            </div>#}
                                             <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
                                         </div>
                                     </div>
@@ -206,7 +265,7 @@
 
 
                         if ($(modal_body).children().length === 0) {
-                            let content = '<iframe src="/Comment/post_comment/' + product_id + '/' + comment_id + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+                            let content = '<iframe src="/Comment/post_comment/' + product_id + '/' + comment_id + '" frameborder="0" style="width: 800px; height: 70px;margin-top: 10px"></iframe>';
                             $(modal_body).append(content);
                         }
                         ;
