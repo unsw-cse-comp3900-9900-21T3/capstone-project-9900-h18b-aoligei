@@ -9,6 +9,8 @@ urlpatterns = [
 
     path(r'post_comment/<int:product_id>', views.post_comment, name='post_comment'),
     path(r'post_comment/<int:product_id>/<int:parent_comment_id>', views.post_comment, name='comment_reply'),
+    path(r'edit_comment/<int:comment_id>',views.edit_comment,name='edit_comment'),
+    path(r'delete_comment/<int:comment_id>',views.delete_comment,name='delete_comment'),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
 

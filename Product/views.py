@@ -19,15 +19,18 @@ from Comment.forms import CommentForm
 
 def home(request):
     kwarg = {}
-    product_new_release = Product.objects.filter().order_by("-publishDate")[:6]
+    product_new_release = Product.objects.filter().order_by("-publishDate")[:10]
     # product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
+
     product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("score")).values("product_id",
                                                                                              "avg").order_by(
         '-avg')[:4]
+
     product_all = Product.objects.all()
 
     kwarg['product_new_release'] = product_new_release
     kwarg['product_spotlight'] = product_spotlight
+
     kwarg['product_all'] = product_all
 
     if request.user.is_authenticated:
@@ -148,46 +151,6 @@ def getProduct(request, product_id):
         'comment_form': comment_form,
     }
     return render(request, 'Product/item_info.html', kwarg)
-
-
-class CategoryIndexView(generic.ListView):
-    model = Product
-    template_name = 'Product/search.html'
-    context_object_name = 'products'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(CategoryIndexView, self).get_context_data(**kwargs)
-        # category_list = Category.objects.filter(status=True).values()
-        category_list = Category.objects.annotate(num_products=Count('product'))
-        format_list = Format.objects.annotate(num_products=Count('product'))
-        rating_list = Rating.objects.annotate(num_products=Count('product'))
-        availability_list = Availability.objects.annotate(num_products=Count('product'))
-
-        context['category_list'] = category_list
-        context['format_list'] = format_list
-        context['rating_list'] = rating_list
-        context['availability_list'] = availability_list
-        return context
-
-    def get_queryset(self):
-        self.c = self.request.GET.get("c", None)
-        self.f = self.request.GET.get("f", None)
-        self.r = self.request.GET.get("r", None)
-        self.a = self.request.GET.get("a", None)
-        if self.c:
-            category = get_object_or_404(Category, pk=self.c)
-            return category.product_set.all().order_by('-publishDate')
-        elif self.f:
-            format = get_object_or_404(Format, pk=self.f)
-            return format.product_set.all().order_by('-publishDate')
-        elif self.r:
-            rating = get_object_or_404(Rating, pk=self.r)
-            return rating.product_set.all().order_by('-publishDate')
-        elif self.a:
-            availability = get_object_or_404(Availability, pk=self.a)
-            return availability.product_set.all().order_by('-publishDate')
-        else:
-            return Product.objects.filter().order_by('-publishDate')
 
 
 def cart(request):

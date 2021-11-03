@@ -4,19 +4,49 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static 'bootstrap-4.6.0-dist/css/bootstrap.min.css' %}">
+{#    <link rel="stylesheet" href="{% static 'bootstrap-4.6.0-dist/css/bootstrap.min.css' %}">#}
+    <style>
+        .newtextarea{
+            border:0;
+            border-radius:5px;
+            background-color:rgba(241,241,241,.98);
+            width: 500px;
+            height: 30px;
+            padding: 10px;
+            resize: none;
+        }
+
+        .login-button {
+            cursor: pointer;
+            border-radius: 5px 5px 5px 5px;
+            width: 100px;
+            height: 30px;
+            background-color: #e47f3a;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            margin-top: 18px;
+            margin-left: 5px;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+            float: right;
+        }
+        .reply-container{
+            display: flex;
+
+        }
+    </style>
 </head>
 
 <body>
+<div class="reply-container">
 <form action="." method="POST" id="reply_form">
     {% csrf_token %}
-    <textarea input type="text" class="form-control" id="test" name="body" rows="3"></textarea>
+    <textarea input type="text" class="newtextarea" id="test" name="body" rows="3"></textarea>
 
 </form>
 
-<button onclick="confirm_submit({{ product_id }}, {{ parent_comment_id }})" class="btn btn-primary">Post</button>
-
-
+<button onclick="confirm_submit({{ product_id }}, {{ parent_comment_id }})" class="login-button">Reply</button>
+</div>
 
 
 <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
@@ -27,7 +57,6 @@
 <script src="{% static 'csrf.js' %}"></script>
 
 <script>
-
 
     function confirm_submit(product_id, comment_id) {
 

@@ -1,0 +1,127 @@
+.carousel-4 {
+    width: 1100px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 40px;
+    background-color: rgba(51, 53, 67, 0.5);
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.carousel-container {
+    width: 284px;
+    height: 400px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.carousel-cards-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateY(0) translateZ(-700px);
+    animation: carousel 15s infinite cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.carousel-cards {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-cards:nth-child(1) {
+    background-color: #fdd94f;
+    transform: rotateY(0) translateZ(700px);
+}
+
+.carousel-cards:nth-child(2) {
+    background-color: #f78949;
+    transform: rotateY(36deg) translateZ(700px);
+}
+
+.carousel-cards:nth-child(3) {
+    background-color: #fbab48;
+    transform: rotateY(72deg) translateZ(700px);
+}
+
+.carousel-cards:nth-child(4) {
+    background-color: lightskyblue;
+    transform: rotateY(108deg) translateZ(700px);
+}
+
+.carousel-cards:nth-child(5) {
+    background-color: green;
+    transform: rotateY(144deg) translateZ(700px);
+}
+
+.carousel-cards:nth-child(6) {
+    background-color: blue;
+    transform: rotateY(180deg) translateZ(700px);
+}
+
+.carousel-cards:nth-child(7) {
+    background-color: red;
+    transform: rotateY(216deg) translateZ(700px);
+}
+
+.carousel-cards:nth-child(8) {
+    background-color: pink;
+    transform: rotateY(252deg) translateZ(700px);
+}
+.carousel-cards:nth-child(9) {
+    background-color: #999;
+    transform: rotateY(288deg) translateZ(700px);
+}
+.carousel-cards:nth-child(10) {
+    background-color: #f78949;
+    transform: rotateY(324deg) translateZ(700px);
+}
+
+@keyframes carousel {
+    0% {
+        transform: translateZ(-700px) rotateY(0);
+    }
+     10% {
+        transform: translateZ(-700px) rotateY(-36deg);
+    }
+    20% {
+        transform: translateZ(-700px) rotateY(-72deg);
+    }
+
+    30% {
+        transform: translateZ(-700px) rotateY(-108deg);
+    }
+    40% {
+        transform: translateZ(-700px) rotateY(-144deg);
+    }
+
+    50% {
+        transform: translateZ(-700px) rotateY(-180deg);
+    }
+    60% {
+        transform: translateZ(-700px) rotateY(-216deg);
+    }
+    70% {
+        transform: translateZ(-700px) rotateY(-252deg);
+    }
+    80% {
+        transform: translateZ(-700px) rotateY(-288deg);
+    }
+    90% {
+        transform: translateZ(-700px) rotateY(-324deg);
+    }
+    100% {
+        transform: translateZ(-700px) rotateY(-360deg);
+    }
+}

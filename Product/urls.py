@@ -13,8 +13,6 @@ urlpatterns = [
 
     path('search/', views.search, name='search'),
 
-    path('category_list/', views.CategoryIndexView.as_view(), name='category_list'),
-
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('update_item/', views.updateItem, name='update_item'),
