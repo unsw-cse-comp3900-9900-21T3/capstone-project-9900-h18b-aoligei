@@ -65,3 +65,9 @@ def edit_comment(request,comment_id):
             comment.body=request.POST.get('body')
             comment.save()
             return HttpResponseRedirect(reverse("Product:getProduct", args=[comment.product.id]))
+
+def delete_comment(request,comment_id):
+    comment=Comment.objects.filter(id=comment_id)
+    if comment:
+        comment.delete()
+    return HttpResponseRedirect(reverse("Product:getProduct", args=[comment.product.id]))
