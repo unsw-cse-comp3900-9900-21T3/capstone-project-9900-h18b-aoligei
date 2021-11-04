@@ -149,8 +149,8 @@ class OrderAdmin(admin.ModelAdmin):
     def transaction_Id(self, obj):
         if obj.transaction_id != None and obj.transaction_id != 'NULL':
             return mark_safe(obj.transaction_id)
-        else:
-            obj.delete()
+        # else:
+        #     obj.delete()
 
     def total_quantity(self, obj):
         if obj:
@@ -197,7 +197,7 @@ class OrderItemAdmin(admin.ModelAdmin):
             return mark_safe("$" + str(obj.product.price))
 
     def transaction_id(self, obj):
-        if obj.order.customer:
+        if obj.order:
             return mark_safe(obj.order.transaction_id)
 
     def customer(self, obj):
