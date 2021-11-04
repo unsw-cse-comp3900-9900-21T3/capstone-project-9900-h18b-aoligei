@@ -102,6 +102,7 @@ class Product(models.Model):
     details = MDTextField(blank=True, null=True)
 
     available = models.BooleanField(default=True)
+    cost = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2)
     digital = models.BooleanField(default=False, null=True, blank=True)
 
     created_time = models.DateTimeField(auto_now_add=True, null=True)

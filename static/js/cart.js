@@ -13,8 +13,6 @@ for (let i = 0; i < updateBtns.length; i++) {
         } else {
             // console.log('User is authenticated, sending data...');
             updateUserOrder(productId, action);
-
-
         }
     });
 }
@@ -44,7 +42,6 @@ function updateUserOrder(productId, action) {
             else{
                  alert("delete successful");
             }
-
             location.reload();
             // console.log('Data:', data)
         });
