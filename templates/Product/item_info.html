@@ -71,7 +71,7 @@
         </div>
 
         <div class="iteminfo_maininfo">
-            <div class="iteminfo_maininfo_text title" id="nm{{ product.id }}">
+            <div class="iteminfo_maininfo_text title product-title-hover" id="nm{{ product.id }}">
                 {{ product.title }}
             </div>
 
@@ -97,23 +97,28 @@
             <div class="iteminfo_maininfo_text price">
                 Price :
                 {% if product.discount_price %}
-                    <p_price>${{ product.discount_price|floatformat:2 }}</p_price>
+                    <p_price class="search-price-hover">${{ product.discount_price|floatformat:2 }}</p_price>
 
-                    <p_price2> was ${{ product.price|floatformat:2 }}</p_price2>
+                    <p_price2 class="search-price-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
                 {% else %}
-                    <p_price> ${{ product.price|floatformat:2 }}</p_price>
+                    <p_price class="search-price-hover"> ${{ product.price|floatformat:2 }}</p_price>
                 {% endif %}
             </div>
 
-            <div class="iteminfo_maininfo_text stock">
-                Stock : {{ product.stock }}
-            </div>
+{#            <div class="iteminfo_maininfo_text stock">#}
+{#                Stock : {{ product.stock }}#}
+{#            </div>#}
 
-            <div class="iteminfo_maininfo_text available">
+            <div class="iteminfo_maininfo_text available" id="detail-available-online">
+                {% if product.digital  %}
+                Available : {{ product.availability }} - online
+                {% else %}
                 Available : {{ product.availability }}
+                {% endif %}
             </div>
 
             <div class="iteminfo_maininfo_text buy">
+{#                <input>#}
                 <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
                     Add to Cart
                 </button>
@@ -219,7 +224,7 @@
                                         </button>
 {#                                        </div>#}
                                     {% else %}
-                                        <a class="reply-button" style="text-align: center"
+                                        <a class="reply-button"
                                            href="{% url 'User:login' %}">
                                             Reply
                                         </a>

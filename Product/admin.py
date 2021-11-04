@@ -96,6 +96,7 @@ class ScoreAdmin(admin.ModelAdmin):
     list_display = (
         'product_cover', 'product_title', 'score_mark', 'user', 'created_time'
     )
+    search_fields = ['score', 'user__username', 'product__title']
     list_per_page = 10
 
     def product_title(self, obj):
@@ -132,18 +133,18 @@ class ScoreAdmin(admin.ModelAdmin):
         return mark_safe(temp_score)
 
 
-admin.site.register(Score,ScoreAdmin)
+admin.site.register(Score, ScoreAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
         'transaction_Id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',
     )
+    list_per_page = 15
 
-    # exclude = ['transaction_id', 'customer', 'complete',]
+    exclude = ['transaction_id', 'customer', 'complete', ]
 
-    # readonly_fields = ['transaction_id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',]
-    list_per_page = 8
+    readonly_fields = ['transaction_Id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered', ]
 
     def transaction_Id(self, obj):
         if obj.transaction_id != None and obj.transaction_id != 'NULL':
@@ -157,7 +158,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     def total_price(self, obj):
         if obj:
-            return mark_safe(str(obj.get_cart_total))
+            return mark_safe("$" + str(obj.get_cart_total))
 
     search_fields = ['transaction_id', 'complete', 'customer__username', ]
 
@@ -175,9 +176,11 @@ class OrderItemAdmin(admin.ModelAdmin):
     search_fields = ['order__transaction_id', 'product__title', 'product__price', 'product__discount_price', 'quantity',
                      'order__complete', 'order__customer__username']
 
-    # readonly_fields = ['transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer',
-    #                    'completed',
-    #                    'date_added', ]
+    exclude = ['product', 'order', 'quantity', ]
+
+    readonly_fields = ['transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer',
+                       'completed',
+                       'date_added', ]
 
     def product_title(self, obj):
         if obj.product:
@@ -194,24 +197,23 @@ class OrderItemAdmin(admin.ModelAdmin):
             return mark_safe("$" + str(obj.product.price))
 
     def transaction_id(self, obj):
-        if obj.order:
+        if obj.order.customer:
             return mark_safe(obj.order.transaction_id)
-        else:
-            obj.delete()
 
     def customer(self, obj):
         if obj.order:
             return mark_safe(str(obj.order.customer))
+        else:
+            obj.delete()
 
     def total(self, obj):
         if obj:
             total = obj.get_total
-            return mark_safe(str(total))
+            return mark_safe("$" +str(total))
 
     def completed(self, obj):
         if obj.order:
             return mark_safe(obj.order.complete)
-
 
 admin.site.register(OrderItem, OrderItemAdmin)
 
@@ -220,6 +222,11 @@ class ShippingAddressAdmin(admin.ModelAdmin):
     list_display = ['customer', 'transaction_Id', 'address', 'city', 'state', 'country', 'zipcode', 'date_added']
     search_fields = ['customer__username', 'order__transaction_id', 'address', 'city', 'state', 'country', 'zipcode',
                      'date_added']
+    list_per_page = 15
+
+    exclude = ['customer', 'city', 'address', 'state', 'zipcode', 'order', 'country']
+    #
+    readonly_fields = ['customer', 'transaction_Id', 'address', 'city', 'state', 'country', 'zipcode', 'date_added']
 
     def transaction_Id(self, obj):
         if obj.order:
