@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>this is order details</h1>
+
+{{ order.customer }} | {{ order.transaction_id }} | {{ order.date_ordered }} | {{ order.complete }} <br/>
+<hr/>
+
+{% for orderitem in orderItems %}
+    <div style="background-color: lightblue">
+    {{ orderitem.product.title }} <br>
+        <img src=" {{ orderitem.product.image.url }}">
+
+        {% if orderitem.product.discount_price %}
+        ${{ orderitem.product.discount_price }}<br/>
+        {% else %}
+        ${{ orderitem.product.price }}<br/>
+        {% endif %}
+    </div>
+{% endfor %}
+<hr/>
+
+Total price: ${{ order.get_cart_total }} <br/>
+total items: {{ order.get_cart_items }}
+
+</body>
+</html>

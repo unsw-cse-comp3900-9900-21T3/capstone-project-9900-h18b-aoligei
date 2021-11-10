@@ -30,11 +30,12 @@ class UserRegisterForm(forms.ModelForm):
             'password',
             'email',
         )
+
+
 class Personal_info_form(forms.ModelForm):
     class Meta:
         model = PersonalInfo
         fields = (
-
                   'firstname',
                   'lastname',
                   'gender',

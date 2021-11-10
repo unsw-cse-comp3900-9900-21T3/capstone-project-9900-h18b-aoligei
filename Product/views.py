@@ -318,3 +318,27 @@ def dashboard(request):
         'weekly_sales': weekly_sales,
     }
     return render(request, 'Product/dashboard.html', context)
+
+
+def my_order(request):
+    # user = User.objects.filter(id=user_id)
+
+    my_orders = Order.objects.filter(customer=request.user).order_by('-date_ordered')
+
+    context = {
+        'my_orders': my_orders,
+    }
+    return render(request, 'test.html', context)
+
+
+def get_orderItem(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+
+    if order.customer != request.user:
+        raise Http404
+
+    orderItems = order.orderitem_set.order_by('-date_added')
+
+    context = {'order':order, 'orderItems':orderItems}
+
+    return render(request, 'testOrderItem.html', context)
