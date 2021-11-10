@@ -77,30 +77,38 @@
             <!--        <div style="font-size: 16px;color:#ffffff;" class="li">-->
             <div class="icon">
                 <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
-                <p style="font-size: 30px">LOGIN</p>
+                <p style="font-size: 30px" id="login_l">LOGIN</p>
                 <!--            </div>-->
             </div>
             <div class="login-area">
                 <form method="post" class="signin-form" action="{% url 'User:login' %}">
                     {% csrf_token %}
                     <!--             {{ form.as_p }}-->
-                    <p>User Name</p>
+                    <p id="login_l_1">User Name</p>
                     <input type="text" name="username" placeholder="Username" required>
-                    <p>Your Password</p>
+                    <p id="login_l_2">Your Password</p>
                     <input type="password" name="password" placeholder="Password" required>
                     {% if form.errors %}
                         <p class="error-message">Your username and password didn't match. Please try again.</p>
                     {% endif %}
-                    <button class="login-button" type="submit" name="submit">Login</button>
+                    <button id="login_btn_1" class="login-button" type="submit" name="submit">Login</button>
                     <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
                 </form>
             </div>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('login_l').innerHTML = '登录';
+                    document.getElementById('login_l_1').innerHTML = '用户名';
+                    document.getElementById('login_l_2').innerHTML = '密码';
+                    document.getElementById('login_btn_1').innerHTML = '登录';
+                }
+            </script>
         </div>
         <div class="right-container">
             <!--        <li>Register</li>-->
             <div class="icon">
                 <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
-                <p style="font-size: 30px">REGISTER</p>
+                <p style="font-size: 30px" id="login_r">REGISTER</p>
                 <!--            </div>-->
             </div>
             <div class="register-area">
@@ -116,25 +124,37 @@
 {#                    <button class="register-button" type="submit" name="submit">Register</button>#}
 {#                    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>#}
 {#                </form>#}
-                　<h2>Signup Today And You'll Be Able To</h2>
+                　<h2 id="login_r_0">Signup Today And You'll Be Able To</h2>
                 <div class="icon">
                 <img src="/static/check-square.svg">
-                <p style="margin-left: 10px">Online Order Status</p>
+                <p id="login_r_1" style="margin-left: 10px">Online Order Status</p>
             </div>
                 <div class="icon">
                 <img src="/static/check-square.svg" style="margin-left: 10px">
-                <p style="margin-left: 10px">See Ready Hot Deals</p>
+                <p id="login_r_2" style="margin-left: 10px">See Ready Hot Deals</p>
             </div>
                 <div class="icon">
                 <img src="/static/check-square.svg">
-                <p style="margin-left:10px;margin-right: 25px">Quick Buy Staffs</p>
+                <p id="login_r_3" style="margin-left:10px;margin-right: 25px">Quick Buy Staffs</p>
             </div>
                 <div class="icon">
                 <img src="/static/check-square.svg" style="margin-left: 80px">
-                <p style="margin-left: 10px">Get Personal Recommandation</p>
+                <p id="login_r_4" style="margin-left: 10px">Get Personal Recommandation</p>
             </div>
 {#                <button class="register-button" type="button"   >Register</button>#}
-                <button class="register-button" type="button" ><a href="{% url 'User:register' %}" style="text-decoration:none;color: white">Register</a ></button>
+                <button id="login_btn_2" class="register-button" type="button" ><a href="{% url 'User:register' %}" style="text-decoration:none;color: white">Register</a ></button>
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById('login_r').innerHTML = '注册';
+                        document.getElementById('login_r_0').innerHTML = '注册账号，你将拥有：';
+                        document.getElementById('login_r_1').innerHTML = '在线购物';
+                        document.getElementById('login_r_2').innerHTML = '查看热门';
+                        document.getElementById('login_r_3').innerHTML = '快速购买';
+                        document.getElementById('login_r_4').innerHTML = '个人推荐';
+                        document.getElementById('login_btn_2').innerHTML = '注册';
+                    }
+                </script>
+
 {#                <div class="li">#}
 {#                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">#}
 {#  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>#}

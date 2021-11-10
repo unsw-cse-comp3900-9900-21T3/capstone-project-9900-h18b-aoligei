@@ -19,6 +19,13 @@
     <title>Aoligei E-commerce</title>
 
     <script type="text/javascript">
+        var storage = window.localStorage;
+        var language = storage.getItem('language');
+        if(language == null) {
+            storage.setItem('language','en');
+        }
+        console.log(storage);
+
         var user = '{{request.user }}';
 
         function getToken(name) {
@@ -71,49 +78,89 @@
 
         <div class="dropdown">
             <a href="{% url "Product:home" %}">
-                <button class="dropbtn">
+                <button class="dropbtn" id="base_h_1">
                     Home
                 </button>
             </a>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('base_h_1').innerHTML = '主页';
+                }
+            </script>
         </div>
         <div class="dropdown">
             <a href="{% url "Product:search" %}">
-                <button class="dropbtn">
+                <button class="dropbtn" id="base_h_2">
                     All Sales
                 </button>
             </a>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('base_h_2').innerHTML = '全部';
+                }
+            </script>
         </div>
 
         <div class="dropdown">
-            <button class="dropbtn">Category</button>
+            <button class="dropbtn" id="base_h_3">Category</button>
             <div class="dropdown-content">
-                <a>check</a>
+                <a id="base_h_3_1">Drama</a>
+                <a id="base_h_3_2">Action</a>
+                <a id="base_h_3_3">Comedy</a>
+                <a id="base_h_3_4">Thriller</a>
             </div>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('base_h_3').innerHTML = '分类';
+                    document.getElementById('base_h_3_1').innerHTML = '剧情';
+                    document.getElementById('base_h_3_2').innerHTML = '动作';
+                    document.getElementById('base_h_3_3').innerHTML = '喜剧';
+                    document.getElementById('base_h_3_4').innerHTML = '惊悚';
+                }
+                document.getElementById('base_h_3_1').addEventListener('click',()=>{
+                    window.location.href = '../search/?c=1';
+                });
+                document.getElementById('base_h_3_2').addEventListener('click',()=>{
+                    window.location.href = '../search/?c=2';
+                });
+                document.getElementById('base_h_3_3').addEventListener('click',()=>{
+                    window.location.href = '../search/?c=3';
+                });
+                document.getElementById('base_h_3_4').addEventListener('click',()=>{
+                    window.location.href = '../search/?c=7';
+                });
+            </script>
         </div>
 
         <div class="dropdown">
-            <button class="dropbtn">Format</button>
+            <button class="dropbtn" id="base_h_4">Language</button>
             <div class="dropdown-content">
-                <a>Item 1</a>
-                <a>Item 2</a>
+                <a onclick="ChangeToEnglish()" id="base_h_4_1">English</a>
+                <a onclick="ChangeToChinese()" id="base_h_4_2">Chinese</a>
             </div>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('base_h_4').innerHTML = '语言';
+                    document.getElementById('base_h_4_1').innerHTML = '英语';
+                    document.getElementById('base_h_4_2').innerHTML = '中文';
+                }
+            </script>
         </div>
 
-        <div class="dropdown">
-            <button class="dropbtn">Rating</button>
-            <div class="dropdown-content">
-                <a>Item 1</a>
-                <a>Item 2</a>
-            </div>
-        </div>
+        <script type="text/javascript">
+            var storage = window.localStorage;
+            function ChangeToEnglish(){
+                storage.setItem('language','en');
+                window.location.href = '/';
+            }
 
-        <div class="dropdown">
-            <button class="dropbtn">Availability</button>
-            <div class="dropdown-content">
-                <a>Item 1</a>
-                <a>Item 2</a>
-            </div>
-        </div>
+            function ChangeToChinese(){
+                storage.setItem('language','ch');
+                window.location.href = '/';
+            }
+        </script>
+
+
 
         <div class="dropdown">
             <a href="{% url 'Product:cart' %}" class="dropbtn">
@@ -130,26 +177,44 @@
                 </a>
                 <div class="dropdown-content">
 
-                    <a href="{% url 'User:logout' %}">Sign out</a>
-                    <a href="{% url 'User:personal_info' request.user.id %}">Personal</a>
+                    <a href="{% url 'User:logout' %}" id="base_h_5_signout">Sign out</a>
+                    <a href="{% url 'User:personal_info' request.user.id %}" id="base_h_5_personal">Personal</a>
                 </div>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('base_h_5_signout').innerHTML = '登出';
+                    document.getElementById('base_h_5_personal').innerHTML = '个人';
+                }
+            </script>
             {% else %}
                 <a href="{% url 'User:login' %}">
-                    <button class="dropbtn">Sign in</button>
+                    <button class="dropbtn" id="base_h_5_signin">Sign in</button>
                 </a>
                 <div class="dropdown-content">
-                    <a href="{% url 'User:login' %}">Sign in</a>
-                    <a href="{% url 'User:register' %}">Sign up</a>
+                    <a href="{% url 'User:login' %}" id="base_h_5_signin_2">Sign in</a>
+                    <a href="{% url 'User:register' %}" id="base_h_5_signup">Sign up</a>
                 </div>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('base_h_5_signin').innerHTML = '登入';
+                    document.getElementById('base_h_5_signin_2').innerHTML = '登入';
+                    document.getElementById('base_h_5_signup').innerHTML = '注册';
+                }
+            </script>
             {% endif %}
-
         </div>
         <form role="search" method="get" id="searchform" action="{% url "Product:search" %}">
-            <button class="searchbtn" type="submit" value="{% url "Product:search" %}" style="cursor: pointer;">Search
+            <button id="base_h_btn" class="searchbtn" type="submit" value="{% url "Product:search" %}" style="cursor: pointer;">Search
             </button>
-            <input type="search" placeholder="search for products" name="item_name" id="input1"
+            <input type="search" id="base_h_input" placeholder="search for products" name="item_name" id="input1"
                    value="" oninput="change()"/>
         </form>
+        <script>
+            if(storage.getItem('language') == 'ch') {
+                document.getElementById('base_h_btn').innerHTML = '搜索';
+                document.getElementById('base_h_input').placeholder = '搜索商品...';
+            }
+        </script>
     </div>
 
 

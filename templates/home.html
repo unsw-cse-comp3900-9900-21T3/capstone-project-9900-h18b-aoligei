@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="homecontent_title">
+    <div class="homecontent_title" id="homecontent_title_1">
         NEW RELEASE
     </div>
     <div class="carousel-4">
@@ -55,7 +55,7 @@
     {#    </div>#}
 
     <div class="homecontent">
-        <div class="homecontent_title">
+        <div class="homecontent_title" id="homecontent_title_2">
             SPOTLIGHT
         </div>
         {% for short in product_spotlight %}{% for long in product_all %}
@@ -80,11 +80,6 @@
                                 Price:${{ long.price|floatformat:2 }} | Score: {{ short.avg }}
                             {% endif %}
                         </div>
-                        <div class="homecontent_info_text d3">
-                            <button class="homepagebtn l">BUY</button>
-                            <button class="homepagebtn r">LIKE</button>
-                        </div>
-
                     </div>
                 </div>
             {% endif %}
@@ -145,7 +140,7 @@
     </div>
 
     <div class="homecontent">
-        <div class="homecontent_title">
+        <div class="homecontent_title" id="homecontent_title_3">
             RECOMMENDATION
         </div>
         <div class="homecontent_item">
@@ -159,10 +154,6 @@
                 <div class="homecontent_info_text d2">
                     Price:$16 | comedy | PG-12
                 </div>
-                <div class="homecontent_info_text d3">
-                    <button class="homepagebtn l">BUY</button>
-                    <button class="homepagebtn r">LIKE</button>
-                </div>
             </div>
         </div>
 
@@ -176,10 +167,6 @@
                 </div>
                 <div class="homecontent_info_text d2">
                     Price:$16 | comedy | PG-12
-                </div>
-                <div class="homecontent_info_text d3">
-                    <button class="homepagebtn l">BUY</button>
-                    <button class="homepagebtn r">LIKE</button>
                 </div>
             </div>
         </div>
@@ -195,10 +182,6 @@
                 <div class="homecontent_info_text d2">
                     Price:$16 | comedy | PG-12
                 </div>
-                <div class="homecontent_info_text d3">
-                    <button class="homepagebtn l">BUY</button>
-                    <button class="homepagebtn r">LIKE</button>
-                </div>
             </div>
         </div>
 
@@ -213,12 +196,16 @@
                 <div class="homecontent_info_text d2">
                     Price:$16 | comedy | PG-12
                 </div>
-                <div class="homecontent_info_text d3">
-                    <button class="homepagebtn l">BUY</button>
-                    <button class="homepagebtn r">LIKE</button>
-                </div>
             </div>
         </div>
     </div>
+
+<script>
+    if(storage.getItem('language') == 'ch') {
+        document.getElementById('homecontent_title_1').innerHTML = '最新发布';
+        document.getElementById('homecontent_title_2').innerHTML = '非常热门';
+        document.getElementById('homecontent_title_3').innerHTML = '极度推荐';
+    }
+</script>
 
 {% endblock content %}

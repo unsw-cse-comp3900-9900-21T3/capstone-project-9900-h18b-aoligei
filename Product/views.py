@@ -18,7 +18,6 @@ from Comment.models import Comment
 from Comment.forms import CommentForm
 import datetime
 
-
 def home(request):
     kwarg = {}
     product_new_release = Product.objects.filter().order_by("-publishDate")[:10]
@@ -122,6 +121,7 @@ def getProduct(request, product_id):
                                                 'markdown.extensions.codehilite',
                                                 'markdown.extensions.toc',
                                             ])
+
     product.details = markdown.markdown(product.details,
                                         extensions=[
                                             'markdown.extensions.extra',

@@ -5,12 +5,12 @@
     <div class="search_content">
         <div class="search_left_bar">
             <div class="search_left_bar_text title">
-                <a href="{% url "Product:search" %}">
+                <a id="search_l_bar_1" href="{% url "Product:search" %}">
                     All movies
                 </a>
             </div>
             <div class="search_left_bar_box">
-                <div class="search_left_bar_text subtitle">
+                <div id="search_l_bar_2" class="search_left_bar_text subtitle">
                     Categories
                 </div>
                 <div class="search_left_bar_text text">
@@ -21,7 +21,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="search_left_bar_text subtitle">
+                <div id="search_l_bar_3" class="search_left_bar_text subtitle">
                     Format
                 </div>
 
@@ -34,7 +34,7 @@
                 </div>
 
 
-                <div class="search_left_bar_text subtitle">
+                <div id="search_l_bar_4" class="search_left_bar_text subtitle">
                     Rating
                 </div>
 
@@ -46,7 +46,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="search_left_bar_text subtitle">
+                <div id="search_l_bar_5" class="search_left_bar_text subtitle">
                     Availability
                 </div>
 
@@ -57,7 +57,15 @@
                         </a>
                     {% endfor %}
                 </div>
-
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById('search_l_bar_1').innerHTML = '全部';
+                        document.getElementById('search_l_bar_2').innerHTML = '分类';
+                        document.getElementById('search_l_bar_3').innerHTML = '格式';
+                        document.getElementById('search_l_bar_4').innerHTML = '分级';
+                        document.getElementById('search_l_bar_5').innerHTML = '库存';
+                    }
+                </script>
             </div>
         </div>
 
@@ -65,11 +73,17 @@
             <div class="search_div_change_page">
                 {% if products.has_previous %}
                     <a href="?page=1">
-                        <button class="search_div_change_page_btn">&laquo; first</button>
+                        <button class="search_div_change_page_btn" id="search_r_btn_1">&laquo; first</button>
                     </a>
                     <a href="?page={{ products.previous_page_number }}">
-                        <button class="search_div_change_page_btn">previous</button>
+                        <button class="search_div_change_page_btn" id="search_r_btn_2">previous</button>
                     </a>
+                    <script>
+                        if(storage.getItem('language') == 'ch') {
+                            document.getElementById('search_r_btn_1').innerHTML = '首页';
+                            document.getElementById('search_r_btn_2').innerHTML = '上页';
+                        }
+                    </script>
                 {% endif %}
 
                 <a>
@@ -81,11 +95,17 @@
 
                 {% if products.has_next %}
                     <a href="?page={{ products.next_page_number }}">
-                        <button class="search_div_change_page_btn">next</button>
+                        <button class="search_div_change_page_btn" id="search_r_btn_3">next</button>
                     </a>
                     <a href="?page={{ products.paginator.num_pages }}">
-                        <button class="search_div_change_page_btn">last &raquo;</button>
+                        <button class="search_div_change_page_btn" id="search_r_btn_4">last &raquo;</button>
                     </a>
+                    <script>
+                        if(storage.getItem('language') == 'ch') {
+                            document.getElementById('search_r_btn_3').innerHTML = '下页';
+                            document.getElementById('search_r_btn_4').innerHTML = '尾页';
+                        }
+                    </script>
                 {% endif %}
             </div>
 

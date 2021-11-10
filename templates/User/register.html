@@ -60,24 +60,34 @@
             <!--        <li>Register</li>-->
             <div class="icon">
                 <img src="/static/arrow-alt-circle-right-solid.svg" style="height: 30px;width: 30px">
-                <p style="font-size: 30px">REGISTER</p>
+                <p id="register_h" style="font-size: 30px">REGISTER</p>
                 <!--            </div>-->
             </div>
             <div class="register-area">
                 <form method="post" class="signin-form" action="{% url 'User:register' %}">
                     {% csrf_token %}
 {#                    <!--                {{form.as_p}}-->#}
-                    <p>User Name</p>
+                    <p id="register_p_1">User Name</p>
                     <input type="text" name="username" id = "uname" placeholder="Username" required>
-                    <p>Your Email</p>
+                    <p id="register_p_2">Your Email</p>
                     <input type="email" name="email" id="email" placeholder="Email" required>
-                    <p>Your Password</p>
+                    <p id="register_p_3">Your Password</p>
                     <input type="password" id="password1" name="password" placeholder="Password" required>
-                     <p>Confirm Password</p>
+                     <p id="register_p_4">Confirm Password</p>
                     <input type="password" id="password2" placeholder="Password" required>
                     <button class="register-button" type="submit" id="register-but" name="submit">Register</button>
                     <input type="hidden" name="next" value="{% url 'Product:home' %}"/>
                 </form>
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById('register_h').innerHTML = '注册';
+                        document.getElementById('register_p_1').innerHTML = '用户名';
+                        document.getElementById('register_p_2').innerHTML = '邮箱';
+                        document.getElementById('register_p_3').innerHTML = '密码';
+                        document.getElementById('register_p_4').innerHTML = '确认密码';
+                        document.getElementById('register-but').innerHTML = '注册';
+                    }
+                </script>
 
             </div>
         </div>

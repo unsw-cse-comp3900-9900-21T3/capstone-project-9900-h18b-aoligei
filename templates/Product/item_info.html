@@ -75,27 +75,26 @@
                 {{ product.title }}
             </div>
 
-            <div class="iteminfo_maininfo_text score">Score:<p_yellow>{{ score }}</p_yellow></div>
+            <div class="iteminfo_maininfo_text score"><p_i id="item_info_i_1">Score</p_i> : <p_yellow>{{ score }}</p_yellow></div>
 
             <div class="iteminfo_maininfo_text rating">
-                Rating : {{ product.rating }}
+                <p_i id="item_info_i_2">Rating</p_i> : {{ product.rating }}
             </div>
 
             <div class="iteminfo_maininfo_text format">
-                Format type : {{ product.format }}
+                <p_i id="item_info_i_3">Format type</p_i> : {{ product.format }}
             </div>
 
             <div class="iteminfo_maininfo_text category">
-                Category : {{ product.category }}
+                <p_i id="item_info_i_4">Category</p_i> : {{ product.category }}
             </div>
 
             <div class="iteminfo_maininfo_text publishdate">
-                Publish date : {{ product.publishDate }}
+                <p_i id="item_info_i_5">Publish date</p_i> : {{ product.publishDate }}
             </div>
 
-
             <div class="iteminfo_maininfo_text price">
-                Price :
+                <p_i id="item_info_i_6">Price</p_i> :
                 {% if product.discount_price %}
                     <p_price class="search-price-hover">${{ product.discount_price|floatformat:2 }}</p_price>
 
@@ -119,10 +118,22 @@
 
             <div class="iteminfo_maininfo_text buy">
 {#                <input>#}
-                <button data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
+                <button id="item_info_btn_buy" data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
                     Add to Cart
                 </button>
             </div>
+
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('item_info_i_1').innerHTML = '评分';
+                    document.getElementById('item_info_i_2').innerHTML = '评级';
+                    document.getElementById('item_info_i_3').innerHTML = '类型';
+                    document.getElementById('item_info_i_4').innerHTML = '类别';
+                    document.getElementById('item_info_i_5').innerHTML = '发布时间';
+                    document.getElementById('item_info_i_6').innerHTML = '价格';
+                    document.getElementById('item_info_btn_buy').innerHTML = '加入购物车';
+                }
+            </script>
 
             <div class="iteminfo_maininfo_text bottom">
                 <img src="/static/payment.png">
@@ -133,7 +144,7 @@
 
     <div class="iteminfo_content_bottom">
         <div class="iteminfo_description">
-            <p_description> Description
+            <p_description id="item_info_t_1"> Description
                 <hr/>
             </p_description>
             {{ product.description|safe }}
@@ -141,24 +152,37 @@
 
         <div class="iteminfo_description">
             {% if product.trailer %}
-                <p_description>Trailer
+                <p_description id="item_info_t_2">Trailer
                     <hr/>
                 </p_description>
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById('item_info_t_2').innerHTML = '视频<hr/>';
+                    }
+                </script>
                 <span style="display: flex; justify-content: center"> {% video product.trailer '1000x600' %}</span>
             {% endif %}
         </div>
 
         <div class="iteminfo_description">
-            <p_description>Details
+            <p_description id="item_info_t_3">Details
                 <hr/>
             </p_description>
             {{ product.details|safe }}
         </div>
 
         <div class="iteminfo_qa">
-            <p_description>Q&A
+            <p_description id="item_info_t_4">Q&A
                 <hr/>
             </p_description>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('item_info_t_1').innerHTML = '概述<hr/>';
+                    document.getElementById('item_info_t_3').innerHTML = '细节<hr/>';
+                    document.getElementById('item_info_t_4').innerHTML = '讨论<hr/>';
+                }
+            </script>
+
             {% if user.is_authenticated %}
                 <div>
                     <form action="{% url "Comment:post_comment" product.id %}" method="post">

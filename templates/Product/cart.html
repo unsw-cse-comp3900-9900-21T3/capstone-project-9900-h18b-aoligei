@@ -8,34 +8,50 @@
     <div class="cart_body" xmlns="http://www.w3.org/1999/html">
         <div class="cart_box_element" style="margin-top: 20px;">
             <a href="{% url "Product:search" %}">
-                <button class="cart_btn" style="margin-bottom: 15px;">&#x2190; Continue shopping</button>
+                <button id="cart_h_btn_1" class="cart_btn" style="margin-bottom: 15px;">&#x2190; Continue shopping</button>
             </a>
             <br/>
             <br/>
             <table class="cart_table">
                 <tr>
-                    <th><h5>Items: <strong>{{ order.get_cart_items }}</strong></h5></th>
-                    <th><H5>Total: <strong>${{ order.get_cart_total|floatformat:2 }}</strong></H5></th>
+                    <th><h5 id="cart_h_1">Items: <strong>{{ order.get_cart_items }}</strong></h5></th>
+                    <th><H5 id="cart_h_2">Total: <strong>${{ order.get_cart_total|floatformat:2 }}</strong></H5></th>
                     <th>
                         <a href="{% url "Product:checkout" %}">
-                            <button class="cart_btn btn-success">
+                            <button id="cart_h_btn_2" class="cart_btn btn-success">
                                 Checkout
                             </button>
                         </a>
                     </th>
                 </tr>
             </table>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('cart_h_1').innerHTML = '商品数量';
+                    document.getElementById('cart_h_2').innerHTML = '总价';
+                    document.getElementById('cart_h_btn_1').innerHTML = '继续购物';
+                    document.getElementById('cart_h_btn_2').innerHTML = '结账';
+                }
+            </script>
         </div>
         <br/>
 
         <div class="cart_box_element">
             <div class="cart-row">
                 <div style="flex: 2;"></div>
-                <div style="flex: 2;"><strong>Item</strong></div>
-                <div style="flex: 1;"><strong>Price</strong></div>
-                <div style="flex: 1;"><strong>Quantity</strong></div>
-                <div style="flex: 1;"><strong>Total</strong></div>
+                <div style="flex: 2;"><strong id="cart_row_1">Item</strong></div>
+                <div style="flex: 1;"><strong id="cart_row_2">Price</strong></div>
+                <div style="flex: 1;"><strong id="cart_row_3">Quantity</strong></div>
+                <div style="flex: 1;"><strong id="cart_row_4">Total</strong></div>
                 <div style="flex: 1;"><strong></strong></div>
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById('cart_row_1').innerHTML = '商品';
+                        document.getElementById('cart_row_2').innerHTML = '价格';
+                        document.getElementById('cart_row_3').innerHTML = '数量';
+                        document.getElementById('cart_row_4').innerHTML = '总价';
+                    }
+                </script>
             </div>
 
             {% for item in items %}
