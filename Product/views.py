@@ -322,9 +322,7 @@ def dashboard(request):
 
 def my_order(request):
     # user = User.objects.filter(id=user_id)
-
-    my_orders = Order.objects.filter(customer=request.user).order_by('-date_ordered')
-
+    my_orders = Order.objects.filter(customer=request.user, complete=True).order_by('-date_ordered')
     context = {
         'my_orders': my_orders,
     }
@@ -336,9 +334,10 @@ def get_orderItem(request, order_id):
 
     if order.customer != request.user:
         raise Http404
-
-    orderItems = order.orderitem_set.order_by('-date_added')
-
-    context = {'order':order, 'orderItems':orderItems}
-
+    orderItems = order.orderitem_set.filter(order__complete=True).order_by('-date_added')
+    shipping_address = order.shippingaddress_set.order_by('-date_added')
+    context = {'order': order,
+               'orderItems': orderItems,
+               'shipping_address': shipping_address,
+               }
     return render(request, 'testOrderItem.html', context)

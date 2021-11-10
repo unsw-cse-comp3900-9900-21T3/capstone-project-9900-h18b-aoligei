@@ -10,7 +10,7 @@
 {% for order in my_orders %}
     <div>
         <a href="{% url "Product:order" order.id %}">
-            {{ order.customer }} | {{ order.transaction_id }} | {{ order.date_ordered }} | {{ order.complete }}
+            {{ order.customer }} | {{ order.transaction_id }} | {{ order.date_ordered }} | {{ order.complete }} | ${{ order.get_cart_total }} | items: {{ order.get_cart_items }}
         </a>
     </div>
 
