@@ -75,7 +75,8 @@ def register(request):
     context = {'form': form}
     return render(request, 'User/register.html', context)
 
-def personal_info(request,userid):
+
+def personal_info(request, userid):
 
     user_info = User.objects.get(id=userid)
     print("1234567890")

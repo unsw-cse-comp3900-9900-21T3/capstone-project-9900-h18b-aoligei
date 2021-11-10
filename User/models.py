@@ -23,7 +23,7 @@ class PersonalInfo(models.Model):
     zipcode = models.CharField(max_length=200, null=False)
     country = models.CharField(max_length=200, null=False)
 
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE,db_column='user_id', null=False)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id', null=False)
 
     def __str__(self):
         return self.code

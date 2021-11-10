@@ -149,7 +149,6 @@ LOGIN_URL = 'Users/login/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = "/media/"
 
-
 SIMPLEUI_HOME_INFO = False
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_HOME_QUICK = False
@@ -164,8 +163,8 @@ SIMPLEUI_CONFIG = {
     # Whether to use the system default menu, it is recommended to close it when customizing the menu.
     'system_keep': False,
     #  用于菜单排序和过滤, 不填此字段为默认排序和全部显示。空列表[] 为全部不显示.
-    'menu_display': ['Product', 'Score', 'Order', 'OrderItem', 'ShippingAddress',
-                     'Authentication and Authorization'],
+    'menu_display': ['Product', 'Score', 'Order', 'OrderItem', 'ShippingAddress', 'Profile',
+                                                                                  'Authentication and Authorization'],
     # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时刷新展示菜单内容。
     # 一般建议关闭。
     'dynamic': False,
@@ -252,6 +251,20 @@ SIMPLEUI_CONFIG = {
                 },
             ]
         },
+
+        # {
+        #     'app': 'PersonalInfo',
+        #     'name': 'Profile',
+        #     'icon': 'fas fa-user-shield',
+        #     'models': [
+        #         {
+        #             'name': 'Profile',
+        #             'icon': 'fa fa-user',
+        #             'url': 'auth/user/personal_info/',
+        #         },
+        #
+        #     ]
+        # },
 
     ]
 }
