@@ -70,73 +70,26 @@
 
                         <div class="homecontent_info_text d1">
                             <a href="product_id={{ short.product_id }}"
-                               style="text-decoration: None;">{{ long.title }}</a>
+                               style="text-decoration: None; color: black;size: +4px;">{{ long.title }}</a>
                         </div>
 
-                        <div class="homecontent_info_text d2">
+                        <div class="homecontent_info_text d2" style="color: #d71345; font-weight: bold; font-size: 24px;" >
                             {% if single_product.discount_price %}
-                                Price:${{ long.discount_price|floatformat:2 }} | Score: {{ short.avg }}
+                                Price:${{ long.discount_price|floatformat:2 }}
                             {% else %}
-                                Price:${{ long.price|floatformat:2 }} | Score: {{ short.avg }}
+                                Price:${{ long.price|floatformat:2 }}
                             {% endif %}
                         </div>
+                        <div class="homecontent_info_text" style="font-size: 20px; color: #f47920; padding-top: 10px;">
+{#                            <span id="star">Score: </span>#}
+                            <div id="ssss">Score: {{ short.avg }}</div>
+
+                        </div>
+
                     </div>
                 </div>
             {% endif %}
         {% endfor %}{% endfor %}
-        <!--        <div class="homecontent_item">-->
-        <!--            <div class="homecontent_pic">-->
-        <!--                <img height="100%" width="100%" src="/static/movie2.jfif"/>-->
-        <!--            </div>-->
-        <!--            <div class="homecontent_info">-->
-        <!--                <div class="homecontent_info_text d1">-->
-        <!--                    The Movie/TV series' Name-->
-        <!--                </div>-->
-        <!--                <div class="homecontent_info_text d2">-->
-        <!--                    Price:$16 | comedy | PG-12-->
-        <!--                </div>-->
-        <!--                <div class="homecontent_info_text d3">-->
-        <!--                    <button class="homepagebtn l">BUY</button>-->
-        <!--                    <button class="homepagebtn r">LIKE</button>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-
-        <!--        <div class="homecontent_item">-->
-        <!--            <div class="homecontent_pic">-->
-        <!--                <img height="100%" width="100%" src="/static/movie1.jfif"/>-->
-        <!--            </div>-->
-        <!--            <div class="homecontent_info">-->
-        <!--                <div class="homecontent_info_text d1">-->
-        <!--                    The Movie/TV series' Name-->
-        <!--                </div>-->
-        <!--                <div class="homecontent_info_text d2">-->
-        <!--                    Price:$16 | comedy | PG-12-->
-        <!--                </div>-->
-        <!--                <div class="homecontent_info_text d3">-->
-        <!--                    <button class="homepagebtn l">BUY</button>-->
-        <!--                    <button class="homepagebtn r">LIKE</button>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-
-        <!--        <div class="homecontent_item">-->
-        <!--            <div class="homecontent_pic">-->
-        <!--                <img height="100%" width="100%" src="/static/movie2.jfif"/>-->
-        <!--            </div>-->
-        <!--            <div class="homecontent_info">-->
-        <!--                <div class="homecontent_info_text d1">-->
-        <!--                    The Movie/TV series' Name-->
-        <!--                </div>-->
-        <!--                <div class="homecontent_info_text d2">-->
-        <!--                    Price:$16 | comedy | PG-12-->
-        <!--                </div>-->
-        <!--                <div class="homecontent_info_text d3">-->
-        <!--                    <button class="homepagebtn l">BUY</button>-->
-        <!--                    <button class="homepagebtn r">LIKE</button>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
     </div>
 
     <div class="homecontent">
@@ -200,12 +153,15 @@
         </div>
     </div>
 
-<script>
+
+
+<script type="text/javascript">
     if(storage.getItem('language') == 'ch') {
         document.getElementById('homecontent_title_1').innerHTML = '最新发布';
         document.getElementById('homecontent_title_2').innerHTML = '非常热门';
         document.getElementById('homecontent_title_3').innerHTML = '极度推荐';
     }
+
 </script>
 
 {% endblock content %}
