@@ -10,7 +10,7 @@ admin.site.index_title = "Aoligei E-Commerce Administration"
 
 class ProductAdmin(AdminVideoMixin, admin.ModelAdmin):
     list_display = (
-        'title', 'image_data', 'publishDate', 'category', 'format', 'rating', 'price_dollar', 'availability',
+        'title', 'image_data', 'publishDate', 'category', 'format', 'rating', 'price_dollar', 'availability','score_avg','score_count',
         'updated_time')
     list_per_page = 10
     search_fields = ['title', 'category__title', 'format__title', 'rating__title', 'availability__title',
@@ -24,6 +24,14 @@ class ProductAdmin(AdminVideoMixin, admin.ModelAdmin):
 
     def image_data(self, obj):
         return mark_safe(u'<img src="%s" width="100px" />' % obj.image.url)
+
+    def score_avg(self, obj):
+        if obj.get_avg_score:
+            return mark_safe(round(float(obj.get_avg_score), 2))
+
+    def score_count(self,obj):
+        return mark_safe(obj.score_count)
+
 
     image_data.short_description = u'image desc'
     price_dollar.short_description = u'price'
@@ -110,26 +118,26 @@ class ScoreAdmin(admin.ModelAdmin):
 
     def score_mark(self, obj):
         temp_score = float(obj.score)
-        if temp_score <= 0.5:
-            temp_score = "" + str(temp_score)
-        elif temp_score <= 1.0:
-            temp_score = "⭐ " + str(temp_score)
-        elif temp_score <= 1.5:
-            temp_score = "⭐ " + str(temp_score)
-        elif temp_score <= 2.0:
-            temp_score = "⭐⭐ " + str(temp_score)
-        elif temp_score <= 2.5:
-            temp_score = "⭐⭐ " + str(temp_score)
-        elif temp_score <= 3.0:
-            temp_score = "⭐⭐⭐ " + str(temp_score)
-        elif temp_score <= 3.5:
-            temp_score = "⭐⭐⭐ " + str(temp_score)
-        elif temp_score <= 4.0:
-            temp_score = "⭐⭐⭐⭐ " + str(temp_score)
-        elif temp_score <= 4.5:
-            temp_score = "⭐⭐⭐⭐ " + str(temp_score)
-        else:
-            temp_score = "⭐⭐⭐⭐⭐ " + str(temp_score)
+        # if temp_score <= 0.5:
+        #     temp_score = "" + str(temp_score)
+        # elif temp_score <= 1.0:
+        #     temp_score = "⭐ " + str(temp_score)
+        # elif temp_score <= 1.5:
+        #     temp_score = "⭐ " + str(temp_score)
+        # elif temp_score <= 2.0:
+        #     temp_score = "⭐⭐ " + str(temp_score)
+        # elif temp_score <= 2.5:
+        #     temp_score = "⭐⭐ " + str(temp_score)
+        # elif temp_score <= 3.0:
+        #     temp_score = "⭐⭐⭐ " + str(temp_score)
+        # elif temp_score <= 3.5:
+        #     temp_score = "⭐⭐⭐ " + str(temp_score)
+        # elif temp_score <= 4.0:
+        #     temp_score = "⭐⭐⭐⭐ " + str(temp_score)
+        # elif temp_score <= 4.5:
+        #     temp_score = "⭐⭐⭐⭐ " + str(temp_score)
+        # else:
+        #     temp_score = "⭐⭐⭐⭐⭐ " + str(temp_score)
         return mark_safe(temp_score)
 
 

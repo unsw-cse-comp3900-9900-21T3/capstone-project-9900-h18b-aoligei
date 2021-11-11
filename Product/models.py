@@ -121,6 +121,23 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('Product:getProduct', args=[self.id])
 
+    @property
+    def score_count(self):
+        counts = self.score_set.all().count()
+        if counts:
+            return counts
+        else:
+            return 0
+
+    @property
+    def get_avg_score(self):
+        productScores = self.score_set.all()
+        if productScores.count() != 0:
+            avg_score = sum([float(score) for score in productScores if score]) / (productScores.count())
+            return avg_score
+        else:
+            return 0.0
+
 
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
