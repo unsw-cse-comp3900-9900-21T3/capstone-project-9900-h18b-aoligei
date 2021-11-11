@@ -3,10 +3,20 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # Using sklearn's linear_kernel() instead of cosine_similarities() since it is faster.
 from sklearn.metrics.pairwise import linear_kernel
 import pandas as pd
+from ast import literal_eval
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 metadata = read_data_from_sql()
 
 # print(metadata.head())
+
+"""
+=====================================
+Content based on the Description
+=====================================
+"""
 
 # Define a TF-IDF Vectorizer Object. Remove all english stop words such as 'the', 'a'
 tfidf = TfidfVectorizer(stop_words='english')
@@ -27,7 +37,7 @@ indices = pd.Series(metadata.index, index=metadata['title']).drop_duplicates()
 
 # print(indices[:5])
 
-def get_recommendations(title, cosine_sim=cosine_sim):
+def get_recommendations(title, cosine_sim, indices):
     # Get the index of the movie that matches the title
     idx = indices[title]
 
@@ -44,9 +54,79 @@ def get_recommendations(title, cosine_sim=cosine_sim):
     movie_indices = [i[0] for i in sim_scores]
 
     # Return the top 10 most similar movies
-    return metadata['title'].iloc[movie_indices]
+
+    return metadata.iloc[movie_indices]
 
 
-print(get_recommendations('Spider-Man - Homecoming'))
-print("========================================")
-print(get_recommendations('Commuter | Blu-ray + UHD, The'))
+# print(get_recommendations('Spider-Man - Homecoming', cosine_sim, indices))
+# print("========================================")
+# print(get_recommendations('Commuter | Blu-ray + UHD, The', cosine_sim, indices))
+#
+
+"""
+=======================================================================================
+Content based on the Format Description and detail , rating, and format, and categories
+=======================================================================================
+"""
+
+
+# Function to convert all strings to lower case and strip names of spaces
+def clean_data_details(x):
+    if isinstance(x, list):
+        return [str.lower(i.replace("\r\n\r\n", ",")) for i in x]
+    else:
+        # Check if director exists. If not, return empty string
+        if isinstance(x, str):
+            return str.lower(x.replace("\r\n\r\n", ","))
+        else:
+            return ''
+
+
+metadata['details'] = metadata['details'].apply(clean_data_details)
+
+
+# print(metadata['details'].head(5)[0])
+
+
+# def str_data(x):
+#     if isinstance(x, list):
+#         return [str.lower(i) for i in x]
+#     else:
+#         # Check if director exists. If not, return empty string
+#         if isinstance(x, str):
+#             return str.lower(x)
+#         else:
+#             return ''
+
+
+# features = ['category_id', 'format_id', 'publishDate', 'rating_id']
+# for feature in features:
+#     metadata[feature] = metadata[feature].apply(str_data)
+#
+# print(metadata['publishDate'].head(5))
+
+
+def create_soup(x):
+    return ''.join(x['details']) + ' ' + str(x['category_id']) + ' ' + str(x['format_id']) + ' ' + str(
+        x['rating_id']) + ' ' + str(x['publishDate'])
+
+
+metadata['soup'] = metadata.apply(create_soup, axis=1)
+#
+metadata.to_csv('data_files/test.csv')
+# print(metadata[['soup']].head(2))
+
+
+count = CountVectorizer(stop_words='english')
+count_matrix = count.fit_transform(metadata['soup'])
+
+# print(count_matrix.shape)
+cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
+# Reset index of your main DataFrame and construct reverse mapping as before
+metadata = metadata.reset_index()
+indices2 = pd.Series(metadata.index, index=metadata['title'])
+
+
+# check= get_recommendations('Spider-Man - Homecoming', cosine_sim2, indices2)
+#
+# print(check)

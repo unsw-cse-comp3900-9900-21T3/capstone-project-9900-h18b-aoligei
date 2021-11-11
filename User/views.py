@@ -34,7 +34,6 @@ def user_login(request):
             print(password)
             user = authenticate(username=username, password=password)  # 只是验证功能，还没有登录
             if user:
-
                 login(request,user)
                 return HttpResponse("yeah yeah yeah!!!!!!")
             else:

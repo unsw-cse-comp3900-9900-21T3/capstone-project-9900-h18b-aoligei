@@ -17,6 +17,7 @@ from django.urls import reverse
 from Comment.models import Comment
 from Comment.forms import CommentForm
 import datetime
+from ContentBasedRecommender import get_recommendations, cosine_sim, cosine_sim2, indices, indices2
 
 def home(request):
     kwarg = {}
@@ -142,12 +143,19 @@ def getProduct(request, product_id):
     comments = Comment.objects.filter(product=product_id)
     comment_form = CommentForm()
 
+    # based on content recommendation
+    content_recommend_products = get_recommendations(str(product.title), cosine_sim2, indices2)[:5]
+
+    # r_products = content_recommend_products.to_html(classes = 'data', header='true')
+    print(content_recommend_products)
+
     kwarg = {
         "product": product,
         "score": score,
         'cartItems': cartItems,
         'comments': comments,
         'comment_form': comment_form,
+        'content_recommend_products': content_recommend_products,
     }
     return render(request, 'Product/item_info.html', kwarg)
 

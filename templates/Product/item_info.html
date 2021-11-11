@@ -143,6 +143,15 @@
     </div>
 
     <div class="iteminfo_content_bottom">
+        <div class="iteminfo_description" style="height: 300px;">
+            <p_description id="item_info_t_1"> Guess you also like：
+                <hr/>
+            </p_description>
+            {% for r_product in content_recommend_products %}
+{#                <img style="float: left; width: 20%; height: 270px;" src="{{ r_product }}">#}
+
+            {% endfor %}
+        </div>
         <div class="iteminfo_description">
             <p_description id="item_info_t_1"> Description
                 <hr/>
@@ -304,6 +313,7 @@
 
         </div>
     </div>
+
 
 
 

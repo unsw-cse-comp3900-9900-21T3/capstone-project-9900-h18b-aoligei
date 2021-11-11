@@ -43,21 +43,4 @@ def read_score_data_from_sql():
     db.close()
     return df
 
-# data = read_data_from_sql()
-# score_data = read_score_data_from_sql()
-#
-#
-# data.to_csv('product.csv')
-# score_data.to_csv('score.csv')
-#
-# print(data.head(5))
-# print(score_data.head(20))
-#
-# data['id'] = data['id'].astype('int')
-# score_data['id'] = score_data['product_id'].astype('int')
-# print(score_data.head())
-# # merge two dataframe
-# data_and_score = data.merge(score_data, on='id')
-#
-# print(data_and_score.__len__())
 

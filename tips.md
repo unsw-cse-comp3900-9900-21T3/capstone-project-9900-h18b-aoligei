@@ -37,4 +37,8 @@ pip install django-embed-video
 test message
 pip install django-mptt
 pip install django-ckeditor
+
+pip install pandas
+pip install scikit-learn
+pip install numpy
 ```
