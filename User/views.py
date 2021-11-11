@@ -18,6 +18,10 @@ from User.models import EmailVertifyCode
 # Create your views here. 操作数据库 resful
 
 def user_login(request):
+    order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+    cartItems = order['get_cart_items']
+    context = {
+        'cartItems': cartItems, }
 
     if request.method == 'POST':
         user_login_form =UserLoginForm(data=request.POST)
@@ -38,6 +42,7 @@ def user_login(request):
         else:
             return HttpResponse("something wrong")
 
+    return render(request, 'User/login.html', context)
 
 def logout_view(request):
     """用户登出"""
@@ -46,7 +51,10 @@ def logout_view(request):
 
 
 def register(request):
-    """注册新用户"""
+
+    order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+    cartItems = order['get_cart_items']
+
     if request.method != 'POST':
         # 显示空的注册表单
         form = UserRegisterForm()
@@ -72,7 +80,8 @@ def register(request):
 
             return HttpResponseRedirect(reverse('Product:home'))
 
-    context = {'form': form}
+    context = {'form': form,
+               'cartItems': cartItems,}
     return render(request, 'User/register.html', context)
 
 
