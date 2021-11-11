@@ -29,6 +29,14 @@
 
 <div class="person_info_body">
     <div class="person_history_content">
+        {% for shipaddress in shippingaddress %}
+    <div>
+
+            {{ shipaddress.address }} | {{ shipaddress.city }} | {{ shipaddress.state }}
+    </div>
+
+{% endfor %}
+
 
     </div>
 </div>

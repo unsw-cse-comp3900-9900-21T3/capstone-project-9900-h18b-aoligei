@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import PersonalInfo
-from Product.models import Order
+from Product.models import Order,ShippingAddress
 
 
 
@@ -96,6 +96,7 @@ def personal_info(request, userid):
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
+    my_address = ShippingAddress.objects.filter(customer_id=request.user).order_by('-date_added')
 
     user_info = User.objects.get(id=userid)
     print("1234567890")
@@ -137,6 +138,7 @@ def personal_info(request, userid):
         context = {'profile_form': personal_form,
                    'profile':profile,
                    'cartItems': cartItems,
+                   'shippingaddress':my_address,
                    }
         return render(request, 'User/Personal_Info.html', context)
 
