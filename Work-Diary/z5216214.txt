@@ -64,3 +64,10 @@ week 8
     (2)Use the JS monitoring function and click "Complete Payment" to successfully generate an order and empty the shopping cart
 
 2. admin: Order display, completed search function within different parts (products, order, orderItem, shippingAddress)
+
+
+week 9
+1. complete the content-based recommendation algorithm
+write the code files:
+ GetSqlData.py, ContentBasedRecommender.py, WeightScoreRecommender.py
+2. Work with team members to complete the report

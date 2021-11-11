@@ -144,17 +144,34 @@
 
     <div class="iteminfo_content_bottom">
         <div class="iteminfo_description r" style="height: 420px;">
-            <p_description id="item_info_t_0"> Guess you also like：
+            <p_description id="item_info_t_0"> Guess You Would Also Like：
                 <hr/>
             </p_description>
             {% for r_product in content_recommend_products %}
-                <img style="float: left; width: 220px; height: 320px; cursor: pointer;" src="/media/{{ r_product }}">
+                <img style="float: left;
+                 width: 220px;
+                 margin-right: 8px;
+                 height: 320px;
+                 border-radius: 4px;
+                 cursor: pointer;" src="/media/{{ r_product }}">
             {% endfor %}
             <br/>
             {% for r_product in content_recommend_products_id %}
-                <a href="../product_id={{ r_product }}"><div style="background: white; border: 1px solid #909090; float: left; width: 218px; text-align: center; font-size: 24px; line-height: 40px; height: 40px; cursor: pointer;">
-                    view detail
-                </div></a>
+                <a href="../product_id={{ r_product }}">
+                    <div style="background: #ffc108;
+                    border: 1px solid #ffc108;
+                    color: black;
+                    border-radius: 4px;
+                    margin-right: 8px;
+                    float: left;
+                    width: 218px;
+                    text-align: center;
+                     font-size: 24px;
+                     line-height: 40px;
+                     height: 40px;
+                     cursor: pointer;">
+                    View</div>
+                </a>
             {% endfor %}
         </div>
         <div class="iteminfo_description">
