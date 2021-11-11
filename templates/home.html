@@ -73,14 +73,14 @@
                                style="text-decoration: None; color: black;size: +4px;">{{ long.title }}</a>
                         </div>
 
-                        <div class="homecontent_info_text d2" style="color: #d71345; font-weight: bold; font-size: 24px;" >
+                        <div class="homecontent_info_text d2" style="color: #d71345; font-weight: bold; font-size: 20px;" >
                             {% if single_product.discount_price %}
                                 Price:${{ long.discount_price|floatformat:2 }}
                             {% else %}
                                 Price:${{ long.price|floatformat:2 }}
                             {% endif %}
                         </div>
-                        <div class="homecontent_info_text" style="font-size: 20px; color: #f47920; padding-top: 10px;">
+                        <div class="homecontent_info_text" style="font-size: 15px; color: #f47920; padding-top: 10px;">
 {#                            <span id="star">Score: </span>#}
                             <div id="ssss">Score: {{ short.avg }}</div>
 
