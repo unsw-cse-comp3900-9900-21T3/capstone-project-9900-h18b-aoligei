@@ -147,7 +147,7 @@ def getProduct(request, product_id):
     content_recommend_products = get_recommendations(str(product.title), cosine_sim2, indices2)[:5]
 
     # r_products = content_recommend_products.to_html(classes = 'data', header='true')
-    print(content_recommend_products)
+
 
     kwarg = {
         "product": product,

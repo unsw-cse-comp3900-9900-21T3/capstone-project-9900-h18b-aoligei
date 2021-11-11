@@ -149,6 +149,9 @@
             </p_description>
             {% for r_product in content_recommend_products %}
 {#                <img style="float: left; width: 20%; height: 270px;" src="{{ r_product }}">#}
+                <div>
+                {{ r_product.price }}
+                </div>
 
             {% endfor %}
         </div>
