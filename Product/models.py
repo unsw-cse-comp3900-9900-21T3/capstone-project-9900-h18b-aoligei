@@ -98,8 +98,10 @@ class Product(models.Model):
 
     # description = models.TextField(blank=True)
     description = MDTextField(blank=True, null=True)
+    description_zh = MDTextField(blank=True, null=True)
     trailer = EmbedVideoField(blank=True, null=True)
     details = MDTextField(blank=True, null=True)
+    details_zh = MDTextField(blank=True, null=True)
 
     available = models.BooleanField(default=True)
     cost = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2)

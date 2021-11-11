@@ -1,43 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
 
-<h1>this is order details</h1>
-<a href="{% url "Product:my_order" %}">Back to order list</a><br/>
 
-{{ order.customer }} | {{ order.transaction_id }} | {{ order.date_ordered }} | {{ order.complete }} <br/>
-<hr/>
+{% block content %}
+    <h1>this is order details</h1>
+    <a href="{% url "Product:my_order" %}">Back to order list</a><br/>
 
-{% for orderitem in orderItems %}
-    <div style="background-color: lightblue">
-        {{ orderitem.product.title }} <br>
-        <img src=" {{ orderitem.product.image.url }}"><br/>
+    {{ order.customer }} | {{ order.transaction_id }} | {{ order.date_ordered }} | {{ order.complete }} <br/>
+    <hr/>
 
-        {% if orderitem.product.discount_price %}
-            ${{ orderitem.product.discount_price }}<br/>
-        {% else %}
-            ${{ orderitem.product.price }}<br/>
-        {% endif %}
+    {% for orderitem in orderItems %}
+        <div style="background-color: lightblue">
+            {{ orderitem.product.title }} <br>
+            <img src=" {{ orderitem.product.image.url }}"><br/>
 
-    quantity: x{{ orderitem.quantity }}
-    </div>
-{% endfor %}
-<hr/>
+            {% if orderitem.product.discount_price %}
+                ${{ orderitem.product.discount_price }}<br/>
+            {% else %}
+                ${{ orderitem.product.price }}<br/>
+            {% endif %}
 
-Total price: ${{ order.get_cart_total }} <br/>
-total items: {{ order.get_cart_items }} <br/>
+            quantity: x{{ orderitem.quantity }}
+        </div>
+    {% endfor %}
+    <hr/>
 
-{% for shipping in shipping_address %}
-    {{ shipping.address }} <br/>
-    {{ shipping.city }} <br/>
-    {{ shipping.state }} <br/>
-    {{ shipping.zipcode }} <br/>
-    {{ shipping.country }} <br/>
-    receiver: {{ shipping.customer }} <br/>
-{% endfor %}
-</body>
-</html>
+    Total price: ${{ order.get_cart_total }} <br/>
+    total items: {{ order.get_cart_items }} <br/>
+
+    {% for shipping in shipping_address %}
+        {{ shipping.address }} <br/>
+        {{ shipping.city }} <br/>
+        {{ shipping.state }} <br/>
+        {{ shipping.zipcode }} <br/>
+        {{ shipping.country }} <br/>
+        receiver: {{ shipping.customer }} <br/>
+    {% endfor %}
+{% endblock content %}

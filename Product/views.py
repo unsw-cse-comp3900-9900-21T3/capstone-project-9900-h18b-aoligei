@@ -323,8 +323,20 @@ def dashboard(request):
 def my_order(request):
     # user = User.objects.filter(id=user_id)
     my_orders = Order.objects.filter(customer=request.user, complete=True).order_by('-date_ordered')
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # create empty cart for none logged in users
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
     context = {
         'my_orders': my_orders,
+        'cartItems':cartItems,
     }
     return render(request, 'test.html', context)
 
@@ -336,8 +348,21 @@ def get_orderItem(request, order_id):
         raise Http404
     orderItems = order.orderitem_set.filter(order__complete=True).order_by('-date_added')
     shipping_address = order.shippingaddress_set.order_by('-date_added')
+
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # create empty cart for none logged in users
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
     context = {'order': order,
                'orderItems': orderItems,
                'shipping_address': shipping_address,
+               'cartItems':cartItems,
                }
     return render(request, 'testOrderItem.html', context)
