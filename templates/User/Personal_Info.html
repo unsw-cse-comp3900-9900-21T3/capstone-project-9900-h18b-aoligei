@@ -6,20 +6,22 @@
     <div class="row">
         <div class="column_2">
             <div class="person_info_current">
-                <div class="person_info_row">Name : name</div>
-                <div class="person_info_row">Email : email</div>
+                <div class="person_info_row">Name : {{ profile.firstname }} {{ profile.lastname }}</div>
+                <div class="person_info_row">gender : {{ profile.gender }}</div>
+                <div class="person_info_row">Address : {{ profile.address }} {{ profile.city }} {{ profile.state }} {{ profile.zipcode }} {{ profile.country }}</div>
                 <div class="person_info_row"><button class="person_info_btn" id="person_info_show_edit">EDIT</button></div>
             </div>
         </div>
         <div class="column_2">
             <div class="person_info_edit" id="person_info_edit_area">
-                <div class="person_info_row">Name : <input></div>
-                <div class="person_info_row">Email : <input></div>
-                <div class="person_info_row">Email : <input></div>
-                <div class="person_info_row">Email : <input></div>
-                <div class="person_info_row"><button class="person_info_btn green">SUBMIT</button></div>
+                   <form action="{% url 'User:personal_info' request.user.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                       {{ profile_form.as_p }}
+
+                <div class="person_info_row"><button class="person_info_btn green" type="submit">SUBMIT</button></div>
 
                 <div class="person_info_row"><button class="person_info_btn" id="person_info_cancel_edit">CANCEL</button></div>
+                   </form>
             </div>
         </div>
     </div>
@@ -27,6 +29,14 @@
 
 <div class="person_info_body">
     <div class="person_history_content">
+        {% for shipaddress in shippingaddress %}
+    <div>
+
+            {{ shipaddress.address }} | {{ shipaddress.city }} | {{ shipaddress.state }}
+    </div>
+
+{% endfor %}
+
 
     </div>
 </div>
@@ -45,23 +55,23 @@
 </script>
 
 
-    <form action="{% url 'User:personal_info' request.user.id %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-         <div class="form-row">
-            <div class="form-group col-md-4 offset-md-2">
-                <label>First Name</label>
-                <input id="first_name" name="first_name" type="text" class="form-control" value={{ profile_form.firstname }} placeholder={{ profile.firstname}}>
-            </div>
-            <div class="form-group col-md-4">
-                <label>Last Name</label>
-                <input id="last_name" name="last_name" type="text" value="{{ profile_form.lastname }}" class="form-control" placeholder="{{ profile.firstname}}">
-            </div>
-        </div>
-
-         <button name="submit" type="submit" class="btn btn-primary btn-block"
-                                    style="width: 680px; margin-left: 190px">Save
-                            </button>
-    </form>
+{#    <form action="{% url 'User:personal_info' request.user.id %}" method="POST" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#         <div class="form-row">#}
+{#            <div class="form-group col-md-4 offset-md-2">#}
+{#                <label>First Name</label>#}
+{#                <input id="first_name" name="first_name" type="text" class="form-control" value={{ profile_form.firstname }} placeholder={{ profile.firstname}}>#}
+{#            </div>#}
+{#            <div class="form-group col-md-4">#}
+{#                <label>Last Name</label>#}
+{#                <input id="last_name" name="last_name" type="text" value="{{ profile_form.lastname }}" class="form-control" placeholder="{{ profile.firstname}}">#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#         <button name="submit" type="submit" class="btn btn-primary btn-block"#}
+{#                                    style="width: 680px; margin-left: 190px">Save#}
+{#                            </button>#}
+{#    </form>#}
 
 {% endblock content %}
 

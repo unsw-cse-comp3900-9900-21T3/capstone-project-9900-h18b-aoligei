@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import PersonalInfo
+from Product.models import Order,ShippingAddress
 
 
 
@@ -17,6 +18,10 @@ from User.models import EmailVertifyCode
 # Create your views here. 操作数据库 resful
 
 def user_login(request):
+    order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+    cartItems = order['get_cart_items']
+    context = {
+        'cartItems': cartItems, }
 
     if request.method == 'POST':
         user_login_form =UserLoginForm(data=request.POST)
@@ -33,11 +38,11 @@ def user_login(request):
                 login(request,user)
                 return HttpResponse("yeah yeah yeah!!!!!!")
             else:
-                return HttpResponse("账号或密码输入有误。请重新输入~")
+                return HttpResponse("account or password is wrong, please enter again~")
         else:
-            return HttpResponse("账号或密码输入不合法")
-    else:
-        return HttpResponse("请使用GET或POST请求数据")
+            return HttpResponse("something wrong")
+
+    return render(request, 'User/login.html', context)
 
 def logout_view(request):
     """用户登出"""
@@ -46,7 +51,10 @@ def logout_view(request):
 
 
 def register(request):
-    """注册新用户"""
+
+    order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+    cartItems = order['get_cart_items']
+
     if request.method != 'POST':
         # 显示空的注册表单
         form = UserRegisterForm()
@@ -72,20 +80,31 @@ def register(request):
 
             return HttpResponseRedirect(reverse('Product:home'))
 
-    context = {'form': form}
+    context = {'form': form,
+               'cartItems': cartItems,}
     return render(request, 'User/register.html', context)
 
 
 def personal_info(request, userid):
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # create empty cart for none logged in users
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+    my_address = ShippingAddress.objects.filter(customer_id=request.user).order_by('-date_added')
 
     user_info = User.objects.get(id=userid)
     print("1234567890")
     if PersonalInfo.objects.filter(user_id=userid).exists():
         profile = PersonalInfo.objects.get(user_id=userid)
     else:
-
-        profile = PersonalInfo.objects.create(user_id=user_info)
         print(44444444444)
+        profile = PersonalInfo.objects.create(user_id = user_info)
 
     print(333333)
     if request.method == 'POST':
@@ -107,25 +126,22 @@ def personal_info(request, userid):
         profile.state =state
         profile.zipcode = zipcode
         profile.country = country
-        try:
-            # 如果未获取当前用户，save会新建一个没有密码的用户，操作是错误的
-            profile.save()
-        except:
 
-            print("ops,error")
+        profile.save()
+        print("saved")
             # 和查看用户信息同理，每个用户都有自己的路由，修改后，重定向到新的路由
             # 因为该路由由用户名决定
         # return render(request, 'User/register.html', '')
         return HttpResponseRedirect(reverse("User:personal_info", args=[userid]))
     elif request.method == 'GET':
-        personal_form = Personal_info_form
+        personal_form = Personal_info_form()
         context = {'profile_form': personal_form,
                    'profile':profile,
+                   'cartItems': cartItems,
+                   'shippingaddress':my_address,
                    }
         return render(request, 'User/Personal_Info.html', context)
-    context = {'userinfo':user_info }
 
-    return render(request,'User/Personal_Info.html',context)
 
 
 def activate(request,code):
