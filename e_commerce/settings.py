@@ -154,7 +154,7 @@ SIMPLEUI_ANALYSIS = False
 SIMPLEUI_HOME_QUICK = False
 SIMPLEUI_HOME_ACTION = False
 
-# SIMPLEUI_LOGO = 'static/img/admin_logo.png'
+SIMPLEUI_LOGO = 'https://raw.githubusercontent.com/Hankin72/COMP9315_21T1/1c442a9d323434c7c835f22053baf446c738f769/_20t1/A.svg'
 # SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
 SIMPLEUI_HOME_PAGE = '/products/dashboard/'
 SIMPLEUI_HOME_TITLE = 'Website traffic'
