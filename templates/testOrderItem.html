@@ -3,37 +3,189 @@
 
 
 {% block content %}
-    <h1>this is order details</h1>
-    <a href="{% url "Product:my_order" %}">Back to order list</a><br/>
+    <style>
+        .container {
+            display: flex;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.5);
+            flex-direction: row;
+            justify-content: center;
+        }
 
-    {{ order.customer }} | {{ order.transaction_id }} | {{ order.date_ordered }} | {{ order.complete }} <br/>
-    <hr/>
+        .right-container {
+            display: flex;
+            flex-direction: column;
+        }
 
-    {% for orderitem in orderItems %}
-        <div style="background-color: lightblue">
-            {{ orderitem.product.title }} <br>
-            <img src=" {{ orderitem.product.image.url }}"><br/>
+        .register-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+        }
 
-            {% if orderitem.product.discount_price %}
-                ${{ orderitem.product.discount_price }}<br/>
-            {% else %}
-                ${{ orderitem.product.price }}<br/>
-            {% endif %}
+        .icon {
+            display: flex;
+            /*margin-left: 0px;*/
+            height: 50px;
+            justify-content: center;
+            align-items: center;
 
-            quantity: x{{ orderitem.quantity }}
+        }
+
+        .icon p {
+            margin-left: 10px;
+        }
+
+        .register-button {
+            cursor: pointer;
+            width: 70px;
+            height: 25px;
+            background-color: #27b069;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            border-radius: 5px 5px 5px 5px;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        }
+
+        .register-button:hover {
+            opacity: 0.8;
+        }
+
+        .cart-table {
+            color: #444;
+            box-sizing: border-box;
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 100%;
+            height: 400px;
+            display: block;
+            overflow: auto;
+        }
+
+        .address-cart-table {
+            color: #444;
+            box-sizing: border-box;
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 100%;
+            overflow: auto;
+        }
+
+        td, th {
+            border: 1px solid lightgray;
+        }
+
+        td {
+            padding: 15px;
+        }
+
+        .address-container {
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+    </style>
+
+
+    <div class="container">
+        <div class="right-container">
+
+            <div class="icon">
+                <img src="/static/bag-check.svg" style="height: 30px;width: 30px">
+                <p style="font-size: 30px">Order Detail</p>
+            </div>
+            <div class="address-container">
+                <table class="address-cart-table">
+                    <tbody>
+                    <tr>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Zipcode</th>
+                        <th>Address</th>
+                        <th>Receiver</th>
+                    </tr>
+                    {% for shipping in shipping_address %}
+                        <tr>
+                            <td>{{ shipping.country }}</td>
+                            <td>{{ shipping.state }}</td>
+                            <td>{{ shipping.city }}</td>
+                            <td>{{ shipping.zipcode }}</td>
+                            <td>{{ shipping.address }}</td>
+                            <td>{{ shipping.customer }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="register-area">
+                <table class="cart-table">
+                    <tbody>
+                    <tr>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    {% for orderitem in orderItems %}
+                        <tr>
+                            <td>{{ orderitem.product.title }}</td>
+                            <td><img src=" {{ orderitem.product.image.url }}" style="height: 30%;width: 30%"></td>
+                            <td>
+                                {% if orderitem.product.discount_price %}
+                                    ${{ orderitem.product.discount_price }}<br/>
+                                {% else %}
+                                    ${{ orderitem.product.price }}<br/>
+                                {% endif %}
+                            </td>
+                            <td>x{{ orderitem.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                <a href="{% url "Product:my_order" %}">
+                    <button class="register-button">Back</button>
+                </a>
+
+            </div>
         </div>
-    {% endfor %}
-    <hr/>
+    </div>
 
-    Total price: ${{ order.get_cart_total }} <br/>
-    total items: {{ order.get_cart_items }} <br/>
 
-    {% for shipping in shipping_address %}
-        {{ shipping.address }} <br/>
-        {{ shipping.city }} <br/>
-        {{ shipping.state }} <br/>
-        {{ shipping.zipcode }} <br/>
-        {{ shipping.country }} <br/>
-        receiver: {{ shipping.customer }} <br/>
-    {% endfor %}
+    {#    <h1>this is order details</h1>#}
+    {#    <a href="{% url "Product:my_order" %}">Back to order list</a><br/>#}
+    {##}
+    {#    {{ order.customer }} | {{ order.transaction_id }} | {{ order.date_ordered }} | {{ order.complete }} <br/>#}
+    {#    <hr/>#}
+    {##}
+    {#    {% for orderitem in orderItems %}#}
+    {#        <div style="background-color: lightblue">#}
+    {#            {{ orderitem.product.title }} <br>#}
+    {#            <img src=" {{ orderitem.product.image.url }}"><br/>#}
+    {##}
+    {#            {% if orderitem.product.discount_price %}#}
+    {#                ${{ orderitem.product.discount_price }}<br/>#}
+    {#            {% else %}#}
+    {#                ${{ orderitem.product.price }}<br/>#}
+    {#            {% endif %}#}
+    {##}
+    {#            quantity: x{{ orderitem.quantity }}#}
+    {#        </div>#}
+    {#    {% endfor %}#}
+    {#    <hr/>#}
+    {##}
+    {#    Total price: ${{ order.get_cart_total }} <br/>#}
+    {#    total items: {{ order.get_cart_items }} <br/>#}
+    {##}
+    {#        {% for shipping in shipping_address %}#}
+    {#            {{ shipping.address }} <br/>#}
+    {#            {{ shipping.city }} <br/>#}
+    {#            {{ shipping.state }} <br/>#}
+    {#            {{ shipping.zipcode }} <br/>#}
+    {#            {{ shipping.country }} <br/>#}
+    {#            receiver: {{ shipping.customer }} <br/>#}
+    {#        {% endfor %}#}
 {% endblock content %}
