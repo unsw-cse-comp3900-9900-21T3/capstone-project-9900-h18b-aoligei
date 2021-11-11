@@ -351,14 +351,14 @@ def get_orderItem(request, order_id):
 
     if request.user.is_authenticated:
         customer = request.user
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
+        order1, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order1.orderitem_set.all()
+        cartItems = order1.get_cart_items
     else:
         # create empty cart for none logged in users
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-        cartItems = order['get_cart_items']
+        order1 = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order1['get_cart_items']
 
     context = {'order': order,
                'orderItems': orderItems,
