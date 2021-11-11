@@ -100,6 +100,11 @@
                 <table class="address-cart-table">
                     <tbody>
                     <tr>
+                        <th colspan="6" style="font-weight: bold; padding-top: 10px; padding-bottom: 10px; font-size: 15px;">
+                            Shipping Address
+                        </th>
+                    </tr>
+                    <tr>
                         <th>Country</th>
                         <th>State</th>
                         <th>City</th>
@@ -131,31 +136,37 @@
                         <th>Total</th>
                     </tr>
                     {% for orderitem in orderItems %}
-                        <tr>
-                            <td>{{ orderitem.product.title }}</td>
-                            <td><img src=" {{ orderitem.product.image.url }}" style="height: 30%;width: 30%"></td>
+                        <tr style="font-weight: bold;">
                             <td>
+                                <a href="{% url "Product:getProduct" orderitem.product.id %}" style="text-decoration: None;color: black;">
+                                <strong>{{ orderitem.product.title }}</strong>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url "Product:getProduct" orderitem.product.id %}">
+                                <img src=" {{ orderitem.product.image.url }}" style="height: 30%;width: 30%">
+                                </a>
+                            </td>
+                            <td style="font-weight: bold;">
                                 {% if orderitem.product.discount_price %}
                                     ${{ orderitem.product.discount_price }}<br/>
                                 {% else %}
                                     ${{ orderitem.product.price }}<br/>
                                 {% endif %}
                             </td>
-                            <td>x{{ orderitem.quantity }}</td>
-                        <td>${{ orderitem.get_total }}</td>
+                            <td style="font-weight: bold;">x{{ orderitem.quantity }}</td>
+                        <td style="font-weight: bold;">${{ orderitem.get_total }}</td>
                         </tr>
                     {% endfor %}
 
                      <tr>
-                         <td colspan="5">Total Item: {{ order.get_cart_items }}
+                         <td colspan="5"><strong>Total Items: {{ order.get_cart_items }}</strong>
                         </td>
                     </tr>
 
                      <tr>
-                        <td colspan="5">Total Price: $ {{ order.get_cart_total }}
+                         <td colspan="5"><strong>Total Price: $ {{ order.get_cart_total }}</strong>
                         </td>
-{#                         <td>Total Item: {{ order.get_cart_items }}#}
-{#                        </td>#}
                     </tr>
 
                     </tbody>
