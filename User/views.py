@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import PersonalInfo
+from Product.models import Order
 
 
 
@@ -76,6 +77,16 @@ def register(request):
 
 
 def personal_info(request, userid):
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # create empty cart for none logged in users
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
 
     user_info = User.objects.get(id=userid)
     print("1234567890")
@@ -116,6 +127,7 @@ def personal_info(request, userid):
         personal_form = Personal_info_form()
         context = {'profile_form': personal_form,
                    'profile':profile,
+                   'cartItems': cartItems,
                    }
         return render(request, 'User/Personal_Info.html', context)
 
