@@ -131,9 +131,12 @@
                 });
             </script>
         </div>
-        <div class="dropdown">
+
+        {% if request.user.is_authenticated %}
+            <div class="dropdown">
                 <a class="dropbtn" href="{% url "Product:my_order" %}">Order</a>
-        </div>
+            </div>
+        {% endif %}
 
         <div class="dropdown">
             <button class="dropbtn" id="base_h_4">Language</button>
