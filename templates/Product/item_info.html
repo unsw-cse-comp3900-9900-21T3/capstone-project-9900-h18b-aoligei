@@ -143,16 +143,18 @@
     </div>
 
     <div class="iteminfo_content_bottom">
-        <div class="iteminfo_description" style="height: 300px;">
-            <p_description id="item_info_t_1"> Guess you also like：
+        <div class="iteminfo_description r" style="height: 420px;">
+            <p_description id="item_info_t_0"> Guess you also like：
                 <hr/>
             </p_description>
             {% for r_product in content_recommend_products %}
-{#                <img style="float: left; width: 20%; height: 270px;" src="{{ r_product }}">#}
-                <div>
-                {{ r_product.price }}
-                </div>
-
+                <img style="float: left; width: 220px; height: 320px; cursor: pointer;" src="/media/{{ r_product }}">
+            {% endfor %}
+            <br/>
+            {% for r_product in content_recommend_products_id %}
+                <a href="../product_id={{ r_product }}"><div style="background: white; border: 1px solid #909090; float: left; width: 218px; text-align: center; font-size: 24px; line-height: 40px; height: 40px; cursor: pointer;">
+                    view detail
+                </div></a>
             {% endfor %}
         </div>
         <div class="iteminfo_description">
@@ -189,6 +191,7 @@
             </p_description>
             <script>
                 if(storage.getItem('language') == 'ch') {
+                    document.getElementById('item_info_t_0').innerHTML = '猜你喜欢<hr/>';
                     document.getElementById('item_info_t_1').innerHTML = '概述<hr/>';
                     document.getElementById('item_info_t_3').innerHTML = '细节<hr/>';
                     document.getElementById('item_info_t_4').innerHTML = '讨论<hr/>';

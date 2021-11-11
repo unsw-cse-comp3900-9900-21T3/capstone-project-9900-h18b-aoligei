@@ -18,6 +18,7 @@ from Comment.models import Comment
 from Comment.forms import CommentForm
 import datetime
 from ContentBasedRecommender import get_recommendations, cosine_sim, cosine_sim2, indices, indices2
+import numpy as np
 
 def home(request):
     kwarg = {}
@@ -145,9 +146,14 @@ def getProduct(request, product_id):
 
     # based on content recommendation
     content_recommend_products = get_recommendations(str(product.title), cosine_sim2, indices2)[:5]
-
+    crp = []
+    crp_id = []
+    content_recommend_products = np.array(content_recommend_products)
+    for i in content_recommend_products:
+        crp.append(i[6])
+        crp_id.append(i[1])
     # r_products = content_recommend_products.to_html(classes = 'data', header='true')
-
+    print(crp)
 
     kwarg = {
         "product": product,
@@ -155,8 +161,10 @@ def getProduct(request, product_id):
         'cartItems': cartItems,
         'comments': comments,
         'comment_form': comment_form,
-        'content_recommend_products': content_recommend_products,
+        'content_recommend_products': crp,
+        'content_recommend_products_id': crp_id,
     }
+
     return render(request, 'Product/item_info.html', kwarg)
 
 

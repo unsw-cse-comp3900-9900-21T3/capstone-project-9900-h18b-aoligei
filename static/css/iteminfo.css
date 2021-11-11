@@ -173,6 +173,13 @@ div.iteminfo_maininfo input {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
+.iteminfo_description.r{
+    width: 1144px;
+    margin: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    height: 400px;
+}
 .iteminfo_qa {
     width: 1144px;
     margin: 8px;
