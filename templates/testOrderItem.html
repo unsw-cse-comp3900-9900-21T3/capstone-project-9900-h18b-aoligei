@@ -121,13 +121,14 @@
                 </table>
             </div>
             <div class="register-area">
-                <table class="cart-table">
+                <table class="cart-table" style="height: 100%; margin-bottom: 20px;">
                     <tbody>
                     <tr>
                         <th>Title</th>
                         <th>Image</th>
                         <th>Price</th>
                         <th>Quantity</th>
+                        <th>Total</th>
                     </tr>
                     {% for orderitem in orderItems %}
                         <tr>
@@ -141,8 +142,21 @@
                                 {% endif %}
                             </td>
                             <td>x{{ orderitem.quantity }}</td>
+                        <td>${{ orderitem.get_total }}</td>
                         </tr>
                     {% endfor %}
+
+                     <tr>
+                         <td colspan="5">Total Item: {{ order.get_cart_items }}
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <td colspan="5">Total Price: $ {{ order.get_cart_total }}
+                        </td>
+{#                         <td>Total Item: {{ order.get_cart_items }}#}
+{#                        </td>#}
+                    </tr>
 
                     </tbody>
                 </table>

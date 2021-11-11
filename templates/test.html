@@ -100,7 +100,7 @@
                             <td>{{ order.date_ordered }}</td>
                             <td>{{ order.complete }}</td>
                             <td>{{ order.get_cart_items }}</td>
-                            <td>{{ order.get_cart_total }}</td>
+                            <td>${{ order.get_cart_total }}</td>
                             <td><a href="{% url "Product:order" order.id %}">
                                 <button class="register-button">View</button>
                             </a></td>
