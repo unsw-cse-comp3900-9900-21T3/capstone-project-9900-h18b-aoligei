@@ -27,7 +27,7 @@ def home(request):
 
     product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("score")).values("product_id",
                                                                                              "avg").order_by(
-        '-avg')[:4]
+        '-avg')[:8]
 
     product_all = Product.objects.all()
 

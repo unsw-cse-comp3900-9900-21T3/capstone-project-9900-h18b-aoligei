@@ -1,6 +1,6 @@
 .homecontent {
     width: 1200px;
-    height: 600px;
+    height: 1200px;
     margin: 0 auto;
     margin-top: 40px;
 
@@ -16,7 +16,7 @@
 }
 
 .homecontent_item {
-    height: 400px;
+    height: 600px;
     width: 284px;
     margin-left: 8px;
     margin-right: 8px;

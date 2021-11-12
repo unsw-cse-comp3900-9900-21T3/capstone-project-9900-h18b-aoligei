@@ -69,8 +69,18 @@
                     <div class="homecontent_info">
 
                         <div class="homecontent_info_text d1">
-                            <a href="product_id={{ short.product_id }}"
+                            <a id="zh_home_spot{{short.product_id}}" href="product_id={{ short.product_id }}"
+                               style="text-decoration: None; color: black;size: +4px;">{{ long.title_zh }}</a>
+                            <a id="home_spot{{short.product_id}}" href="product_id={{ short.product_id }}"
                                style="text-decoration: None; color: black;size: +4px;">{{ long.title }}</a>
+                            <script>
+                                if(storage.getItem('language') == 'ch') {
+                                    document.getElementById("home_spot{{short.product_id}}").style.display = 'none';
+                                }
+                                else{
+                                    document.getElementById("zh_home_spot{{short.product_id}}").style.display = 'none';
+                                }
+                            </script>
                         </div>
 
                         <div class="homecontent_info_text d2" style="color: #d71345; font-weight: bold; font-size: 20px;" >
@@ -92,74 +102,11 @@
         {% endfor %}{% endfor %}
     </div>
 
-    <div class="homecontent">
-        <div class="homecontent_title" id="homecontent_title_3">
-            RECOMMENDATION
-        </div>
-        <div class="homecontent_item">
-            <div class="homecontent_pic">
-                <img height="100%" width="100%" src="/static/movie1.jfif"/>
-            </div>
-            <div class="homecontent_info">
-                <div class="homecontent_info_text d1">
-                    The Movie/TV series' Name
-                </div>
-                <div class="homecontent_info_text d2">
-                    Price:$16 | comedy | PG-12
-                </div>
-            </div>
-        </div>
-
-        <div class="homecontent_item">
-            <div class="homecontent_pic">
-                <img height="100%" width="100%" src="/static/movie2.jfif"/>
-            </div>
-            <div class="homecontent_info">
-                <div class="homecontent_info_text d1">
-                    The Movie/TV series' Name
-                </div>
-                <div class="homecontent_info_text d2">
-                    Price:$16 | comedy | PG-12
-                </div>
-            </div>
-        </div>
-
-        <div class="homecontent_item">
-            <div class="homecontent_pic">
-                <img height="100%" width="100%" src="/static/movie1.jfif"/>
-            </div>
-            <div class="homecontent_info">
-                <div class="homecontent_info_text d1">
-                    The Movie/TV series' Name
-                </div>
-                <div class="homecontent_info_text d2">
-                    Price:$16 | comedy | PG-12
-                </div>
-            </div>
-        </div>
-
-        <div class="homecontent_item">
-            <div class="homecontent_pic">
-                <img height="100%" width="100%" src="/static/movie2.jfif"/>
-            </div>
-            <div class="homecontent_info">
-                <div class="homecontent_info_text d1">
-                    The Movie/TV series' Name
-                </div>
-                <div class="homecontent_info_text d2">
-                    Price:$16 | comedy | PG-12
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
 <script type="text/javascript">
     if(storage.getItem('language') == 'ch') {
         document.getElementById('homecontent_title_1').innerHTML = '最新发布';
         document.getElementById('homecontent_title_2').innerHTML = '非常热门';
-        document.getElementById('homecontent_title_3').innerHTML = '极度推荐';
     }
 
 </script>

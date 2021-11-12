@@ -72,7 +72,16 @@
 
         <div class="iteminfo_maininfo">
             <div class="iteminfo_maininfo_text title product-title-hover" id="nm{{ product.id }}">
-                {{ product.title }}
+                <p_d id="main_info_t">{{ product.title }}</p_d>
+                <p_d id="main_info_t_z">{{ product.title_zh }}</p_d>
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById("main_info_t").style.display = 'none';
+                    }
+                    else{
+                        document.getElementById("main_info_t_z").style.display = 'none';
+                    }
+                </script>
             </div>
 
             <div class="iteminfo_maininfo_text score"><p_i id="item_info_i_1">Score</p_i> : <p_yellow>{{ score }}</p_yellow></div>
@@ -178,8 +187,17 @@
             <p_description id="item_info_t_1"> Description
                 <hr/>
             </p_description>
-            {{ product.description|safe }}
+            <p_d id="item_info_description">{{ product.description|safe }}</p_d>
+            <p_d id="item_info_description_z">{{ product.description_zh|safe }}</p_d>
         </div>
+        <script>
+            if(storage.getItem('language') == 'ch') {
+                document.getElementById("item_info_description").style.display = 'none';
+            }
+            else{
+                document.getElementById("item_info_description_z").style.display = 'none';
+            }
+        </script>
 
         <div class="iteminfo_description">
             {% if product.trailer %}
@@ -199,8 +217,17 @@
             <p_description id="item_info_t_3">Details
                 <hr/>
             </p_description>
-            {{ product.details|safe }}
+            <p_d id="item_info_detail">{{ product.details|safe }}</p_d>
+            <p_d id="item_info_detail_z">{{ product.details_zh|safe }}</p_d>
         </div>
+        <script>
+            if(storage.getItem('language') == 'ch') {
+                document.getElementById("item_info_detail").style.display = 'none';
+            }
+            else{
+                document.getElementById("item_info_detail_z").style.display = 'none';
+            }
+        </script>
 
         <div class="iteminfo_qa">
             <p_description id="item_info_t_4">Q&A

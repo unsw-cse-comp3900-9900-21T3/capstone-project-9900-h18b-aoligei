@@ -209,3 +209,7 @@ div.comment {
 div.all_comment {
     width: 100%;
 }
+
+p_d{
+    white_space: pre-wrap;
+}
