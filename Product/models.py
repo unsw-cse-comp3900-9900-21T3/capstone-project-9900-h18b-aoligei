@@ -82,6 +82,8 @@ class Availability(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=256)
+    title_zh = models.CharField(max_length=256, null=True, blank=True)
+
     price = models.DecimalField(max_digits=8, decimal_places=2)
     discount_price = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2)
     stock = models.PositiveIntegerField()
