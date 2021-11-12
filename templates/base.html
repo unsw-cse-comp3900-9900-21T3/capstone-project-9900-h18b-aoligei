@@ -134,7 +134,12 @@
 
         {% if request.user.is_authenticated %}
             <div class="dropdown">
-                <a class="dropbtn" href="{% url "Product:my_order" %}">Order</a>
+                <a id="base_h_o" class="dropbtn" href="{% url "Product:my_order" %}">Order</a>
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById('base_h_o').innerHTML = '订单';
+                    }
+                </script>
             </div>
         {% endif %}
 
