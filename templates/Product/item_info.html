@@ -116,17 +116,17 @@
             <div class="iteminfo_maininfo_text score"><p_i id="item_info_i_1">Score</p_i> : <p_yellow>{{ score }}</p_yellow></div>
 
             {% if user.is_authenticated %}
-                <div>
+                <div  class="iteminfo_maininfo_text">
                     <form action="{% url "Product:putScore" product.id %}" method="post">
                         {% csrf_token %}
-                        <div class="form-group">
-                            <div class="normal">
-                            </div>
-                            <textarea  type="text" class="scoretextarea" id="score" name="score"
-                                      placeholder="Enter Score:" onkeyup="this.value=this.value.replace(/[^\r\n0-9\.\.]/g,'');"></textarea>
-                        </div>
-
-                        <button class="score-button" type="submit" >Post</button>
+                        <input  type="text" id="score" name="score"
+                                  placeholder="Enter Score:" onkeyup="this.value=this.value.replace(/[^\r\n0-9\.\.]/g,'');"/>
+                        <button type="submit" class="item_info_post_score_btn" id="item_info_post_score">Post</button>
+                        <script>
+                            if(storage.getItem('language') == 'ch') {
+                                document.getElementById("item_info_post_score").innerHTML = '打分';
+                            }
+                        </script>
                     </form>
                 </div>
 
@@ -170,9 +170,19 @@
 
             <div class="iteminfo_maininfo_text available" id="detail-available-online">
                 {% if product.digital  %}
-                Available : {{ product.availability }} - online
+                <p_d id="item_info_a_1">Available</p_d> : {{ product.availability }} - online
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById("item_info_a_1").innerHTML = '库存';
+                    }
+                </script>
                 {% else %}
-                Available : {{ product.availability }}
+                <p_d id="item_info_a_2">Available</p_d> : {{ product.availability }}
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById("item_info_a_2").innerHTML = '库存';
+                    }
+                </script>
                 {% endif %}
             </div>
 

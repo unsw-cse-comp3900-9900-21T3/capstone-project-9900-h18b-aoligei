@@ -118,6 +118,7 @@ def getProduct(request, product_id):
 
     score = Score.objects.filter(product=product_id).aggregate(Avg('score'))
     score = score['score__avg']
+    score = round(score, 1)
 
     product.description = markdown.markdown(product.description,
                                             extensions=[
