@@ -7,6 +7,35 @@
     {#            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>#}
 
      <style>
+
+     .scoretextarea{
+            border:0;
+            border-radius:5px;
+            background-color:rgba(241,241,241,.9);
+            width: 100px;
+            height: 30px;
+            padding: 10px;
+            resize: none;
+            float: left;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+            {#margin-left: 50px;#}
+        }
+
+        .score-button {
+            cursor: pointer;
+            border-radius: 5px 5px 5px 5px;
+            width: 100px;
+            height: 30px;
+            background-color: #27b069;
+            font-size: 13px;
+            border: none;
+            color: #ffffff;
+            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+            float: left;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
         .newtextarea{
             border:0;
             border-radius:5px;
@@ -92,13 +121,12 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <div class="normal">
-                                <p1>put a score:</p1>
                             </div>
-                            <textarea  type="text" class="newtextarea" id="score" name="score"
-                                      placeholder="score is:"></textarea>
+                            <textarea  type="text" class="scoretextarea" id="score" name="score"
+                                      placeholder="Enter Score:" onkeyup="this.value=this.value.replace(/[^\r\n0-9\.\.]/g,'');"></textarea>
                         </div>
 
-                        <button class="post-button" type="submit" >Post</button>
+                        <button class="score-button" type="submit" >Post</button>
                     </form>
                 </div>
 
