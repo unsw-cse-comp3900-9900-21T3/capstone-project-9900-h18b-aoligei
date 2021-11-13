@@ -86,6 +86,29 @@
 
             <div class="iteminfo_maininfo_text score"><p_i id="item_info_i_1">Score</p_i> : <p_yellow>{{ score }}</p_yellow></div>
 
+            {% if user.is_authenticated %}
+                <div>
+                    <form action="{% url "Product:putScore" product.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="normal">
+                                <p1>put a score:</p1>
+                            </div>
+                            <textarea  type="text" class="newtextarea" id="score" name="score"
+                                      placeholder="score is:"></textarea>
+                        </div>
+
+                        <button class="post-button" type="submit" >Post</button>
+                    </form>
+                </div>
+
+                <br>
+            {% endif %}
+
+
+
+
+
             <div class="iteminfo_maininfo_text rating">
                 <p_i id="item_info_i_2">Rating</p_i> : {{ product.rating }}
             </div>

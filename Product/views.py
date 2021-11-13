@@ -19,6 +19,8 @@ from Comment.forms import CommentForm
 import datetime
 from ContentBasedRecommender import get_recommendations, cosine_sim, cosine_sim2, indices, indices2
 import numpy as np
+from django import forms
+
 
 def home(request):
     kwarg = {}
@@ -382,3 +384,33 @@ def get_orderItem(request, order_id):
                'cartItems':cartItems,
                }
     return render(request, 'testOrderItem.html', context)
+
+class ScoreForm(forms.ModelForm):
+
+    class Meta:
+        model = Score
+        fields = ['score']
+        widgets = {'score': forms.Textarea(attrs={'cols': 10})}
+
+
+def putScore(request,product_id):
+    product=get_object_or_404(Product, id=product_id)
+    if request.method=='POST':
+        sc_form=ScoreForm(request.POST)
+        if sc_form.is_valid():
+            sc=sc_form.save(commit=False)
+            sc.product=product
+            sc.user=request.user
+            sc.save()
+            return redirect(product)
+        else:
+            return render(request, "empty_content_fail.html", locals())
+    else:
+        sc_form=ScoreForm()
+        context={
+            'sc_form':sc_form,
+            'product_id':product_id,
+            'product':product,
+        }
+        return render(request, 'Product/item_info.html', context)
+

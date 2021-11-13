@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     path(r'product_id=<int:product_id>', getProduct, name='getProduct'),
+    path('putScore/<int:product_id>',putScore,name='putScore'),
 
     path('search/', views.search, name='search'),
 

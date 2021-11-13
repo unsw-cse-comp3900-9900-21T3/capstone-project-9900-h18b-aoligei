@@ -33,8 +33,8 @@ def post_comment(request, product_id, parent_comment_id=None):
 
             new_comment.save()
             return redirect(product)
-        #else:
-            #return render(request,'Fail/comments_fail.html')
+        else:
+            return render(request, "empty_content_fail.html", locals())
 
             # return HttpResponse('There is something wrong with this form. Please fill it out again. ')
     # GET request
