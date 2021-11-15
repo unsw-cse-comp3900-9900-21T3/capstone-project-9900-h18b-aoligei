@@ -13,3 +13,32 @@ Write proposal draft(Cart and Q&A functions of part b)
 Modify and integrate the final proposal
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Week 4
+Write the interface of the homepage and product details page
+Improve the database and create a score table
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 5
+Assist in testing and fixing bugs in sprint 1
+prepare for the sprint 1 presentation
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 6
+Write the retrospective A
+Discuss the work in sprint 2
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 7
+Determine the data structure that Q&A needs
+Create tables that Q&A needs in database
+Write the Q&A module back-end code
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 8
+Continue to improve Q&A function
+Add user rating function
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 9
+Write the retrospective B
+Assist in integrating all codes
+Write the final report
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 10
+Continue to integrate codes
+Continue to write the report
+Prepare for the final presentation
