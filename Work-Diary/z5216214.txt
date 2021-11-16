@@ -71,3 +71,4 @@ week 9
 write the code files:
  GetSqlData.py, ContentBasedRecommender.py, WeightScoreRecommender.py
 2. Work with team members to complete the report
+ mainly payment and recommendation part

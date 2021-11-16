@@ -7,5 +7,31 @@ I had a meeting for the division of the proposal on Saturday
 I had a meeting for the content of project on Sunday
 
 week3
-Together with Mengti Tang and Yi Liu, I wrote the user story and sprints section of the proposal. I also
+ wrote the user story and sprints section of the proposal. I also
 found and discussed with the team the project progit duct, all available software tools that we can use for the project.
+
+week4
+wrote the log in and register function
+try the email certification
+
+week5
+try to figure out and fix all the user story in demoA
+report the Demo A
+write the retrospective A
+week6
+make some changes in demo b's user story
+discuss the work in sprint 2
+week7
+finish the imformation page
+week8
+create the paypal account
+try to delete and edit the comment
+report the Demo B
+write the retrospective B
+week9
+write the report, fix the bug of personal information
+fix the bug about cart number setting
+week10
+write the report
+write the slide
+fix the code style
