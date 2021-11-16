@@ -10,3 +10,7 @@ week4
 I write the login and register front page
 week7
 I separate the login and register function and Initialize the order history page
+week8
+I design and write the order and order detail page
+week9
+I write the user manual part in the report
