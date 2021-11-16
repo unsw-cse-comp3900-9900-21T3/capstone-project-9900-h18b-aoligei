@@ -8,6 +8,8 @@ Together with Mengti Tang and Yu Zhang, I wrote the user story and sprints secti
 I write backlog of story in Jira
 week4
 I write the login and register front page
+week5
+I polish the front end page and write the jira page
 week7
 I separate the login and register function and Initialize the order history page
 week8
