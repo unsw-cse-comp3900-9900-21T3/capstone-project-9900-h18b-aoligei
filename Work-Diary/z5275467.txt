@@ -1,0 +1,35 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 1
+Attend a group meeting
+Discuss project topic
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 2
+Discuss the main goals of the project
+Discuss and determine the technology stack of the project
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 3
+Understand the DJANGO front-end development method
+Write front-end interface
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 4
+Write homepage and product information page
+Improved several pages
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 5
+Write shopping cart page
+Write payment page
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 7
+Improve the code
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 8
+Complete the language switching function of the front-end components
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 9
+Assist in integrating all codes
+Write the final report
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Week 10
+Continue to integrate code
+Continue to write the report
+Prepare the final speech
