@@ -7,19 +7,23 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import PersonalInfo
 from Product.models import Order,ShippingAddress
-
-
-
 from django.core.mail import send_mail
 from .send_email_tool import send_email_code
 from User.models import EmailVertifyCode
+from Product.models import Order
 
-
-# Create your views here. 操作数据库 resful
 
 def user_login(request):
-    order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-    cartItems = order['get_cart_items']
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # create empty cart for none logged in users
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
     context = {
         'cartItems': cartItems, }
 
@@ -34,7 +38,7 @@ def user_login(request):
             print(password)
             user = authenticate(username=username, password=password)  # 只是验证功能，还没有登录
             if user:
-                login(request,user)
+                login(request, user)
                 return HttpResponse("yeah yeah yeah!!!!!!")
             else:
                 return HttpResponse("account or password is wrong, please enter again~")
@@ -128,8 +132,6 @@ def personal_info(request, userid):
 
         profile.save()
         print("saved")
-            # 和查看用户信息同理，每个用户都有自己的路由，修改后，重定向到新的路由
-            # 因为该路由由用户名决定
         # return render(request, 'User/register.html', '')
         return HttpResponseRedirect(reverse("User:personal_info", args=[userid]))
     elif request.method == 'GET':
@@ -142,13 +144,5 @@ def personal_info(request, userid):
         return render(request, 'User/Personal_Info.html', context)
 
 
-
 def activate(request,code):
-    # if code:
-    #     email_vertification_list = EmailVertifyCode.objects.filters(code = code)
-    #     if email_vertification_list:
-    #         email_ver = email_vertification_list[0]
-    #         email = email_ver.email
-    #         user = User()
-    #
     pass

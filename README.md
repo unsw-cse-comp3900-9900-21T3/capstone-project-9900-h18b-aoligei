@@ -15,13 +15,18 @@
 > ```.env
 > pip install -user virtualenv
 > ```
+> ##### (if in the Linux System and above command return error)
+> ##### try using the command below
+> ```.env
+> sudo apt-get install python-virtualenv
+> ```
 > #### 2. activate the virtual environment
 > ```.env
 > source <venvname>/bin/activate
 > ```
 > ###  3. need to install packages 
 > ```.env
-> pip install -r requirment.txt
+> pip install -r requirements.txt
 > ```
 > ###  4. createsuperuser
 > ```.env
