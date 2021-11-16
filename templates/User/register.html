@@ -9,51 +9,41 @@
 </head>
 
 {% block content %}
-    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
-    <style>
-        .register-button {
-            /*height: 30px;*/
-            /*width: 100px;*/
-            /*!*background-color: #3b5769;*!*/
-            /*margin-top: 20px;*/
-            /*cursor: pointer;*/
-            cursor: pointer;
-            width: 170px;
-            height: 47px;
-            background-color: #27b069;
-            font-size: 13px;
-            border: none;
-            color: #ffffff;
-            margin-top: 20px;
-            border-radius: 5px 5px 5px 5px;
-            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-        {#margin-left: 40px;#}
-        }
+<link rel="stylesheet" type="text/css" href="/static/css/login.css">
+<style>
+    .register-button {
+        /*height: 30px;*/
+        /*width: 100px;*/
+        /*!*background-color: #3b5769;*!*/
+        /*margin-top: 20px;*/
+        /*cursor: pointer;*/
+        cursor: pointer;
+        width: 170px;
+        height: 47px;
+        background-color: #27b069;
+        font-size: 13px;
+        border: none;
+        color: #ffffff;
+        margin-top: 20px;
+        border-radius: 5px 5px 5px 5px;
+        box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    {#margin-left: 40px;#}
+    }
 
-        .register-button:hover {
-            opacity: 0.8;
-        }
+    .register-button:hover {
+        opacity: 0.8;
+    }
 
-        input {
-            /*box-shadow: inset;*/
-            height: 40px;
-            border-radius: 5px 5px 5px 5px;
-            border: 1px solid #d2d2d2;
-            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    input {
+        /*box-shadow: inset;*/
+        height: 40px;
+        border-radius: 5px 5px 5px 5px;
+        border: 1px solid #d2d2d2;
+        box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 
-        }
-    </style>
+    }
+</style>
 <body>
-{#<form method="post" action="{% url 'User:register' %}" class="form">#}
-{#    {% csrf_token %}#}
-{#    {{form.as_p}}#}
-{##}
-{##}
-{##}
-{#    <button name="submit" class="btn btn-primary">register</button>#}
-{#    <input type="hidden" name="next" value="{% url 'Product:home' %}"/>#}
-{##}
-{#</form>#}
 <div class="container" style="display: flex; justify-content: center; height: 700px">
 
       <div class="right-container">
@@ -66,7 +56,6 @@
             <div class="register-area">
                 <form method="post" class="signin-form" action="{% url 'User:register' %}">
                     {% csrf_token %}
-{#                    <!--                {{form.as_p}}-->#}
                     <p id="register_p_1">User Name</p>
                     <input type="text" name="username" id = "uname" placeholder="Username" required>
                     <p id="register_p_2">Your Email</p>

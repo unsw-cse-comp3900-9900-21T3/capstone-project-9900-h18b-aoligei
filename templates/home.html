@@ -1,106 +1,73 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="homecontent_title" id="homecontent_title_1">
-        NEW RELEASE
-    </div>
-    <div class="carousel-4">
-        <div class="carousel-container">
-            <div class="carousel-cards-wrap">
-                {% for single_product in product_new_release %}
-                    <div class="carousel-cards">
-                        <a class="homecontent_pic" href="product_id={{ single_product.id }}"
-                           style="text-decoration: None;">
-                            <img height="100%" width="100%" src="{{ single_product.image.url }}"/>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-
-    {#    <div class="homecontent">#}
-    {#        <div class="homecontent_title">#}
-    {#            NEW RELEASE#}
-    {#        </div>#}
-    {#        {% for single_product in product_new_release %}#}
-    {#            <div class="homecontent_item">#}
-    {#                <a href="product_id={{ single_product.id }}" style="text-decoration: None;">#}
-    {#                    <div class="homecontent_pic">#}
-    {#                        <img height="100%" width="100%" src="{{ single_product.image.url }}"/>#}
-    {#                    </div>#}
-    {#                </a>#}
-    {#                <div class="homecontent_info">#}
-    {##}
-    {#                    <div class="homecontent_info_text d1">#}
-    {#                        <a href="product_id={{ single_product.id }}" style="text-decoration: None;">#}
-    {#                            {{ single_product.title }}#}
-    {#                        </a>#}
-    {#                    </div>#}
-    {#                    <div class="homecontent_info_text d2">#}
-    {#                        {% if single_product.discount_price %}#}
-    {#                            Price:${{ single_product.discount_price|floatformat:2 }} | {{ single_product.category }}#}
-    {#                        {% else %}#}
-    {#                            Price:${{ single_product.price|floatformat:2 }} | {{ single_product.category }}#}
-    {#                        {% endif %}#}
-    {#                        | {{ single_product.rating }}#}
-    {#                    </div>#}
-    {#                    <div class="homecontent_info_text d3">#}
-    {#                        <button class="homepagebtn l">BUY</button>#}
-    {#                        <button class="homepagebtn r">LIKE</button>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        {% endfor %}#}
-    {#    </div>#}
-
-    <div class="homecontent">
-        <div class="homecontent_title" id="homecontent_title_2">
-            SPOTLIGHT
-        </div>
-        {% for short in product_spotlight %}{% for long in product_all %}
-            {% if short.product_id == long.id %}
-                <div class="homecontent_item">
-                    <a href="product_id={{ short.product_id }}" style="text-decoration: None;">
-                        <div class="homecontent_pic">
-                            <img height="100%" width="100%" src="{{ long.image.url }}"/>
-                        </div>
+<!-- Recently released products -->
+<div class="homecontent_title" id="homecontent_title_1">
+    NEW RELEASE
+</div>
+<div class="carousel-4">
+    <div class="carousel-container">
+        <div class="carousel-cards-wrap">
+            {% for single_product in product_new_release %}
+                <div class="carousel-cards">
+                    <a class="homecontent_pic" href="product_id={{ single_product.id }}"
+                       style="text-decoration: None;">
+                        <img height="100%" width="100%" src="{{ single_product.image.url }}"/>
                     </a>
-                    <div class="homecontent_info">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
-                        <div class="homecontent_info_text d1">
-                            <a id="zh_home_spot{{short.product_id}}" href="product_id={{ short.product_id }}"
-                               style="text-decoration: None; color: black;size: +4px;">{{ long.title_zh }}</a>
-                            <a id="home_spot{{short.product_id}}" href="product_id={{ short.product_id }}"
-                               style="text-decoration: None; color: black;size: +4px;">{{ long.title }}</a>
-                            <script>
-                                if(storage.getItem('language') == 'ch') {
-                                    document.getElementById("home_spot{{short.product_id}}").style.display = 'none';
-                                }
-                                else{
-                                    document.getElementById("zh_home_spot{{short.product_id}}").style.display = 'none';
-                                }
-                            </script>
-                        </div>
+<!-- Recommended products -->
+<div class="homecontent">
+    <div class="homecontent_title" id="homecontent_title_2">
+        SPOTLIGHT
+    </div>
+    {% for short in product_spotlight %}{% for long in product_all %}
+        {% if short.product_id == long.id %}
+            <div class="homecontent_item">
+                <a href="product_id={{ short.product_id }}" style="text-decoration: None;">
+                    <div class="homecontent_pic">
+                        <img height="100%" width="100%" src="{{ long.image.url }}"/>
+                    </div>
+                </a>
+                <div class="homecontent_info">
 
-                        <div class="homecontent_info_text d2" style="color: #d71345; font-weight: bold; font-size: 20px;" >
-                            {% if single_product.discount_price %}
-                                Price:${{ long.discount_price|floatformat:2 }}
-                            {% else %}
-                                Price:${{ long.price|floatformat:2 }}
-                            {% endif %}
-                        </div>
-                        <div class="homecontent_info_text" style="font-size: 15px; color: #f47920; padding-top: 10px;">
+                    <div class="homecontent_info_text d1">
+                        <a id="zh_home_spot{{short.product_id}}" href="product_id={{ short.product_id }}"
+                           style="text-decoration: None; color: black;size: +4px;">{{ long.title_zh }}</a>
+                        <a id="home_spot{{short.product_id}}" href="product_id={{ short.product_id }}"
+                           style="text-decoration: None; color: black;size: +4px;">{{ long.title }}</a>
+                        <script>
+                            if(storage.getItem('language') == 'ch') {
+                                document.getElementById("home_spot{{short.product_id}}").style.display = 'none';
+                            }
+                            else{
+                                document.getElementById("zh_home_spot{{short.product_id}}").style.display = 'none';
+                            }
+                        </script>
+                    </div>
+
+                    <div class="homecontent_info_text d2" style="color: #d71345; font-weight: bold; font-size: 20px;" >
+                        {% if single_product.discount_price %}
+                            Price:${{ long.discount_price|floatformat:2 }}
+                        {% else %}
+                            Price:${{ long.price|floatformat:2 }}
+                        {% endif %}
+                    </div>
+                    <div class="homecontent_info_text" style="font-size: 15px; color: #f47920; padding-top: 10px;">
 {#                            <span id="star">Score: </span>#}
-                            <div id="ssss">Score: {{ short.avg }}</div>
-
-                        </div>
+                        <div id="ssss">Score: {{ short.avg }}</div>
 
                     </div>
+
                 </div>
-            {% endif %}
-        {% endfor %}{% endfor %}
-    </div>
+            </div>
+        {% endif %}
+    {% endfor %}{% endfor %}
+</div>
 
 
 <script type="text/javascript">
