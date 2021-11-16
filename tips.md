@@ -1,35 +1,35 @@
-# django 有关命令
+# django useful commands
 
-### 1. 建立虚拟环境
-```python
+### 1. create a python virtual environment
+```.python
 python3 -m venv <venvname>
 ```
 
-### 2. 如果没有 virtualenv
+### 2. if you don't have virtualenv
 ```.env
 pip install -user virtualenv
 
 ```
 
-### 3. 命令创建 django 项目
+### 3. create a new django project
 
 ```.env
 django-admin.py startprooject <project-name> .
 ```
 
-### 4. 创建应用程序
+### 4. create a new django application within a django project
 
 ```.env
 python3 manage.py startapp <app-name>
 ```
 
-### 可能需要安装的包
+### some api may need to be installed
 ```.env
 pip install django-simpleui
-pip install django-mdeditor  # 用于后台编辑
-pip install markdown # 用于前端显示
-pip install Pygments # 用于前端显示markdown里面写的代码的高亮
-editor.md 开源的前端的编辑器的源码，这个在GitHub上，下载解压（好像也有官网）
+pip install django-mdeditor  # to edit in the admin system
+pip install markdown # display in the fronend
+pip install Pygments 
+editor.md 
 pip install static3
 
 pip install django-embed-video

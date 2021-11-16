@@ -7,8 +7,8 @@ from django.urls import reverse
 from django.db.models.aggregates import Count
 
 
-# Create your models here.
 class Category(models.Model):
+    '''create table Category to mysql'''
     title = models.CharField(max_length=20, blank=True, null=True)
     status = models.BooleanField(default=True)
 
@@ -27,6 +27,7 @@ class Category(models.Model):
 
 
 class Format(models.Model):
+    '''create table Format to mysql'''
     title = models.CharField(max_length=20, blank=True, null=True)
     status = models.BooleanField(default=True)
 
@@ -45,6 +46,7 @@ class Format(models.Model):
 
 
 class Rating(models.Model):
+    '''create table Rating to mysql'''
     title = models.CharField(max_length=20, blank=True, null=True)
     status = models.BooleanField(default=True)
 
@@ -63,6 +65,7 @@ class Rating(models.Model):
 
 
 class Availability(models.Model):
+    '''create table Availability to mysql'''
     title = models.CharField(max_length=20, blank=True, null=True)
     status = models.BooleanField(default=True)
 
@@ -81,6 +84,7 @@ class Availability(models.Model):
 
 
 class Product(models.Model):
+    '''create table Product to mysql'''
     title = models.CharField(max_length=256)
     title_zh = models.CharField(max_length=256, null=True, blank=True)
 
@@ -142,6 +146,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    '''create table Order to mysql'''
     customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
@@ -177,6 +182,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    '''create table OrderItem to save each order item information db-mysql'''
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
@@ -195,6 +201,7 @@ class OrderItem(models.Model):
 
 
 class ShippingAddress(models.Model):
+    '''create table Shipping address to mysql'''
     customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=False)
@@ -209,6 +216,7 @@ class ShippingAddress(models.Model):
 
 
 class Score(models.Model):
+    '''create table Score related to moive rantings to mysql'''
     score = models.FloatField(null=True, default=1.0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)

@@ -9,10 +9,14 @@ admin.site.index_title = "Aoligei E-Commerce Administration"
 
 
 class ProductAdmin(AdminVideoMixin, admin.ModelAdmin):
+    ''' manage the features of product in the admin system '''
+    # list display product feature in product list page
     list_display = (
-        'title', 'image_data', 'publishDate', 'category', 'format', 'rating', 'price_dollar', 'availability','score_avg','score_count',
+        'title', 'image_data', 'publishDate', 'category', 'format', 'rating', 'price_dollar', 'availability',
+        'score_avg', 'score_count',
         'updated_time')
     list_per_page = 10
+    # setting the search filtering fields in the admin system
     search_fields = ['title', 'category__title', 'format__title', 'rating__title', 'availability__title',
                      'price', 'discount_price']
 
@@ -29,9 +33,8 @@ class ProductAdmin(AdminVideoMixin, admin.ModelAdmin):
         if obj.get_avg_score:
             return mark_safe(round(float(obj.get_avg_score), 2))
 
-    def score_count(self,obj):
+    def score_count(self, obj):
         return mark_safe(obj.score_count)
-
 
     image_data.short_description = u'image desc'
     price_dollar.short_description = u'price'
@@ -41,6 +44,7 @@ admin.site.register(Product, ProductAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    ''' manage the features of category in the admin system '''
     list_display = ('Categories', 'Product_Count')
     search_fields = ['title']
     list_per_page = 20
@@ -56,6 +60,7 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class RatingAdmin(admin.ModelAdmin):
+    ''' manage the features of rating in the admin system '''
     list_display = ('Rating', 'Product_Count')
     search_fields = ['title']
     list_per_page = 20
@@ -71,6 +76,7 @@ admin.site.register(Rating, RatingAdmin)
 
 
 class FormatAdmin(admin.ModelAdmin):
+    ''' manage the features of format in the admin system '''
     list_display = ('Format', 'Product_Count')
     search_fields = ['title']
     list_per_page = 20
@@ -86,6 +92,7 @@ admin.site.register(Format, FormatAdmin)
 
 
 class AvailabilityAdmin(admin.ModelAdmin):
+    ''' manage the features of Availability in the admin system '''
     list_display = ('Availability', 'Product_Count')
     search_fields = ['title']
     list_per_page = 20
@@ -101,6 +108,7 @@ admin.site.register(Availability, AvailabilityAdmin)
 
 
 class ScoreAdmin(admin.ModelAdmin):
+    ''' manage the features of Score in the admin system '''
     list_display = (
         'product_cover', 'product_title', 'score_mark', 'user', 'created_time'
     )
@@ -118,26 +126,6 @@ class ScoreAdmin(admin.ModelAdmin):
 
     def score_mark(self, obj):
         temp_score = float(obj.score)
-        # if temp_score <= 0.5:
-        #     temp_score = "" + str(temp_score)
-        # elif temp_score <= 1.0:
-        #     temp_score = "⭐ " + str(temp_score)
-        # elif temp_score <= 1.5:
-        #     temp_score = "⭐ " + str(temp_score)
-        # elif temp_score <= 2.0:
-        #     temp_score = "⭐⭐ " + str(temp_score)
-        # elif temp_score <= 2.5:
-        #     temp_score = "⭐⭐ " + str(temp_score)
-        # elif temp_score <= 3.0:
-        #     temp_score = "⭐⭐⭐ " + str(temp_score)
-        # elif temp_score <= 3.5:
-        #     temp_score = "⭐⭐⭐ " + str(temp_score)
-        # elif temp_score <= 4.0:
-        #     temp_score = "⭐⭐⭐⭐ " + str(temp_score)
-        # elif temp_score <= 4.5:
-        #     temp_score = "⭐⭐⭐⭐ " + str(temp_score)
-        # else:
-        #     temp_score = "⭐⭐⭐⭐⭐ " + str(temp_score)
         return mark_safe(temp_score)
 
 
@@ -145,9 +133,11 @@ admin.site.register(Score, ScoreAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
+    ''' manage the features of Order in the admin system '''
     list_display = (
         'transaction_Id', 'total_quantity', 'total_price', 'customer', 'complete', 'date_ordered',
     )
+    # setting item numbers in a single page
     list_per_page = 15
 
     exclude = ['transaction_id', 'customer', 'complete', ]
@@ -175,6 +165,7 @@ admin.site.register(Order, OrderAdmin)
 
 
 class OrderItemAdmin(admin.ModelAdmin):
+    ''' manage the features of OrderItem in the admin system '''
     list_display = (
         'transaction_id', 'product_title', 'product_cover', 'price', 'quantity', 'total', 'customer', 'completed',
         'date_added',
@@ -217,16 +208,18 @@ class OrderItemAdmin(admin.ModelAdmin):
     def total(self, obj):
         if obj:
             total = obj.get_total
-            return mark_safe("$" +str(total))
+            return mark_safe("$" + str(total))
 
     def completed(self, obj):
         if obj.order:
             return mark_safe(obj.order.complete)
 
+
 admin.site.register(OrderItem, OrderItemAdmin)
 
 
 class ShippingAddressAdmin(admin.ModelAdmin):
+    ''' manage the features of shipping address in the admin system '''
     list_display = ['customer', 'transaction_Id', 'address', 'city', 'state', 'country', 'zipcode', 'date_added']
     search_fields = ['customer__username', 'order__transaction_id', 'address', 'city', 'state', 'country', 'zipcode',
                      'date_added']

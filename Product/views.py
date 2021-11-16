@@ -19,23 +19,23 @@ from Comment.forms import CommentForm
 import datetime
 from ContentBasedRecommender import get_recommendations, cosine_sim, cosine_sim2, indices, indices2
 import numpy as np
-from django import forms
+from .forms import ScoreForm
 
 
 def home(request):
+    '''
+    transmitting parameters to homepage
+    '''
     kwarg = {}
+    # new release 10 products in recently time
     product_new_release = Product.objects.filter().order_by("-publishDate")[:10]
-    # product_spotlight=Product.objects.group_by('product').annotate(title_avg=Avg('title')).order_by('-title_avg')[:4]
-
+    # score rantings
     product_spotlight = Score.objects.values("product_id").annotate(avg=Avg("score")).values("product_id",
                                                                                              "avg").order_by(
         '-avg')[:8]
-
     product_all = Product.objects.all()
-
     kwarg['product_new_release'] = product_new_release
     kwarg['product_spotlight'] = product_spotlight
-
     kwarg['product_all'] = product_all
 
     if request.user.is_authenticated:
@@ -53,6 +53,9 @@ def home(request):
 
 
 def search(request):
+    '''
+    transmitting parameters to search page
+    '''
     products = Product.objects.all()
     # search code
     item_name = request.GET.get("item_name")
@@ -114,6 +117,9 @@ def search(request):
 
 
 def getProduct(request, product_id):
+    '''
+    transmitting parameters to product detail page
+    '''
     product = Product.objects.get(id=product_id)
 
     score = Score.objects.filter(product=product_id).aggregate(Avg('score'))
@@ -172,6 +178,9 @@ def getProduct(request, product_id):
 
 
 def cart(request):
+    '''
+    transmitting parameters to shopping cart
+    '''
     if request.user.is_authenticated:
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -188,6 +197,9 @@ def cart(request):
 
 
 def checkout(request):
+    '''
+    transmitting parameters to checkout page
+    '''
     if request.user.is_authenticated:
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -204,23 +216,22 @@ def checkout(request):
 
 
 def updateItem(request):
+    '''
+    in the cart page, add/remover products
+    '''
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
     print('Action:', action)
     print('Product:', productId)
-
     customer = request.user
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
-
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
-
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
-
     orderItem.save()
     if orderItem.quantity <= 0:
         orderItem.delete()
@@ -231,12 +242,14 @@ def updateItem(request):
 
 
 def processOder(request):
+    '''
+    transmitting parameters in the process of checkout
+    '''
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
     if request.user.is_authenticated:
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-
         total = float(data['form']['total'])
         order.transaction_id = transaction_id
         if total == float(order.get_cart_total):
@@ -260,12 +273,14 @@ def processOder(request):
 
 
 def dashboard(request):
+    '''
+    transmitting the related parameters
+    to the dashbard page (web traffic) to the admin system
+    '''
     today = datetime.datetime.now().date()
     weekdelta = datetime.datetime.now().date() - datetime.timedelta(weeks=1)
-
     orders = Order.objects.all()
     products = Product.objects.all()
-
     user_count = User.objects.count()
     total_product = Product.objects.count()
     total_customer = User.objects.filter(is_superuser=False).count()
@@ -295,7 +310,7 @@ def dashboard(request):
 
     # week sales 7 days
     now_time = datetime.datetime.now()
-    # # 距离周日相隔的天数，这里得到int型数值
+    # compute the days to the last sunday
     day_num = now_time.isoweekday()
 
     days = []
@@ -340,6 +355,10 @@ def dashboard(request):
 
 
 def my_order(request):
+    '''
+    transmitting the parameters to the personal orders page,
+    so that logined user can check their order informations
+    '''
     # user = User.objects.filter(id=user_id)
     my_orders = Order.objects.filter(customer=request.user, complete=True).order_by('-date_ordered')
     if request.user.is_authenticated:
@@ -361,6 +380,10 @@ def my_order(request):
 
 
 def get_orderItem(request, order_id):
+    '''
+        transmitting the parameters to the personal order-item page,
+        user check each order information including each order item
+    '''
     order = get_object_or_404(Order, id=order_id)
 
     if order.customer != request.user:
@@ -386,15 +409,11 @@ def get_orderItem(request, order_id):
                }
     return render(request, 'testOrderItem.html', context)
 
-class ScoreForm(forms.ModelForm):
-
-    class Meta:
-        model = Score
-        fields = ['score']
-        widgets = {'score': forms.Textarea(attrs={'cols': 10})}
-
 
 def putScore(request,product_id):
+    '''
+        user publish score in the product detail page
+    '''
     product=get_object_or_404(Product, id=product_id)
     if request.method=='POST':
         sc_form=ScoreForm(request.POST)
