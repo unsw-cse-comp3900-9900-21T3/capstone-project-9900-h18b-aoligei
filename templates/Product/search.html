@@ -2,165 +2,168 @@
 {% load static %}
 {% block content %}
 
-    <div class="search_content">
-        <div class="search_left_bar">
-            <div class="search_left_bar_text title">
-                <a id="search_l_bar_1" href="{% url "Product:search" %}">
-                    All movies
-                </a>
+<div class="search_content">
+    <!-- The search selection box on the left side of the search page, click tags to search for the corresponding information -->
+    <div class="search_left_bar">
+        <div class="search_left_bar_text title">
+            <a id="search_l_bar_1" href="{% url "Product:search" %}">
+                All movies
+            </a>
+        </div>
+        <div class="search_left_bar_box">
+            <div id="search_l_bar_2" class="search_left_bar_text subtitle">
+                Categories
             </div>
-            <div class="search_left_bar_box">
-                <div id="search_l_bar_2" class="search_left_bar_text subtitle">
-                    Categories
-                </div>
-                <div class="search_left_bar_text text">
-                    {% for category in category_list %}
-                        <a href="?c={{ category.id }}">
-                            <button class="search_left_bar_btn">{{ category.title }}({{ category.num_products }})</button>
-                        </a>
-                    {% endfor %}
-                </div>
+            <div class="search_left_bar_text text">
+                {% for category in category_list %}
+                    <a href="?c={{ category.id }}">
+                        <button class="search_left_bar_btn">{{ category.title }}({{ category.num_products }})</button>
+                    </a>
+                {% endfor %}
+            </div>
 
-                <div id="search_l_bar_3" class="search_left_bar_text subtitle">
-                    Format
-                </div>
+            <div id="search_l_bar_3" class="search_left_bar_text subtitle">
+                Format
+            </div>
 
-                <div class="search_left_bar_text text">
-                    {% for format in format_list %}
-                        <a href="?f={{ format.id }}">
-                            <button class="search_left_bar_btn">{{ format.title }} ({{ format.num_products }})</button>
-                        </a>
-                    {% endfor %}
-                </div>
+            <div class="search_left_bar_text text">
+                {% for format in format_list %}
+                    <a href="?f={{ format.id }}">
+                        <button class="search_left_bar_btn">{{ format.title }} ({{ format.num_products }})</button>
+                    </a>
+                {% endfor %}
+            </div>
 
 
-                <div id="search_l_bar_4" class="search_left_bar_text subtitle">
-                    Rating
-                </div>
+            <div id="search_l_bar_4" class="search_left_bar_text subtitle">
+                Rating
+            </div>
 
-                <div class="search_left_bar_text text">
-                    {% for rating in rating_list %}
-                        <a href="?r={{ rating.id }}">
-                            <button class="search_left_bar_btn">{{ rating.title }} ({{ rating.num_products }})</button>
-                        </a>
-                    {% endfor %}
-                </div>
+            <div class="search_left_bar_text text">
+                {% for rating in rating_list %}
+                    <a href="?r={{ rating.id }}">
+                        <button class="search_left_bar_btn">{{ rating.title }} ({{ rating.num_products }})</button>
+                    </a>
+                {% endfor %}
+            </div>
 
-                <div id="search_l_bar_5" class="search_left_bar_text subtitle">
-                    Availability
-                </div>
+            <div id="search_l_bar_5" class="search_left_bar_text subtitle">
+                Availability
+            </div>
 
-                <div class="search_left_bar_text text">
-                    {% for availability in availability_list %}
-                        <a href="?a={{ availability.id }}">
-                            <button class="search_left_bar_btn">{{ availability.title }}({{ availability.num_products }})</button>
-                        </a>
-                    {% endfor %}
-                </div>
+            <div class="search_left_bar_text text">
+                {% for availability in availability_list %}
+                    <a href="?a={{ availability.id }}">
+                        <button class="search_left_bar_btn">{{ availability.title }}({{ availability.num_products }})</button>
+                    </a>
+                {% endfor %}
+            </div>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById('search_l_bar_1').innerHTML = '全部';
+                    document.getElementById('search_l_bar_2').innerHTML = '分类';
+                    document.getElementById('search_l_bar_3').innerHTML = '格式';
+                    document.getElementById('search_l_bar_4').innerHTML = '分级';
+                    document.getElementById('search_l_bar_5').innerHTML = '库存';
+                }
+            </script>
+        </div>
+    </div>
+    <!-- On the right side of the search bar, display the searched information -->
+    <div class="search_right_bar">
+        <!-- Page change -->
+        <div class="search_div_change_page">
+            {% if products.has_previous %}
+                <a href="?page=1">
+                    <button class="search_div_change_page_btn" id="search_r_btn_1">&laquo; first</button>
+                </a>
+                <a href="?page={{ products.previous_page_number }}">
+                    <button class="search_div_change_page_btn" id="search_r_btn_2">previous</button>
+                </a>
                 <script>
                     if(storage.getItem('language') == 'ch') {
-                        document.getElementById('search_l_bar_1').innerHTML = '全部';
-                        document.getElementById('search_l_bar_2').innerHTML = '分类';
-                        document.getElementById('search_l_bar_3').innerHTML = '格式';
-                        document.getElementById('search_l_bar_4').innerHTML = '分级';
-                        document.getElementById('search_l_bar_5').innerHTML = '库存';
+                        document.getElementById('search_r_btn_1').innerHTML = '首页';
+                        document.getElementById('search_r_btn_2').innerHTML = '上页';
                     }
                 </script>
-            </div>
+            {% endif %}
+
+            <a>
+                <button class="search_div_change_page_btn" style="background-color: #999;cursor: text;">
+                    Page {{ products.number }}
+                    of {{ products.paginator.num_pages }}.
+                </button>
+            </a>
+
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}">
+                    <button class="search_div_change_page_btn" id="search_r_btn_3">next</button>
+                </a>
+                <a href="?page={{ products.paginator.num_pages }}">
+                    <button class="search_div_change_page_btn" id="search_r_btn_4">last &raquo;</button>
+                </a>
+                <script>
+                    if(storage.getItem('language') == 'ch') {
+                        document.getElementById('search_r_btn_3').innerHTML = '下页';
+                        document.getElementById('search_r_btn_4').innerHTML = '尾页';
+                    }
+                </script>
+            {% endif %}
         </div>
 
-        <div class="search_right_bar">
-            <div class="search_div_change_page">
-                {% if products.has_previous %}
-                    <a href="?page=1">
-                        <button class="search_div_change_page_btn" id="search_r_btn_1">&laquo; first</button>
+        <!-- All searched products -->
+        {% for product in products %}
+            <div class="search_content_item">
+                {% if product.image.url %}
+                    <a href="{% url "Product:getProduct" product.id %}"
+                       style="text-decoration: None;">
+                        <img src="{{ product.image.url }} "
+                             style="height: 400px; width: 284px;  margin: auto; border-radius: 10px;"
+                             class="card-img-top">
                     </a>
-                    <a href="?page={{ products.previous_page_number }}">
-                        <button class="search_div_change_page_btn" id="search_r_btn_2">previous</button>
+                {% else %}
+                    <a href="{% url "Product:getProduct" product.id %}"
+                       style="text-decoration: None;">
+                        <img src="{% static "img/admin_logo.png" %}"
+                             style="height: 400px; width: 284px;  margin-left: auto; margin-right: auto; border-radius: 10px;"
+                             class="card-img-top">
                     </a>
-                    <script>
-                        if(storage.getItem('language') == 'ch') {
-                            document.getElementById('search_r_btn_1').innerHTML = '首页';
-                            document.getElementById('search_r_btn_2').innerHTML = '上页';
-                        }
-                    </script>
                 {% endif %}
 
-                <a>
-                    <button class="search_div_change_page_btn" style="background-color: #999;cursor: text;">
-                        Page {{ products.number }}
-                        of {{ products.paginator.num_pages }}.
-                    </button>
-                </a>
-
-                {% if products.has_next %}
-                    <a href="?page={{ products.next_page_number }}">
-                        <button class="search_div_change_page_btn" id="search_r_btn_3">next</button>
-                    </a>
-                    <a href="?page={{ products.paginator.num_pages }}">
-                        <button class="search_div_change_page_btn" id="search_r_btn_4">last &raquo;</button>
-                    </a>
-                    <script>
-                        if(storage.getItem('language') == 'ch') {
-                            document.getElementById('search_r_btn_3').innerHTML = '下页';
-                            document.getElementById('search_r_btn_4').innerHTML = '尾页';
-                        }
-                    </script>
-                {% endif %}
-            </div>
-
-            {% for product in products %}
-                <div class="search_content_item">
-                    {% if product.image.url %}
-                        <a href="{% url "Product:getProduct" product.id %}"
-                           style="text-decoration: None;">
-                            <img src="{{ product.image.url }} "
-                                 style="height: 400px; width: 284px;  margin: auto; border-radius: 10px;"
-                                 class="card-img-top">
+                <div class="search_content_body">
+                    <div class="search_content_body_text title">
+                        <a href="{% url "Product:getProduct" product.id %}" class="search-hover"
+                           style="text-decoration: None;color: black; font-weight: bold; vertical-align:center;">
+                            {{ product.title }}
                         </a>
-                    {% else %}
-                        <a href="{% url "Product:getProduct" product.id %}"
-                           style="text-decoration: None;">
-                            <img src="{% static "img/admin_logo.png" %}"
-                                 style="height: 400px; width: 284px;  margin-left: auto; margin-right: auto; border-radius: 10px;"
-                                 class="card-img-top">
-                        </a>
-                    {% endif %}
-
-                    <div class="search_content_body">
-                        <div class="search_content_body_text title">
-                            <a href="{% url "Product:getProduct" product.id %}" class="search-hover"
-                               style="text-decoration: None;color: black; font-weight: bold; vertical-align:center;">
-                                {{ product.title }}
-                            </a>
-                        </div>
-                        <div class="search_content_body_text text" style="padding-bottom: 8px;">
-                            {% if product.discount_price %}
-                                <p_price class="search-price-hover">
-                                    ${{ product.discount_price|floatformat:2 }}</p_price>
-                                <p_price2 class="search-price-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
-                            {% else %}
-                                <p_price class="search-price-hover"> ${{ product.price|floatformat:2 }}</p_price>
-                            {% endif %}
-                        </div>
-                        <div class="search_content_body_text text search-hover">
-                            {{ product.format }} | {{ product.category }} | {{ product.availability }}
-                        </div>
-                        <div class="row" style="margin-top: 12px; margin-left: 10px;">
-                            {#                                <div class="col-md-3">#}
-                            {#                                    <input type="number" value="1" class="btn"#}
-                            {#                                           style="border: 1px solid #d71345; width: 70px; cursor: auto;">#}
-                            {#                                </div>#}
-                            <div class="col-md-9">
-                                <button data-product="{{ product.id }}" data-action="add"
-                                        class="search_page_buy_button update-cart cart-hover-big">Add to Cart
-                                </button>
-                            </div>
+                    </div>
+                    <div class="search_content_body_text text" style="padding-bottom: 8px;">
+                        {% if product.discount_price %}
+                            <p_price class="search-price-hover">
+                                ${{ product.discount_price|floatformat:2 }}</p_price>
+                            <p_price2 class="search-price-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
+                        {% else %}
+                            <p_price class="search-price-hover"> ${{ product.price|floatformat:2 }}</p_price>
+                        {% endif %}
+                    </div>
+                    <div class="search_content_body_text text search-hover">
+                        {{ product.format }} | {{ product.category }} | {{ product.availability }}
+                    </div>
+                    <div class="row" style="margin-top: 12px; margin-left: 10px;">
+                        {#                                <div class="col-md-3">#}
+                        {#                                    <input type="number" value="1" class="btn"#}
+                        {#                                           style="border: 1px solid #d71345; width: 70px; cursor: auto;">#}
+                        {#                                </div>#}
+                        <div class="col-md-9">
+                            <button data-product="{{ product.id }}" data-action="add"
+                                    class="search_page_buy_button update-cart cart-hover-big">Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
     </div>
+</div>
 
 {% endblock content %}

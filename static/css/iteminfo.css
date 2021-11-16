@@ -228,3 +228,56 @@ p_d{
     color: white;
     background: green;
 }
+
+.newtextarea{
+    border:0;
+    border-radius:5px;
+    background-color:rgba(241,241,241,.98);
+    width: 1000px;
+    height: 200px;
+    padding: 10px;
+    resize: none;
+    margin-left: 50px;
+}
+
+.post_button {
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+    width: 170px;
+    height: 47px;
+    background-color: #27b069;
+    font-size: 13px;
+    border: none;
+    color: #ffffff;
+    margin-top: 20px;
+    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    margin-right: 70px;
+    float: right;
+}
+
+
+.reply_button {
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+    width: 100px;
+    height: 30px;
+    background-color: #27b069;
+    font-size: 13px;
+    border: none;
+    color: #ffffff;
+    margin-top: 40px;
+    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    {#margin-right: 30px;#}
+    float: right;
+}
+
+.comment_area{
+    {#border: 1px solid #d2d2d2;#}
+    border-radius: 5px 5px 5px 5px;
+}
+
+.small_comment_area{
+    border-radius: 5px 5px 5px 5px;
+    background-color:rgba(241,241,241,.5);
+    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}

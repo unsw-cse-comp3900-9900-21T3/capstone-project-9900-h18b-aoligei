@@ -1,429 +1,385 @@
 {% extends "base.html" %}
 {% load embed_video_tags %}
 {% block content %}
-    {#    <link rel="stylesheet" type="text/css" href="/static/css/iteminfo.css">#}
-    {#    <script type="text/javascript" src="/static/js/cart.js"></script>#}
-    {#    <script src="https://code.jquery.com/jquery-3.6.0.js"#}
-    {#            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>#}
+<style>
+.newtextarea{
+    border:0;
+    border-radius:5px;
+    background-color:rgba(241,241,241,.98);
+    width: 1000px;
+    height: 200px;
+    padding: 10px;
+    resize: none;
+    margin-left: 50px;
+}
 
-     <style>
-
-     .scoretextarea{
-            border:0;
-            border-radius:5px;
-            background-color:rgba(241,241,241,.9);
-            width: 100px;
-            height: 30px;
-            padding: 10px;
-            resize: none;
-            float: left;
-            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-            {#margin-left: 50px;#}
-        }
-
-        .score-button {
-            cursor: pointer;
-            border-radius: 5px 5px 5px 5px;
-            width: 100px;
-            height: 30px;
-            background-color: #27b069;
-            font-size: 13px;
-            border: none;
-            color: #ffffff;
-            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-            float: left;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-
-        .newtextarea{
-            border:0;
-            border-radius:5px;
-            background-color:rgba(241,241,241,.98);
-            width: 1000px;
-            height: 200px;
-            padding: 10px;
-            resize: none;
-            margin-left: 50px;
-        }
-
-        .post-button {
-            cursor: pointer;
-            border-radius: 5px 5px 5px 5px;
-            width: 170px;
-            height: 47px;
-            background-color: #27b069;
-            font-size: 13px;
-            border: none;
-            color: #ffffff;
-            margin-top: 20px;
-            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-            margin-right: 70px;
-            float: right;
-        }
+.post-button {
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+    width: 170px;
+    height: 47px;
+    background-color: #27b069;
+    font-size: 13px;
+    border: none;
+    color: #ffffff;
+    margin-top: 20px;
+    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    margin-right: 70px;
+    float: right;
+}
 
 
-        .reply-button {
-            cursor: pointer;
-            border-radius: 5px 5px 5px 5px;
-            width: 100px;
-            height: 30px;
-            background-color: #27b069;
-            font-size: 13px;
-            border: none;
-            color: #ffffff;
-            margin-top: 40px;
-            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-            {#margin-right: 30px;#}
-            float: right;
-        }
+.reply-button {
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+    width: 100px;
+    height: 30px;
+    background-color: #27b069;
+    font-size: 13px;
+    border: none;
+    color: #ffffff;
+    margin-top: 40px;
+    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    {#margin-right: 30px;#}
+    float: right;
+}
 
-        .comment-area{
-            {#border: 1px solid #d2d2d2;#}
-            border-radius: 5px 5px 5px 5px;
+.comment-area{
+    {#border: 1px solid #d2d2d2;#}
+    border-radius: 5px 5px 5px 5px;
+}
 
-        }
+.small-comment-area{
+    border-radius: 5px 5px 5px 5px;
+    background-color:rgba(241,241,241,.5);
+    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+</style>
+<!-- The upper part of the product information interface needs to be displayed including product pictures and basic information -->
+<div class="iteminfo_content_top">
 
-        .small-comment-area{
-            border-radius: 5px 5px 5px 5px;
-            background-color:rgba(241,241,241,.5);
-            box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-        }
-    </style>
-
-
-
-
-    <div class="iteminfo_content_top">
-        <div class="iteminfo_pic">
-            <img height="100%" width="100%" src="{{ product.image.url }}"/>
-        </div>
-
-        <div class="iteminfo_maininfo">
-            <div class="iteminfo_maininfo_text title product-title-hover" id="nm{{ product.id }}">
-                <p_d id="main_info_t">{{ product.title }}</p_d>
-                <p_d id="main_info_t_z">{{ product.title_zh }}</p_d>
-                <script>
-                    if(storage.getItem('language') == 'ch') {
-                        document.getElementById("main_info_t").style.display = 'none';
-                    }
-                    else{
-                        document.getElementById("main_info_t_z").style.display = 'none';
-                    }
-                </script>
-            </div>
-
-            <div class="iteminfo_maininfo_text score"><p_i id="item_info_i_1">Score</p_i> : <p_yellow>{{ score }}</p_yellow></div>
-
-            {% if user.is_authenticated %}
-                <div  class="iteminfo_maininfo_text">
-                    <form action="{% url "Product:putScore" product.id %}" method="post">
-                        {% csrf_token %}
-                        <input  type="text" id="score" name="score"
-                                  placeholder="Enter Score:" onkeyup="this.value=this.value.replace(/[^\r\n0-9\.\.]/g,'');"/>
-                        <button type="submit" class="item_info_post_score_btn" id="item_info_post_score">Post</button>
-                        <script>
-                            if(storage.getItem('language') == 'ch') {
-                                document.getElementById("item_info_post_score").innerHTML = '打分';
-                            }
-                        </script>
-                    </form>
-                </div>
-
-                <br>
-            {% endif %}
-
-
-
-
-
-            <div class="iteminfo_maininfo_text rating">
-                <p_i id="item_info_i_2">Rating</p_i> : {{ product.rating }}
-            </div>
-
-            <div class="iteminfo_maininfo_text format">
-                <p_i id="item_info_i_3">Format type</p_i> : {{ product.format }}
-            </div>
-
-            <div class="iteminfo_maininfo_text category">
-                <p_i id="item_info_i_4">Category</p_i> : {{ product.category }}
-            </div>
-
-            <div class="iteminfo_maininfo_text publishdate">
-                <p_i id="item_info_i_5">Publish date</p_i> : {{ product.publishDate }}
-            </div>
-
-            <div class="iteminfo_maininfo_text price">
-                <p_i id="item_info_i_6">Price</p_i> :
-                {% if product.discount_price %}
-                    <p_price class="search-price-hover">${{ product.discount_price|floatformat:2 }}</p_price>
-
-                    <p_price2 class="search-price-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
-                {% else %}
-                    <p_price class="search-price-hover"> ${{ product.price|floatformat:2 }}</p_price>
-                {% endif %}
-            </div>
-
-{#            <div class="iteminfo_maininfo_text stock">#}
-{#                Stock : {{ product.stock }}#}
-{#            </div>#}
-
-            <div class="iteminfo_maininfo_text available" id="detail-available-online">
-                {% if product.digital  %}
-                <p_d id="item_info_a_1">Available</p_d> : {{ product.availability }} - online
-                <script>
-                    if(storage.getItem('language') == 'ch') {
-                        document.getElementById("item_info_a_1").innerHTML = '库存';
-                    }
-                </script>
-                {% else %}
-                <p_d id="item_info_a_2">Available</p_d> : {{ product.availability }}
-                <script>
-                    if(storage.getItem('language') == 'ch') {
-                        document.getElementById("item_info_a_2").innerHTML = '库存';
-                    }
-                </script>
-                {% endif %}
-            </div>
-
-            <div class="iteminfo_maininfo_text buy">
-{#                <input>#}
-                <button id="item_info_btn_buy" data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
-                    Add to Cart
-                </button>
-            </div>
-
-            <script>
-                if(storage.getItem('language') == 'ch') {
-                    document.getElementById('item_info_i_1').innerHTML = '评分';
-                    document.getElementById('item_info_i_2').innerHTML = '评级';
-                    document.getElementById('item_info_i_3').innerHTML = '类型';
-                    document.getElementById('item_info_i_4').innerHTML = '类别';
-                    document.getElementById('item_info_i_5').innerHTML = '发布时间';
-                    document.getElementById('item_info_i_6').innerHTML = '价格';
-                    document.getElementById('item_info_btn_buy').innerHTML = '加入购物车';
-                }
-            </script>
-
-            <div class="iteminfo_maininfo_text bottom">
-                <img src="/static/payment.png">
-            </div>
-
-        </div>
+    <!-- Show product picture -->
+    <div class="iteminfo_pic">
+        <img height="100%" width="100%" src="{{ product.image.url }}"/>
     </div>
 
-    <div class="iteminfo_content_bottom">
-        <div class="iteminfo_description r" style="height: 420px;">
-            <p_description id="item_info_t_0"> Guess You Would Also Like：
-                <hr/>
-            </p_description>
-            {% for r_product in content_recommend_products %}
-                <img style="float: left;
-                 width: 220px;
-                 margin-right: 8px;
-                 height: 320px;
-                 border-radius: 4px;
-                 cursor: pointer;" src="/media/{{ r_product }}">
-            {% endfor %}
-            <br/>
-            {% for r_product in content_recommend_products_id %}
-                <a href="../product_id={{ r_product }}">
-                    <div style="background: #ffc108;
-                    border: 1px solid #ffc108;
-                    color: black;
-                    border-radius: 4px;
-                    margin-right: 8px;
-                    float: left;
-                    width: 218px;
-                    text-align: center;
-                     font-size: 24px;
-                     line-height: 40px;
-                     height: 40px;
-                     cursor: pointer;">
-                    View</div>
-                </a>
-            {% endfor %}
+    <!-- Show basic information -->
+    <div class="iteminfo_maininfo">
+        <div class="iteminfo_maininfo_text title product-title-hover" id="nm{{ product.id }}">
+            <p_d id="main_info_t">{{ product.title }}</p_d>
+            <p_d id="main_info_t_z">{{ product.title_zh }}</p_d>
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById("main_info_t").style.display = 'none';
+                }
+                else{
+                    document.getElementById("main_info_t_z").style.display = 'none';
+                }
+            </script>
         </div>
-        <div class="iteminfo_description">
-            <p_description id="item_info_t_1"> Description
-                <hr/>
-            </p_description>
-            <p_d id="item_info_description">{{ product.description|safe }}</p_d>
-            <p_d id="item_info_description_z">{{ product.description_zh|safe }}</p_d>
-        </div>
-        <script>
-            if(storage.getItem('language') == 'ch') {
-                document.getElementById("item_info_description").style.display = 'none';
-            }
-            else{
-                document.getElementById("item_info_description_z").style.display = 'none';
-            }
-        </script>
 
-        <div class="iteminfo_description">
-            {% if product.trailer %}
-                <p_description id="item_info_t_2">Trailer
-                    <hr/>
-                </p_description>
-                <script>
-                    if(storage.getItem('language') == 'ch') {
-                        document.getElementById('item_info_t_2').innerHTML = '视频<hr/>';
-                    }
-                </script>
-                <span style="display: flex; justify-content: center"> {% video product.trailer '1000x600' %}</span>
+        <div class="iteminfo_maininfo_text score"><p_i id="item_info_i_1">Score</p_i> : <p_yellow>{{ score }}</p_yellow></div>
+
+        {% if user.is_authenticated %}
+            <div  class="iteminfo_maininfo_text">
+                <form action="{% url "Product:putScore" product.id %}" method="post">
+                    {% csrf_token %}
+                    <input  type="text" id="score" name="score"
+                              placeholder="Enter Score:" onkeyup="this.value=this.value.replace(/[^\r\n0-9\.\.]/g,'');"/>
+                    <button type="submit" class="item_info_post_score_btn" id="item_info_post_score">Post</button>
+                    <script>
+                        if(storage.getItem('language') == 'ch') {
+                            document.getElementById("item_info_post_score").innerHTML = '打分';
+                        }
+                    </script>
+                </form>
+            </div>
+
+            <br>
+        {% endif %}
+
+        <div class="iteminfo_maininfo_text rating">
+            <p_i id="item_info_i_2">Rating</p_i> : {{ product.rating }}
+        </div>
+
+        <div class="iteminfo_maininfo_text format">
+            <p_i id="item_info_i_3">Format type</p_i> : {{ product.format }}
+        </div>
+
+        <div class="iteminfo_maininfo_text category">
+            <p_i id="item_info_i_4">Category</p_i> : {{ product.category }}
+        </div>
+
+        <div class="iteminfo_maininfo_text publishdate">
+            <p_i id="item_info_i_5">Publish date</p_i> : {{ product.publishDate }}
+        </div>
+
+        <div class="iteminfo_maininfo_text price">
+            <p_i id="item_info_i_6">Price</p_i> :
+            {% if product.discount_price %}
+                <p_price class="search-price-hover">${{ product.discount_price|floatformat:2 }}</p_price>
+
+                <p_price2 class="search-price-hover"> was ${{ product.price|floatformat:2 }}</p_price2>
+            {% else %}
+                <p_price class="search-price-hover"> ${{ product.price|floatformat:2 }}</p_price>
             {% endif %}
         </div>
 
-        <div class="iteminfo_description">
-            <p_description id="item_info_t_3">Details
-                <hr/>
-            </p_description>
-            <p_d id="item_info_detail">{{ product.details|safe }}</p_d>
-            <p_d id="item_info_detail_z">{{ product.details_zh|safe }}</p_d>
+        <div class="iteminfo_maininfo_text available" id="detail-available-online">
+            {% if product.digital  %}
+            <p_d id="item_info_a_1">Available</p_d> : {{ product.availability }} - online
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById("item_info_a_1").innerHTML = '库存';
+                }
+            </script>
+            {% else %}
+            <p_d id="item_info_a_2">Available</p_d> : {{ product.availability }}
+            <script>
+                if(storage.getItem('language') == 'ch') {
+                    document.getElementById("item_info_a_2").innerHTML = '库存';
+                }
+            </script>
+            {% endif %}
         </div>
+
+        <div class="iteminfo_maininfo_text buy">
+            <button id="item_info_btn_buy" data-product="{{ product.id }}" data-action="add" class="iteminfo_buybtn atc update-cart">
+                Add to Cart
+            </button>
+        </div>
+
         <script>
             if(storage.getItem('language') == 'ch') {
-                document.getElementById("item_info_detail").style.display = 'none';
-            }
-            else{
-                document.getElementById("item_info_detail_z").style.display = 'none';
+                document.getElementById('item_info_i_1').innerHTML = '评分';
+                document.getElementById('item_info_i_2').innerHTML = '评级';
+                document.getElementById('item_info_i_3').innerHTML = '类型';
+                document.getElementById('item_info_i_4').innerHTML = '类别';
+                document.getElementById('item_info_i_5').innerHTML = '发布时间';
+                document.getElementById('item_info_i_6').innerHTML = '价格';
+                document.getElementById('item_info_btn_buy').innerHTML = '加入购物车';
             }
         </script>
 
-        <div class="iteminfo_qa">
-            <p_description id="item_info_t_4">Q&A
+        <div class="iteminfo_maininfo_text bottom">
+            <img src="/static/payment.png">
+        </div>
+
+    </div>
+</div>
+
+<!-- The lower part of the product information interface needs to display the product description, video and comment area -->
+<div class="iteminfo_content_bottom">
+    <!-- Recommended related products -->
+    <div class="iteminfo_description r" style="height: 420px;">
+        <p_description id="item_info_t_0"> Guess You Would Also Like：
+            <hr/>
+        </p_description>
+        {% for r_product in content_recommend_products %}
+            <img style="float: left;
+             width: 220px;
+             margin-right: 8px;
+             height: 320px;
+             border-radius: 4px;
+             cursor: pointer;" src="/media/{{ r_product }}">
+        {% endfor %}
+        <br/>
+        {% for r_product in content_recommend_products_id %}
+            <a href="../product_id={{ r_product }}">
+                <div style="background: #ffc108;
+                border: 1px solid #ffc108;
+                color: black;
+                border-radius: 4px;
+                margin-right: 8px;
+                float: left;
+                width: 218px;
+                text-align: center;
+                 font-size: 24px;
+                 line-height: 40px;
+                 height: 40px;
+                 cursor: pointer;">
+                View</div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- Product description -->
+    <div class="iteminfo_description">
+        <p_description id="item_info_t_1"> Description
+            <hr/>
+        </p_description>
+        <p_d id="item_info_description">{{ product.description|safe }}</p_d>
+        <p_d id="item_info_description_z">{{ product.description_zh|safe }}</p_d>
+    </div>
+    <script>
+        if(storage.getItem('language') == 'ch') {
+            document.getElementById("item_info_description").style.display = 'none';
+        }
+        else{
+            document.getElementById("item_info_description_z").style.display = 'none';
+        }
+    </script>
+
+    <!-- Product trailer -->
+    <div class="iteminfo_description">
+        {% if product.trailer %}
+            <p_description id="item_info_t_2">Trailer
                 <hr/>
             </p_description>
             <script>
                 if(storage.getItem('language') == 'ch') {
-                    document.getElementById('item_info_t_0').innerHTML = '猜你喜欢<hr/>';
-                    document.getElementById('item_info_t_1').innerHTML = '概述<hr/>';
-                    document.getElementById('item_info_t_3').innerHTML = '细节<hr/>';
-                    document.getElementById('item_info_t_4').innerHTML = '讨论<hr/>';
+                    document.getElementById('item_info_t_2').innerHTML = '视频<hr/>';
                 }
             </script>
+            <span style="display: flex; justify-content: center"> {% video product.trailer '1000x600' %}</span>
+        {% endif %}
+    </div>
 
-            {% if user.is_authenticated %}
-                <div>
-                    <form action="{% url "Comment:post_comment" product.id %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <div class="normal">
-                                <p1>Post a Comment:</p1>
-                            </div>
-                            <textarea  type="text" class="newtextarea" id="body" name="body"
-                                      placeholder="Please enter a comment"></textarea>
+    <!-- Product details -->
+    <div class="iteminfo_description">
+        <p_description id="item_info_t_3">Details
+            <hr/>
+        </p_description>
+        <p_d id="item_info_detail">{{ product.details|safe }}</p_d>
+        <p_d id="item_info_detail_z">{{ product.details_zh|safe }}</p_d>
+    </div>
+    <script>
+        if(storage.getItem('language') == 'ch') {
+            document.getElementById("item_info_detail").style.display = 'none';
+        }
+        else{
+            document.getElementById("item_info_detail_z").style.display = 'none';
+        }
+    </script>
+
+    <!-- Comment area -->
+    <div class="iteminfo_qa">
+        <p_description id="item_info_t_4">Q&A
+            <hr/>
+        </p_description>
+        <script>
+            if(storage.getItem('language') == 'ch') {
+                document.getElementById('item_info_t_0').innerHTML = '猜你喜欢<hr/>';
+                document.getElementById('item_info_t_1').innerHTML = '概述<hr/>';
+                document.getElementById('item_info_t_3').innerHTML = '细节<hr/>';
+                document.getElementById('item_info_t_4').innerHTML = '讨论<hr/>';
+            }
+        </script>
+
+        {% if user.is_authenticated %}
+            <div>
+                <form action="{% url "Comment:post_comment" product.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="normal">
+                            <p1>Post a Comment:</p1>
                         </div>
+                        <textarea  type="text" class="newtextarea" id="body" name="body"
+                                  placeholder="Please enter a comment"></textarea>
+                    </div>
 
-                        <button class="post-button" type="submit" >Post</button>
-                    </form>
-                </div>
+                    <button class="post-button" type="submit" >Post</button>
+                </form>
+            </div>
 
-                <br>
-            {% else %}
-                <br>
-                <h5 class="row justify-content-center">
-                    Please <a href="{% url 'User:login' %}"> login </a> to reply.
-                </h5>
-                <br>
-            {% endif %}
+            <br>
+        {% else %}
+            <br>
+            <h5 class="row justify-content-center">
+                Please <a href="{% url 'User:login' %}"> login </a> to reply.
+            </h5>
+            <br>
+        {% endif %}
 
-            <div class="all_comment">
-                {% load mptt_tags %}
-                <h4>Total comments: {{ comments.count }}</h4>
-                <div class="comment-area">
-                    {% recursetree comments %}
-                        {% with comment=node %}
-                            <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
-{#                                <hr/>#}
-                            <div class="small-comment-area">
-                                <p>
-                                    <strong style="color: #e47f3a;font-size: 20px">
-                                        {{ comment.user }}
+        <div class="all_comment">
+            {% load mptt_tags %}
+            <h4>Total comments: {{ comments.count }}</h4>
+            <div class="comment-area">
+                {% recursetree comments %}
+                    {% with comment=node %}
+                        <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
+                        <div class="small-comment-area">
+                            <p>
+                                <strong style="color: #e47f3a;font-size: 20px">
+                                    {{ comment.user }}
+                                </strong>
+
+                                {% if comment.reply_to %}
+                                    <i class="far fa-arrow-alt-circle-right"
+                                       style="color: cornflowerblue;"
+                                    ></i>
+                                    <strong style="color: cornflowerblue;font-size: 20px">
+                                        <span style="color: black"
+                                              class="arrow-outer">  reply to</span> {{ comment.reply_to }}
                                     </strong>
+                                {% endif %}
 
-                                    {% if comment.reply_to %}
-                                        <i class="far fa-arrow-alt-circle-right"
-                                           style="color: cornflowerblue;"
-                                        ></i>
-                                        <strong style="color: cornflowerblue;font-size: 20px">
-                                            <span style="color: black"
-                                                  class="arrow-outer">  reply to</span> {{ comment.reply_to }}
-                                        </strong>
-                                    {% endif %}
+                            </p>
+                            <div>{{ comment.body|safe }}</div>
 
-                                </p>
-                                <div>{{ comment.body|safe }}</div>
+                            <div>
+                                <span style="color: gray">
+                                {{ comment.created|date:"Y-m-d H:i:s" }}
+                                </span>
 
-                                <div>
-                                    <span style="color: gray">
-                                    {{ comment.created|date:"Y-m-d H:i:s" }}
-                                    </span>
-
-                                    {% if user.is_authenticated %}
-{#                                        div class="reply-button-container" style="display: flex; flex-direction: row-reverse;line-height: 0">#}
-                                        <button type="button"
-                                                class="reply-button"
-                                                onclick="load_modal({{ product.id }}, {{ comment.id }})">Reply
-                                        </button>
-{#                                        </div>#}
-                                    {% else %}
-                                        <a class="reply-button"
-                                           href="{% url 'User:login' %}">
-                                            Reply
-                                        </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-
-                                <div class="modal fade"
-                                     id="comment_{{ comment.id }}"
-                                     tabindex="-1"
-                                     role="dialog"
-                                     aria-labelledby="CommentModalCenter"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                        <div class="modal-content" style="height: 80px">
-{#                                            <div class="modal-header">#}
-{#                                                <h5 class="modal-title" id="exampleModalCenterTitle">Replying#}
-{#                                                    to {{ comment.user }}：</h5>#}
-{#                                            </div>#}
-                                            <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% if not comment.is_leaf_node %}
-                                    <div class="children">
-                                        {{ children }}
-                                    </div>
+                                {% if user.is_authenticated %}
+                                    <button type="button"
+                                            class="reply-button"
+                                            onclick="load_modal({{ product.id }}, {{ comment.id }})">Reply
+                                    </button>
+                                {% else %}
+                                    <a class="reply-button"
+                                       href="{% url 'User:login' %}">
+                                        Reply
+                                    </a>
                                 {% endif %}
                             </div>
-                        {% endwith %}
-                    {% endrecursetree %}
-                </div>
+                        </div>
 
 
-                <script>
-
-                    function load_modal(product_id, comment_id) {
-                        let modal_body = '#modal_body_' + comment_id;
-                        let modal_id = '#comment_' + comment_id;
-
-
-                        if ($(modal_body).children().length === 0) {
-                            let content = '<iframe src="/Comment/post_comment/' + product_id + '/' + comment_id + '" frameborder="0" style="width: 800px; height: 70px;margin-top: 10px"></iframe>';
-                            $(modal_body).append(content);
-                        }
-                        ;
-                        $(modal_id).modal('show');
-                    }
-                </script>
+                            <div class="modal fade"
+                                 id="comment_{{ comment.id }}"
+                                 tabindex="-1"
+                                 role="dialog"
+                                 aria-labelledby="CommentModalCenter"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content" style="height: 80px">
+                                        <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if not comment.is_leaf_node %}
+                                <div class="children">
+                                    {{ children }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endwith %}
+                {% endrecursetree %}
             </div>
 
 
+            <script>
+
+                function load_modal(product_id, comment_id) {
+                    let modal_body = '#modal_body_' + comment_id;
+                    let modal_id = '#comment_' + comment_id;
+
+
+                    if ($(modal_body).children().length === 0) {
+                        let content = '<iframe src="/Comment/post_comment/' + product_id + '/' + comment_id + '" frameborder="0" style="width: 800px; height: 70px;margin-top: 10px"></iframe>';
+                        $(modal_body).append(content);
+                    }
+                    ;
+                    $(modal_id).modal('show');
+                }
+            </script>
         </div>
+
+
     </div>
+</div>
 
 
 
