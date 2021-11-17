@@ -422,8 +422,10 @@ def putScore(request,product_id):
             sc=sc_form.save(commit=False)
             sc.product=product
             sc.user=request.user
-            sc.save()
-            return redirect(product)
+            if 0 < float(sc) <= 10:
+                sc.save()
+            else:
+                return render(request, "empty_content_fail.html", locals())
         else:
             return render(request, "empty_content_fail.html", locals())
     else:

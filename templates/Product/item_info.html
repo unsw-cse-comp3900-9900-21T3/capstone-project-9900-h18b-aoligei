@@ -85,9 +85,17 @@
                 <form action="{% url "Product:putScore" product.id %}" method="post">
                     {% csrf_token %}
                     <input  type="text" id="score" name="score"
-                              placeholder="Enter Score:" onkeyup="this.value=this.value.replace(/[^\r\n0-9\.\.]/g,'');"/>
-                    <button type="submit" class="item_info_post_score_btn" id="item_info_post_score">Post</button>
+                              placeholder="scoring 1~10 " onkeyup="this.value=this.value.replace(/[^\r\n0-9\.\.]/g,'');"/>
+                    <button type="submit" class="item_info_post_score_btn" id="item_info_post_score" onclick="Score()">Post</button>
                     <script>
+                        const score = document.getElementById('score').value;
+                        function Score () {
+                            let score = document.getElementById('score').value;
+                            score = parseFloat(score)
+                             if ( score >10 || score<0 ){
+                                alert("Please scoring between 1 to 10 !")
+                        }
+
                         if(storage.getItem('language') == 'ch') {
                             document.getElementById("item_info_post_score").innerHTML = '打分';
                         }
