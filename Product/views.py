@@ -61,6 +61,7 @@ def search(request):
     item_name = request.GET.get("item_name")
     if item_name != '' and item_name is not None:
         products = products.filter(title__icontains=item_name) | \
+                   products.filter(title_zh__icontains=item_name) | \
                    products.filter(price__icontains=item_name) | \
                    products.filter(format__title__icontains=item_name) | \
                    products.filter(category__title__icontains=item_name) | \
