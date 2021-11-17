@@ -14,18 +14,6 @@ from Product.models import Order
 
 
 def user_login(request):
-    if request.user.is_authenticated:
-        customer = request.user
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        # create empty cart for none logged in users
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-        cartItems = order['get_cart_items']
-    context = {
-        'cartItems': cartItems, }
 
     if request.method == 'POST':
         user_login_form =UserLoginForm(data=request.POST)
@@ -44,8 +32,10 @@ def user_login(request):
                 return HttpResponse("account or password is wrong, please enter again~")
         else:
             return HttpResponse("something wrong")
-
-    return render(request, 'User/login.html', context)
+    else:
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+        return render(request, 'User/login.html', locals())
 
 def logout_view(request):
     """用户登出"""
@@ -59,17 +49,14 @@ def register(request):
     cartItems = order['get_cart_items']
 
     if request.method != 'POST':
-        # 显示空的注册表单
+
         form = UserRegisterForm()
     else:
-        # 处理填写好的表单
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             print("yeah")
             new_user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
-
             new_user.save()
-            # 让用户自动登陆，再重定向 到主页位置
             print(new_user.password)
             print(request.POST['password'])
             authenticate_user = authenticate(username=new_user.username, password=request.POST['password'])
@@ -78,9 +65,7 @@ def register(request):
             login(request, authenticate_user)
             print("2222")
             email = request.POST['email']
-
             send_email_code(email, 1)
-
             return HttpResponseRedirect(reverse('Product:home'))
 
     context = {'form': form,

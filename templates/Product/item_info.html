@@ -88,7 +88,6 @@
                               placeholder="scoring 1~10 " onkeyup="this.value=this.value.replace(/[^\r\n0-9\.\.]/g,'');"/>
                     <button type="submit" class="item_info_post_score_btn" id="item_info_post_score" onclick="Score()">Post</button>
                     <script>
-                        const score = document.getElementById('score').value;
                         function Score () {
                             let score = document.getElementById('score').value;
                             score = parseFloat(score)

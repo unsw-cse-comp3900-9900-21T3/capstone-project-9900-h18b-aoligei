@@ -416,6 +416,18 @@ def putScore(request,product_id):
         user publish score in the product detail page
     '''
     product=get_object_or_404(Product, id=product_id)
+
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # create empty cart for none logged in users
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
     if request.method=='POST':
         sc_form=ScoreForm(request.POST)
         if sc_form.is_valid():
@@ -425,7 +437,7 @@ def putScore(request,product_id):
             if 0 < float(sc) <= 10:
                 sc.save()
             else:
-                return render(request, "empty_content_fail.html", locals())
+                return render(request, "score_fail.html", locals())
         else:
             return render(request, "empty_content_fail.html", locals())
     else:

@@ -125,7 +125,10 @@
                 <img src="/static/check-square.svg" style="margin-left: 80px">
                 <p id="login_r_4" style="margin-left: 10px">Get Personal Recommandation</p>
             </div>
-                <button id="login_btn_2" class="register-button" type="button" ><a href="{% url 'User:register' %}" style="text-decoration:none;color: white">Register</a ></button>
+                <button id="login_btn_2" class="register-button" type="button" >
+                    <a href="{% url 'User:register' %}" style="text-decoration:none;color: white">
+                        Register</a >
+                </button>
                 <script>
                     if(storage.getItem('language') == 'ch') {
                         document.getElementById('login_r').innerHTML = '注册';
