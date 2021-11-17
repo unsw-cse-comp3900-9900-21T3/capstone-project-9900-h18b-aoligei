@@ -13,7 +13,7 @@
 > ```
 > #####  if you don't have virtualenv, install the virtualenv firstly
 > ```.env
-> pip install -user virtualenv
+> pip3 install -user virtualenv
 > ```
 > ##### (if in the Linux System and above command return error)
 > ##### try using the command below
@@ -26,7 +26,7 @@
 > ```
 > ###  3. need to install packages 
 > ```.env
-> pip install -r requirements.txt
+> pip3 install -r requirements.txt
 > ```
 > ###  4. createsuperuser
 > ```.env
@@ -43,16 +43,27 @@
 source venv/bin/activate 
 ```
 
-### 2. Close the  virtual environment
-```.env
-deactivate
-```
 
-
-### 3. Run the  project on website
+### 2. Run the  project on website
 ```.env
 python3 manage.py runserver [port number]
 (or, for example, ./manage.py runserver 9000 (default 8000) )
+```
+
+### 3. If it needs to install the package，run
+```.env
+pip3 install -r requirements.txt
+```
+
+### then, run the server again
+```.env
+python3 manage.py runserver [port number]
+```
+
+
+### 4. Close the  virtual environment
+```.env
+deactivate
 ```
 
 ### 4. STOP run:

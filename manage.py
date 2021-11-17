@@ -3,9 +3,6 @@
 import os
 import sys
 
-import pymysql
-# !/usr/bin/env python
-
 # !/usr/bin/env python
 try:
     import pymysql
