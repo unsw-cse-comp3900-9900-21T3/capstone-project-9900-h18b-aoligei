@@ -154,7 +154,7 @@ SIMPLEUI_ANALYSIS = False
 SIMPLEUI_HOME_QUICK = False
 SIMPLEUI_HOME_ACTION = False
 
-SIMPLEUI_LOGO = 'https://raw.githubusercontent.com/Hankin72/COMP9315_21T1/1c442a9d323434c7c835f22053baf446c738f769/_20t1/A.svg'
+# SIMPLEUI_LOGO = 'https://raw.githubusercontent.com/Hankin72/COMP9315_21T1/1c442a9d323434c7c835f22053baf446c738f769/_20t1/A.svg'
 # SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
 SIMPLEUI_HOME_PAGE = '/products/dashboard/'
 SIMPLEUI_HOME_TITLE = 'Website traffic'
@@ -162,11 +162,8 @@ SIMPLEUI_HOME_ICON = 'fa fa-eye'
 SIMPLEUI_CONFIG = {
     # Whether to use the system default menu, it is recommended to close it when customizing the menu.
     'system_keep': False,
-    #  用于菜单排序和过滤, 不填此字段为默认排序和全部显示。空列表[] 为全部不显示.
     'menu_display': ['Product', 'Score', 'Order', 'OrderItem', 'ShippingAddress', 'Profile',
                                                                                   'Authentication and Authorization'],
-    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时刷新展示菜单内容。
-    # 一般建议关闭。
     'dynamic': False,
     'menus': [
         {
@@ -251,21 +248,6 @@ SIMPLEUI_CONFIG = {
                 },
             ]
         },
-
-        # {
-        #     'app': 'PersonalInfo',
-        #     'name': 'Profile',
-        #     'icon': 'fas fa-user-shield',
-        #     'models': [
-        #         {
-        #             'name': 'Profile',
-        #             'icon': 'fa fa-user',
-        #             'url': 'auth/user/personal_info/',
-        #         },
-        #
-        #     ]
-        # },
-
     ]
 }
 
@@ -273,5 +255,5 @@ EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = "aoligei_9900@163.com"
 EMAIL_HOST_PASSWORD = "LVULKCYNQVNYGQKM"
-EMAIL_USE_TLS = False  # 一般都为False
+EMAIL_USE_TLS = False
 EMAIL_FROM = "aoligei_9900@163.com"
