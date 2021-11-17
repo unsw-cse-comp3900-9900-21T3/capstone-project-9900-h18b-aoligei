@@ -132,10 +132,22 @@
 
                 <div class="search_content_body">
                     <div class="search_content_body_text title">
-                        <a href="{% url "Product:getProduct" product.id %}" class="search-hover"
+                        <a id="zh_s{{product.id}}" href="{% url "Product:getProduct" product.id %}" class="search-hover"
+                           style="text-decoration: None;color: black; font-weight: bold; vertical-align:center;">
+                            {{ product.title_zh }}
+                        </a>
+                        <a id="en_s{{product.id}}" href="{% url "Product:getProduct" product.id %}" class="search-hover"
                            style="text-decoration: None;color: black; font-weight: bold; vertical-align:center;">
                             {{ product.title }}
                         </a>
+                        <script>
+                            if(storage.getItem('language') == 'ch') {
+                                document.getElementById("en_s{{product.id}}").style.display = 'none';
+                            }
+                            else{
+                                document.getElementById("zh_s{{product.id}}").style.display = 'none';
+                            }
+                        </script>
                     </div>
                     <div class="search_content_body_text text" style="padding-bottom: 8px;">
                         {% if product.discount_price %}
@@ -150,10 +162,6 @@
                         {{ product.format }} | {{ product.category }} | {{ product.availability }}
                     </div>
                     <div class="row" style="margin-top: 12px; margin-left: 10px;">
-                        {#                                <div class="col-md-3">#}
-                        {#                                    <input type="number" value="1" class="btn"#}
-                        {#                                           style="border: 1px solid #d71345; width: 70px; cursor: auto;">#}
-                        {#                                </div>#}
                         <div class="col-md-9">
                             <button data-product="{{ product.id }}" data-action="add"
                                     class="search_page_buy_button update-cart cart-hover-big">Add to Cart
